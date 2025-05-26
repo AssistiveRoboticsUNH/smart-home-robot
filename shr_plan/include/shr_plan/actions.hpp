@@ -1302,6 +1302,7 @@ namespace pddl_lib {
 
         BT::NodeStatus MoveToLandmark_generic(const InstantiatedAction &action) {
             std::cout << "MoveToLandmark: " << std::endl;
+            auto &kb = KnowledgeBase::getInstance();
 
             /// move robot to location
             std::string location = action.parameters[2].name;
@@ -1311,26 +1312,28 @@ namespace pddl_lib {
             std::cout << "ps.world_state_converter->get_world_state_msg()->robot_charging: " << ps.world_state_converter->get_world_state_msg()->robot_charging << std::endl;
 
             std::string log_message = std::string("weblog=") + "Move to landmark: " + location;
-            
-            if (ps.active_protocol.type == "VideoReminderProtocol") {
-                std::cout << "Protocol type is VideoReminderProtocol\n";
-                if (location == "living_room") {
-                    std::cout << "Location is living_room\n";
-                    if (ps.active_protocol.name == "coffee_reminder") {
-                        std::cout << "Active protocol name is coffee_reminder, changing location to kitchen\n";
-                        location = "kitchen";
-                    } else if (ps.active_protocol.name == "microwave_reminder") {
-                        std::cout << "Active protocol name is microwave_reminder, changing location to kitchen\n";
-                        location = "kitchen";
-                    } else {
-                        std::cout << "Active protocol name is " << ps.active_protocol.name << ", no location change\n";
-                    }
-                } else {
-                    std::cout << "Location is " << location << ", no change\n";
-                }
+
+            InstantiatedPredicate microwave_pred;
+            microwave_pred.name = "time_for_video";
+            microwave_pred.parameters.push_back({"microwave_reminder", "VideoReminderProtocol"});
+
+            InstantiatedPredicate coffee_pred;
+            coffee_pred.name = "time_for_video";
+            coffee_pred.parameters.push_back({"coffee_reminder", "VideoReminderProtocol"});
+
+            if (kb.find_predicate(microwave_pred)) {
+                std::cout << "🍱 Protocol: microwave_reminder is active (time_for_video)\n";
+                std::cout << "➡️  Going to kitchen\n";
+                location = "dining_room";
+            } else if (kb.find_predicate(coffee_pred)) {
+                std::cout << "☕ Protocol: coffee_reminder is active (time_for_video)\n";
+                std::cout << "➡️  Going to dining\n";
+                location = "dining_room";
             } else {
-                std::cout << "Protocol type is " << ps.active_protocol.type << ", no changes made\n";
+                std::cout << "❓ No matching video protocol active. Staying at current location: " << location << "\n";
+                // location remains unchanged
             }
+
 
             lock.Lock();
                         

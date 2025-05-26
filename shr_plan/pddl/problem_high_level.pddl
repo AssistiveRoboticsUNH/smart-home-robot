@@ -24,9 +24,7 @@
       (visible_location living_room)
       (not_visible_location bedroom)
       (not_visible_location outside)
-      (active_video coffee_reminder dining)
-      (active_video microwave_reminder kitchen)
-      
+     
       ;;(person_currently_at nathan living_room)
       ;;(person_at t1 nathan living_room)
       ;;(robot_at home)
