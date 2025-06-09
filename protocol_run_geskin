@@ -1,0 +1,28 @@
+for running the script
+~/smarthome_ws/src/smart-home-robot/external/helper_script/startup_planner.sh
+
+
+
+for coffee protocol
+ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-0.73, 0.25]}"
+ros2 topic pub /coffee std_msgs/msg/Bool "data: true"
+
+for heating up protocol
+ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-0.73, 0.25]}"
+ros2 topic pub /heating_food std_msgs/msg/Bool "data: true"
+
+for medicine am protocol
+ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-0.73, 0.25]}"
+ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 37810"
+
+for pm medcine 
+ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-0.73, 0.25]}"
+ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 68400"
+
+for one time protocol
+ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-0.73, 0.25]}"
+ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 68450" 
+
+
+bedroom position
+ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-4.707, 0.146]}"
