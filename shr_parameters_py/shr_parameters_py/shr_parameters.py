@@ -29,16 +29,16 @@ class shr_parameters:
             instances = __Instances()
             class __Medicineprotocols:
                 instances = ["am_meds", "pm_meds"]
-                take_medication_times = ["Everyday 18h30m0s/19h30m0s", "Everyday 18h00m0s/19h00m0s"]
+                take_medication_times = ["Everyday 12h00m0s/13h00m0s", "Everyday 16h00m0s/17h30m0s"]
             MedicineProtocols = __Medicineprotocols()
             class __Videoreminderprotocols:
                 instances = ["coffee_reminder", "microwave_reminder"]
-                video_reminder_times = ["Everyday 06h00m0s/07h00m0s", "Everyday 15h00m0s/17h00m0s"]
+                video_reminder_times = ["Everyday 07h00m0s/13h00m0s", "Everyday 07h00m0s/13h00m0s"]
                 video_reminder_topics = ["/coffee", "/heating_food"]
             VideoReminderProtocols = __Videoreminderprotocols()
             class __Onereminderprotocols:
                 instances = ["trash"]
-                one_reminder_times = ["Everyday 19h00m0s/20h00m0s"]
+                one_reminder_times = ["Wednesday 18h00m0s/18h50m0s"]
             OneReminderProtocols = __Onereminderprotocols()
         pddl = __Pddl()
         class __Topics:

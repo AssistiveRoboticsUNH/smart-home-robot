@@ -52,9 +52,9 @@ namespace pddl_lib {
         // name field should be the same as the name of the protocol in the high_level_problem
         // mak sure the txt files and mp3 are in shr_resources
         wait_times = {
-                {{"am_meds",                           "MedicineProtocol"},                       {{"wait", {9, 0}},
+                {{"am_meds",                           "MedicineProtocol"},                       {{"wait", {900, 0}},
                                                                                                   }},
-                {{"pm_meds",                           "MedicineProtocol"},                       { {"wait", {9, 0}},
+                {{"pm_meds",                           "MedicineProtocol"},                       { {"wait", {900, 0}},
                                                                                                   }},
                 {{"coffee_reminder",                   "VideoReminderProtocol"},                 { {"wait", {9, 0}},
                                                                                                   }},
@@ -109,13 +109,13 @@ namespace pddl_lib {
                 {
                         {"am_meds", "MedicineProtocol"},
                         {
-                                {"voice_msg", {"Dad, Did you take your medication, please say Yes or No ?", "am_med_reminder.mp3", "food_reminder.mp3"}}
+                                {"voice_msg", {"Dad, Did you take your medication, please say Yes or No ?", "if_true_am.txt", "if_false_am.txt"}}
                         }
                 },
                 {
                         {"pm_meds", "MedicineProtocol"},
                         {
-                                {"voice_msg", {"Dad, Did you take your medication, please say Yes or No ?", "pm_med_reminder.mp3", "medicine_reminder.mp3"}}
+                                {"voice_msg", {"Dad, Did you take your medication, please say Yes or No ?", "if_true_am.txt", "if_false_am.txt"}}
                         }
                 },
         };
@@ -903,6 +903,18 @@ namespace pddl_lib {
                     std::string("weblog=") + currentDateTime + " high_level_domain_StartVideoReminderProtocol" +
                     " started";
             RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
+
+            InstantiatedPredicate executed_voice_pred;
+            executed_voice_pred.name = "executed_voice";
+            executed_voice_pred.parameters.push_back({"voice_command", "VoiceAction"});
+            
+            if (kb.find_predicate(executed_voice_pred)) {
+                kb.erase_predicate(executed_voice_pred);
+                RCLCPP_INFO(ps.world_state_converter->get_logger(), "✅ erased (executed_voice voice_command)");
+            }
+
+
+            
             
             // Just proceed with the protocol without moving
             instantiate_protocol("video_reminder.pddl");
@@ -1324,11 +1336,11 @@ namespace pddl_lib {
             if (kb.find_predicate(microwave_pred)) {
                 std::cout << "🍱 Protocol: microwave_reminder is active (time_for_video)\n";
                 std::cout << "➡️  Going to kitchen\n";
-                location = "dining_room";
+                location = "heating";
             } else if (kb.find_predicate(coffee_pred)) {
                 std::cout << "☕ Protocol: coffee_reminder is active (time_for_video)\n";
                 std::cout << "➡️  Going to dining\n";
-                location = "dining_room";
+                location = "coffee";
             } else {
                 std::cout << "❓ No matching video protocol active. Staying at current location: " << location << "\n";
                 // location remains unchanged
@@ -1468,7 +1480,7 @@ namespace pddl_lib {
 
                     std::string params_cmd = "python3 /home/hello-robot/smarthome_ws/src/smart-home-robot/external/helper_script/parameter_change.py MedicineProtocols am_meds " + start_str + " " + end_str;
                     std::cout << "params_cmd : " << params_cmd << "\n";
-                    std::string build_cmd = "cd /home/hello-robot/smarthome_ws && colcon build --symlink-install --packages-select shr_parameters";
+                    std::string build_cmd = "cd /home/hello-robot/smarthome_ws && colcon build --symlink-install";
 
 
                     std::system(params_cmd.c_str());

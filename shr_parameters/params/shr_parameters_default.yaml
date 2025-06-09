@@ -6,21 +6,21 @@ shr_parameters:
     MedicineProtocols:
       instances: {type: string_array, default_value: ["am_meds", "pm_meds"], description: "medicine
           protocols"}
-      take_medication_times: {type: string_array, default_value: ["Everyday 17h09m0s/18h09m0s",
-          "Everyday 18h00m0s/19h00m0s"], description: "time that each protocol is
+      take_medication_times: {type: string_array, default_value: ["Everyday 12h00m0s/13h00m0s",
+          "Everyday 16h00m0s/17h30m0s"], description: "time that each protocol is
           triggered"}
     VideoReminderProtocols:
       instances: {type: string_array, default_value: ["coffee_reminder", "microwave_reminder"],
         description: "video reminder protocols"}
-      video_reminder_times: {type: string_array, default_value: ["Everyday 06h00m0s/07h00m0s",
-          "Everyday 15h00m0s/17h00m0s"], description: "time that each protocol is
+      video_reminder_times: {type: string_array, default_value: ["Everyday 07h00m0s/13h00m0s",
+          "Everyday 07h00m0s/13h00m0s"], description: "time that each protocol is
           triggered"}
       video_reminder_topics: {type: string_array, default_value: ["/coffee", "/heating_food"],
         description: "time that each protocol is triggered"}
     OneReminderProtocols:
       instances: {type: string_array, default_value: ["trash"], description: "trash
           protocols"}
-      one_reminder_times: {type: string_array, default_value: ["Everyday 19h00m0s/20h00m0s"],
+      one_reminder_times: {type: string_array, default_value: ["Wednesday 18h00m0s/18h50m0s"],
         description: "time that each protocol is triggered"}
   topics:
     time: {type: string, default_value: "/protocol_time", description: "topic for

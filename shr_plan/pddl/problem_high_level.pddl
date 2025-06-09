@@ -1,9 +1,8 @@
 (define (problem high_level)
   (:domain high_level_domain)
   (:objects
-     ;;living_room bedroom kitchen dining home outside - Landmark
-     living_room dining kitchen bedroom home outside - Landmark
-
+  
+     living_room bedroom home outside - Landmark
      am_meds pm_meds - MedicineProtocol
      coffee_reminder microwave_reminder - VideoReminderProtocol
      trash - OneReminderProtocol

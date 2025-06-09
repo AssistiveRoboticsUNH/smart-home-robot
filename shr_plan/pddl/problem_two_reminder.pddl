@@ -2,8 +2,6 @@
 (:domain shr_domain)
 (:objects
     living_room bedroom home outside - Landmark
-    ;;living_room kitchen dining home outside - Landmark
-
     nathan - Person
     t1 t2 t3 t4 t5 - Time
     reminder_1_msg reminder_2_msg call_caregiver_msg - Msg

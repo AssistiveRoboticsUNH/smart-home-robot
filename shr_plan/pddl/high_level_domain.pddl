@@ -264,6 +264,8 @@
 	              (not (priority_5))
                 (forall (?med - MedicineProtocol) (not (medicine_protocol_enabled ?med)) )
                 (forall (?vid - VideoReminderProtocol) (not (video_reminder_enabled ?vid)) )
+                (forall (?one - OneReminderProtocol) (not (one_reminder_enabled ?one)) )
+
                 (not (low_level_failed))
           )
 )
@@ -280,6 +282,7 @@
 	        (started)
 	        ;; has to be higher priority than idle
             (priority_4)
+            ;;(dont_shutdown)
 
             ;; CANT SHUTDOWN IF time to do something is true and
             ;; all predicates indicating that they it is done are false
@@ -304,6 +307,15 @@
                     (and
                         (time_for_video ?vid)
                         (not (already_showed_video ?vid))
+                    )
+                )
+            )
+
+            (forall (?one - OneReminderProtocol)
+                (not
+                    (and
+                        (time_for_one_reminder ?one)
+                        (not (already_gave_one_reminder ?one))
                     )
                 )
             )

@@ -1,2 +1,1 @@
-already_showed_video coffee_reminder VideoReminderProtocol
-already_showed_video microwave_reminder VideoReminderProtocol
+already_reminded_medicine am_meds MedicineProtocol
