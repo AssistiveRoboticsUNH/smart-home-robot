@@ -52,9 +52,9 @@ namespace pddl_lib {
         // name field should be the same as the name of the protocol in the high_level_problem
         // mak sure the txt files and mp3 are in shr_resources
         wait_times = {
-                {{"am_meds",                           "MedicineProtocol"},                       {{"wait", {900, 0}},
+                {{"am_meds",                           "MedicineProtocol"},                        { {"wait", {9, 0}},
                                                                                                   }},
-                {{"pm_meds",                           "MedicineProtocol"},                       { {"wait", {900, 0}},
+                {{"pm_meds",                           "MedicineProtocol"},                        { {"wait", {9, 0}},
                                                                                                   }},
                 {{"coffee_reminder",                   "VideoReminderProtocol"},                 { {"wait", {9, 0}},
                                                                                                   }},
@@ -1336,11 +1336,11 @@ namespace pddl_lib {
             if (kb.find_predicate(microwave_pred)) {
                 std::cout << "🍱 Protocol: microwave_reminder is active (time_for_video)\n";
                 std::cout << "➡️  Going to kitchen\n";
-                location = "heating";
+                location = "dining_room";
             } else if (kb.find_predicate(coffee_pred)) {
                 std::cout << "☕ Protocol: coffee_reminder is active (time_for_video)\n";
                 std::cout << "➡️  Going to dining\n";
-                location = "coffee";
+                location = "dining_room";
             } else {
                 std::cout << "❓ No matching video protocol active. Staying at current location: " << location << "\n";
                 // location remains unchanged

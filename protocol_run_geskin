@@ -4,25 +4,31 @@ for running the script
 
 
 for coffee protocol
-ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-0.73, 0.25]}"
+ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-2.19, 1.4]}"
 ros2 topic pub /coffee std_msgs/msg/Bool "data: true"
 
 for heating up protocol
-ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-0.73, 0.25]}"
+ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-2.19, 1.4]}"
 ros2 topic pub /heating_food std_msgs/msg/Bool "data: true"
 
 for medicine am protocol
-ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-0.73, 0.25]}"
-ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 37810"
+ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-2.19, 1.4]}"
+ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 43560"
 
 for pm medcine 
-ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-0.73, 0.25]}"
+ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-2.19, 1.4]}"
 ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 68400"
 
 for one time protocol
-ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-0.73, 0.25]}"
+ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-2.19, 1.4]}"
 ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 68450" 
 
 
 bedroom position
-ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-4.707, 0.146]}"
+ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-5.09, -0.01]}"
+
+
+ros2 topic pub /charging std_msgs/msg/Int32 '{data: 1}'
+
+for clion
+sh /opt/clion-*/bin/clion.sh

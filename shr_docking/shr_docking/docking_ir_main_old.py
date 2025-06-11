@@ -51,7 +51,7 @@ class Docking_IR(Node):
         self.sensor_oriented = False # Check if sensor is oriented to docking station once
         self.close_counter = 0
         self.mode = 'far'
-        self.centre_ir_weight = 4.0
+        self.centre_ir_weight = 2.0
         self.centre_ir_set = False
 
     def bump_callback(self, msg):

@@ -12,13 +12,15 @@ def main():
     zmq_context = zmq.Context()
     zmq_socket = zmq_context.socket(zmq.PUB)
 
-    ip_list = os.popen('hostname -I').read().strip().split()
-
-    for ip in ip_list:
-        if ip.find('192.') != -1:
-            ip_address = ip
-
-    print("ZMQ LOCAL IP Address: ", ip_address)
+    try:
+        ip_list = os.popen('hostname -I').read().strip().split()
+        ip_address = next(ip for ip in ip_list if ip.startswith('192.'))
+    except StopIteration:
+        # Fallback default IP if no suitable IP found
+        ip_address = "10.21.194.221"
+        print("⚠️ Could not detect 192.* IP. Falling back to default:", ip_address)
+    else:
+        print("✅ ZMQ LOCAL IP Address detected:", ip_address)
    
     str_ = "tcp://" + str(ip_address) + ":5556"
     zmq_socket.bind(str_)  # Shared address and port
