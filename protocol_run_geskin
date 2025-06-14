@@ -1,0 +1,111 @@
+for running the script
+~/smarthome_ws/src/smart-home-robot/external/helper_script/startup_planner.sh
+
+
+for coffee protocol
+ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-2.19, 1.4]}"
+ros2 topic pub /coffee std_msgs/msg/Bool "data: true"
+
+for heating up protocol
+ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-2.19, 1.4]}"
+ros2 topic pub /heating_food std_msgs/msg/Bool "data: true"
+
+for medicine am protocol
+ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-2.19, 1.4]}"
+ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 43560"
+
+for pm medcine 
+ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-2.19, 1.4]}"
+ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 68400"
+
+for one time protocol
+ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-2.19, 1.4]}"
+ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 68450" 
+
+
+bedroom position
+ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-5.09, -0.01]}"
+
+ros2 topic pub /charging std_msgs/msg/Int32 '{data: 1}'
+
+
+for clion
+sh /opt/clion-*/bin/clion.sh
+
+
+for drinking:
+ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 50410"
+bedroom 
+ros2 run tf2_ros static_transform_publisher -3.93 0.26 -1.165 0.0 0.0 -0.707 0.707 unity nathan
+living_room
+ros2 run tf2_ros static_transform_publisher -2.19 1.0 -1.165 0.0 0.0 0.0 1.0 unity nathan
+
+ros2 topic pub /time_for_drinking std_msgs/msg/Int32 "data: 1"
+
+
+for am med:
+ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 33310"
+bedroom 
+ros2 run tf2_ros static_transform_publisher -3.93 0.26 -1.165 0.0 0.0 -0.707 0.707 unity nathan
+living_room
+ros2 run tf2_ros static_transform_publisher -2.19 1.0 -1.165 0.0 0.0 0.0 1.0 unity nathan
+
+for pm med;
+ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 75610"
+bedroom 
+ros2 run tf2_ros static_transform_publisher -3.93 0.26 -1.165 0.0 0.0 -0.707 0.707 unity nathan
+living_room
+ros2 run tf2_ros static_transform_publisher -2.19 1.0 -1.165 0.0 0.0 0.0 1.0 unity nathan
+
+
+for emptydish
+ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 37810"
+bedroom 
+ros2 run tf2_ros static_transform_publisher -3.93 0.26 -1.165 0.0 0.0 -0.707 0.707 unity nathan
+living_room
+ros2 run tf2_ros static_transform_publisher -2.19 1.0 -1.165 0.0 0.0 0.0 1.0 unity nathan
+
+
+for emptytrash
+ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 34210"
+bedroom 
+ros2 run tf2_ros static_transform_publisher -3.93 0.26 -1.165 0.0 0.0 -0.707 0.707 unity nathan
+living_room
+ros2 run tf2_ros static_transform_publisher -2.19 1.0 -1.165 0.0 0.0 0.0 1.0 unity nathan
+
+
+for morningwakeprotocol
+ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 30310"
+bedroom 
+ros2 run tf2_ros static_transform_publisher -3.93 0.26 -1.165 0.0 0.0 -0.707 0.707 unity nathan
+living_room
+ros2 run tf2_ros static_transform_publisher -2.19 1.0 -1.165 0.0 0.0 0.0 1.0 unity nathan
+
+
+for showerprotocol
+ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 26710"
+bedroom 
+ros2 run tf2_ros static_transform_publisher -3.93 0.26 -1.165 0.0 0.0 -0.707 0.707 unity nathan
+living_room
+ros2 run tf2_ros static_transform_publisher -2.19 1.0 -1.165 0.0 0.0 0.0 1.0 unity nathan
+
+
+for pamlocationprotocol
+ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 23110"
+bedroom 
+ros2 run tf2_ros static_transform_publisher -3.93 0.26 -1.165 0.0 0.0 -0.707 0.707 unity nathan
+living_room
+ros2 run tf2_ros static_transform_publisher -2.19 1.0 -1.165 0.0 0.0 0.0 1.0 unity nathan
+
+
+
+for fitnessprotocol
+ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 12310"
+bedroom 
+ros2 run tf2_ros static_transform_publisher -3.93 0.26 -1.165 0.0 0.0 -0.707 0.707 unity nathan
+living_room
+ros2 run tf2_ros static_transform_publisher -2.19 1.0 -1.165 0.0 0.0 0.0 1.0 unity nathan
+
+
+
+

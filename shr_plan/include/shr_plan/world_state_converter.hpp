@@ -18,6 +18,7 @@ private:
     rclcpp::Subscription<std_msgs::msg::Int32>::SharedPtr taking_medicine_sub_;
 	rclcpp::Subscription<std_msgs::msg::Int32>::SharedPtr taking_shower_sub_;
 	rclcpp::Subscription<std_msgs::msg::Int32>::SharedPtr pam_outside_sub_;
+    rclcpp::Subscription<std_msgs::msg::Int32>::SharedPtr time_for_drinking_;
     rclcpp::Subscription<std_msgs::msg::Int32>::SharedPtr good_weather_sub_;
     rclcpp::Subscription<std_msgs::msg::String>::SharedPtr screen_ack_sub_;
 
@@ -87,6 +88,12 @@ public:
                 params.topics.pam_outside, 10, [this](const std_msgs::msg::Int32::SharedPtr msg) {
                     std::lock_guard<std::mutex> lock(world_state_mtx);
                     world_state_->pam_outside = msg->data;
+                });
+
+        time_for_drinking_ = create_subscription<std_msgs::msg::Int32>(
+                params.topics.time_for_drinking, 10, [this](const std_msgs::msg::Int32::SharedPtr msg) {
+                    std::lock_guard<std::mutex> lock(world_state_mtx);
+                    world_state_->time_for_drinking = msg->data;
                 });
 
         screen_ack_sub_ = create_subscription<std_msgs::msg::String>(

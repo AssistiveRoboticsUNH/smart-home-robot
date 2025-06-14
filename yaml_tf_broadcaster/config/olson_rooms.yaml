@@ -43,7 +43,7 @@ transformations:
   id: living_room
   transform:
   - -2.190000057220459
-  - 1.0
+  - 1.5
   - -1.1649999618530273
   - 0.0
   - 0.0

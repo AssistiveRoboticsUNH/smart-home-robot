@@ -37,11 +37,11 @@ class shr_parameters:
             MedicineProtocol = __Medicineprotocol()
             class __Emptydishwasherprotocol:
                 instances = ["em_dishwasher"]
-                empty_dishwasher_reminder_times = ["Monday 10h30m0s/11h30m0s"]
+                empty_dishwasher_reminder_times = ["Everyday 10h30m0s/11h30m0s"]
             EmptyDishwasherProtocol = __Emptydishwasherprotocol()
             class __Emptytrashprotocol:
                 instances = ["em_trash"]
-                empty_trash_reminder_times = ["Fridays 09h30m0s/10h30m0s"]
+                empty_trash_reminder_times = ["Everyday 09h30m0s/10h30m0s"]
             EmptyTrashProtocol = __Emptytrashprotocol()
             class __Morningwakeprotocol:
                 instances = ["morning_wake"]
@@ -69,6 +69,7 @@ class shr_parameters:
             good_weather = "/good_weather"
             pam_outside = "/pam_outside"
             display_ack = "/screen_ack"
+            time_for_drinking = "/time_for_drinking"
         topics = __Topics()
 
 
@@ -232,6 +233,10 @@ class shr_parameters:
                     updated_params.topics.display_ack = param.value
                     self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
 
+                if param.name == self.prefix_ + "topics.time_for_drinking":
+                    updated_params.topics.time_for_drinking = param.value
+                    self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
+
                 if param.name == self.prefix_ + "person_tf":
                     updated_params.person_tf = param.value
                     self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
@@ -377,6 +382,11 @@ class shr_parameters:
                 parameter = updated_params.topics.display_ack
                 self.node_.declare_parameter(self.prefix_ + "topics.display_ack", parameter, descriptor)
 
+            if not self.node_.has_parameter(self.prefix_ + "topics.time_for_drinking"):
+                descriptor = ParameterDescriptor(description="topic for display ack", read_only = False)
+                parameter = updated_params.topics.time_for_drinking
+                self.node_.declare_parameter(self.prefix_ + "topics.time_for_drinking", parameter, descriptor)
+
             if not self.node_.has_parameter(self.prefix_ + "person_tf"):
                 descriptor = ParameterDescriptor(description="person tf frame id", read_only = False)
                 parameter = updated_params.person_tf
@@ -464,6 +474,9 @@ class shr_parameters:
             param = self.node_.get_parameter(self.prefix_ + "topics.display_ack")
             self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
             updated_params.topics.display_ack = param.value
+            param = self.node_.get_parameter(self.prefix_ + "topics.time_for_drinking")
+            self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
+            updated_params.topics.time_for_drinking = param.value
             param = self.node_.get_parameter(self.prefix_ + "person_tf")
             self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
             updated_params.person_tf = param.value

@@ -38,7 +38,7 @@ shr_parameters:
       }
       empty_dishwasher_reminder_times: {
         type: string_array,
-        default_value: [ "Monday 10h30m0s/11h30m0s"],
+        default_value: [ "Everyday 10h30m0s/11h30m0s"],
         description: "time that each protocol is triggered",
       }
     EmptyTrashProtocol:
@@ -49,7 +49,7 @@ shr_parameters:
       }
       empty_trash_reminder_times: {
         type: string_array,
-        default_value: [ "Fridays 09h30m0s/10h30m0s"],
+        default_value: [ "Everyday 09h30m0s/10h30m0s"],
         description: "time that each protocol is triggered",
       }
     MorningWakeProtocol:
@@ -143,6 +143,12 @@ shr_parameters:
       description: "topic for display ack",
     }
 
+    time_for_drinking: {
+      type: string,
+      default_value: "/time_for_drinking",
+      description: "topic for display ack",
+    }
+
   person_tf: {
     type: string,
     default_value: "nathan",
@@ -154,14 +160,3 @@ shr_parameters:
     description: "robot tf frame id",
   }
   
-
-
-
-
-
-
-
-
-
-
-

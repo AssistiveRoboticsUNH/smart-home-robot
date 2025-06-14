@@ -145,13 +145,13 @@ public:
 
     
     TRUTH_VALUE time_for_drinking_reminder(TRUTH_VALUE val, DrinkingProtocol d) const override {
-        auto params = world_state_converter->get_params();
-        if (auto index = get_inst_index(d, params)) {
-            if (compare_time(params.pddl.DrinkingProtocol.drinking_reminder_times[index.value()])) {
+        if (d == "drinking"){
+            if (world_state_converter->get_world_state_msg()->time_for_drinking == 1){
                 return TRUTH_VALUE::TRUE;
             }
         }
         return TRUTH_VALUE::FALSE;
+        
     }
 
     TRUTH_VALUE time_to_take_medicine(TRUTH_VALUE val, MedicineProtocol m) const override {

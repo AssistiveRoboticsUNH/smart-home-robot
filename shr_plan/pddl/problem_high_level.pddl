@@ -33,9 +33,9 @@
       (not_visible_location outside)
 
       ;;(time_for_morning_wake_reminder morning_wake)
-      ;;(person_currently_at nathan living_room)
+     ;; (person_currently_at nathan living_room)
       ;;(person_at t1 nathan living_room)
-      ;;(robot_at home)
+     ;; (robot_at home)
 
 
       ;; add when you need to test the protocl 
@@ -43,7 +43,7 @@
       ;;(person_currently_at nathan living_room)
       ;;(robot_at home)
       
-      ;;(time_for_drinking_reminder drinking)
+     ;; (time_for_drinking_reminder drinking)
       ;;(time_for_empty_trash_reminder em_trash)
       ;;(time_for_empty_dishwasher_reminder em_dishwasher)
       ;;(time_for_morning_wake_reminder morning_wake)

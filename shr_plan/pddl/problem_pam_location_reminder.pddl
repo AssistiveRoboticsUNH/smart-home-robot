@@ -26,6 +26,8 @@
     (next_time t3 t4)
     (next_time t4 t5)
 
+   ;; (unknown (pam_outside))
+
 
     ;; Person can be at different locations at future times
     (oneof (person_at t2 nathan living_room) (person_at t2 nathan bedroom) (person_at t2 nathan outside))
@@ -44,7 +46,7 @@
 
     ;; Define success states
     (message_given_success reminder_2_msg)
-    (medicine_taken_success)
+
 
     ;; Enforce same location constraint for interactions
     (same_location_constraint)

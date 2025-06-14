@@ -6,5 +6,6 @@ int32 robot_charging
 int32 person_eating
 int32 good_weather
 int32 pam_outside
+int32 time_for_drinking
 string screen_ack
 builtin_interfaces/Time time

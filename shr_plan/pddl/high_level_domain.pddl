@@ -176,7 +176,7 @@
 	:parameters (?d - DrinkingProtocol ?p - Person ?cur - Landmark ?dest - Landmark)
 	:precondition (and
 	  ;; all protocols should have a priority higher than that of idle
-	  (priority_2)
+	  (priority_3)
       (time_for_drinking_reminder ?d)
 
       (visible_location ?dest)
@@ -215,7 +215,7 @@
       (not (already_reminded_drinking ?d))
       (drinking_protocol_enabled ?d)
 		)
-	:effect (and (success) (not (priority_2)) )
+	:effect (and (success) (not (priority_3)) )
 )
 
 (:action StartMedicineProtocol

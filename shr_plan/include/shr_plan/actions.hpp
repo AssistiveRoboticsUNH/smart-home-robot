@@ -865,7 +865,7 @@ namespace pddl_lib {
                     std::string("weblog=") + currentDateTime + " high_level_domain_StartEmptyDishwaserProtocol" + " started";
             RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
 
-            instantiate_protocol("empty_trash_reminder.pddl");
+            instantiate_protocol("empty_dishwasher_reminder.pddl");
             
             ps.active_protocol = protocol;
             lock.UnLock();
@@ -1139,7 +1139,7 @@ namespace pddl_lib {
 
             ps.world_state_converter->reset_screen_ack();  // Optional: reset at the start
 
-            for (int i = 0; i < 20; ++i) {
+            for (int i = 0; i < 10; ++i) {
                 if (ps.world_state_converter->is_screen_ack_turn_on()) {
                     RCLCPP_INFO(rclcpp::get_logger("StartROS"), "✅ Received TURN_ON via screen_ack. Breaking loop.");
                     break;
