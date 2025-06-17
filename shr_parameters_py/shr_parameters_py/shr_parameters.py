@@ -53,7 +53,7 @@ class shr_parameters:
             ShowerProtocol = __Showerprotocol()
             class __Pamlocationprotocol:
                 instances = ["pam_location", "pam_wed", "pam_fri"]
-                pam_location_reminder_times = ["Everyday 06h25m0s/6h45m0s", "Everyday 05h25m0s/5h45m0s", "Everyday 04h25m0s/4h45m0s"]
+                pam_location_reminder_times = ["Everyday 04h25m0s/4h45m0s", "Everyday 05h25m0s/5h45m0s", "Everyday 06h25m0s/6h45m0s"]
             PamLocationProtocol = __Pamlocationprotocol()
             class __Fitnessprotocol:
                 instances = ["fitness"]
@@ -62,6 +62,7 @@ class shr_parameters:
         pddl = __Pddl()
         class __Topics:
             time = "/protocol_time"
+            person_location = "/person_location"
             person_taking_medicine = "/person_taking_medicine"
             person_shower = "/person_shower"
             person_eating = "/person_eating"
@@ -203,6 +204,10 @@ class shr_parameters:
 
                 if param.name == self.prefix_ + "topics.time":
                     updated_params.topics.time = param.value
+                    self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
+
+                if param.name == self.prefix_ + "topics.person_location":
+                    updated_params.topics.person_location = param.value
                     self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
 
                 if param.name == self.prefix_ + "topics.person_taking_medicine":
@@ -347,6 +352,11 @@ class shr_parameters:
                 parameter = updated_params.topics.time
                 self.node_.declare_parameter(self.prefix_ + "topics.time", parameter, descriptor)
 
+            if not self.node_.has_parameter(self.prefix_ + "topics.person_location"):
+                descriptor = ParameterDescriptor(description="topic for protocol clock time", read_only = False)
+                parameter = updated_params.topics.person_location
+                self.node_.declare_parameter(self.prefix_ + "topics.person_location", parameter, descriptor)
+
             if not self.node_.has_parameter(self.prefix_ + "topics.person_taking_medicine"):
                 descriptor = ParameterDescriptor(description="topic for sensor that detect if medication is taken", read_only = False)
                 parameter = updated_params.topics.person_taking_medicine
@@ -453,6 +463,9 @@ class shr_parameters:
             param = self.node_.get_parameter(self.prefix_ + "topics.time")
             self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
             updated_params.topics.time = param.value
+            param = self.node_.get_parameter(self.prefix_ + "topics.person_location")
+            self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
+            updated_params.topics.person_location = param.value
             param = self.node_.get_parameter(self.prefix_ + "topics.person_taking_medicine")
             self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
             updated_params.topics.person_taking_medicine = param.value

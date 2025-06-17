@@ -82,7 +82,7 @@ shr_parameters:
       }
       pam_location_reminder_times: {
         type: string_array,
-        default_value: [ "Everyday 06h25m0s/6h45m0s", "Everyday 05h25m0s/5h45m0s", "Everyday 04h25m0s/4h45m0s" ],
+        default_value: [ "Everyday 04h25m0s/4h45m0s", "Everyday 05h25m0s/5h45m0s", "Everyday 06h25m0s/6h45m0s" ],
         description: "time that each protocol is triggered",
       }
 
@@ -102,6 +102,11 @@ shr_parameters:
     time: {
       type: string,
       default_value: "/protocol_time",
+      description: "topic for protocol clock time",
+    }
+    person_location: {
+      type: string,
+      default_value: "/person_location",
       description: "topic for protocol clock time",
     }
     person_taking_medicine: {

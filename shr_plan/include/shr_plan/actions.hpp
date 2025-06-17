@@ -963,6 +963,14 @@ namespace pddl_lib {
                 RCLCPP_INFO(rclcpp::get_logger("Shutdown"), "✅ Created publisher for display_status.");
             }
 
+
+             // ✅ Publish TURN_OFF before shutdown
+            auto message_non_talk = std_msgs::msg::String();
+            message_non_talk.data = "1";
+            ps.getDisplayPublisher()->publish(message_non_talk);
+            RCLCPP_INFO(rclcpp::get_logger("Shutdown"), "Published for display: %s", message_non_talk.data.c_str());
+            rclcpp::sleep_for(std::chrono::seconds(10));
+
             // ✅ Publish TURN_OFF before shutdown
             auto message = std_msgs::msg::String();
             message.data = "TURN_OFF";
@@ -1005,6 +1013,8 @@ namespace pddl_lib {
                 {"morning_wake", "MorningWakeProtocol"},
 				{"shower", "ShowerProtocol"},
 				{"pam_location", "PamLocationProtocol"},
+                {"pam_wed", "PamLocationProtocol"},
+                {"pam_fri", "PamLocationProtocol"},
                 {"fitness", "FitnessProtocol"},
 
             };
@@ -1585,6 +1595,26 @@ namespace pddl_lib {
                 std::string log_message =
                         std::string("weblog=") + currentDateTime + " GiveReminder" + script_name_str + " succeed!";
                 RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
+
+                // ✅ Ensure publisher exists, create if necessary
+                if (!ps.getDisplayPublisher()) {
+                    auto node = rclcpp::Node::make_shared("display_publisher_node");
+                    ps.setDisplayPublisher(node->create_publisher<std_msgs::msg::String>("display_status", 10));
+                    RCLCPP_INFO(rclcpp::get_logger("Shutdown"), "✅ Created publisher for display_status.");
+                }
+
+
+                // ✅ If the active protocol is PamLocationProtocol, publish "1"
+                if (ps.active_protocol.type == "PamLocationProtocol") {
+                    std_msgs::msg::String message;
+                    message.data = "3";
+                    for (int i = 0; i < 10; ++i) {
+                        ps.getDisplayPublisher()->publish(message);
+                        RCLCPP_INFO(rclcpp::get_logger("GiveReminder"), "📤 Published to display (%d/10): %s", i + 1, message.data.c_str());
+                        rclcpp::sleep_for(std::chrono::seconds(1));
+                    }
+                }
+
                 rclcpp::sleep_for(std::chrono::seconds(ps.wait_times.at(ps.active_protocol).at(msg).second));
                 // wait_time = ps.wait_times.at(ps.active_protocol).at(msg).second;
                 // for (int i = 0; i < wait_time; i++) {

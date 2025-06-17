@@ -99,6 +99,8 @@ ros2 run tf2_ros static_transform_publisher -2.19 1.0 -1.165 0.0 0.0 0.0 1.0 uni
 
 
 
+
+
 for fitnessprotocol
 ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 12310"
 bedroom 
