@@ -1175,7 +1175,7 @@ namespace pddl_lib {
 
             // KILING ROS2 
 
-            std::system("python3 /home/hello-robot/kill_ros.py");
+            std::system("python3 /home/hello-robot/smarthome_ws/src/smart-home-robot/external/helper_script/kill_ros.py");
             
             rclcpp::sleep_for(std::chrono::seconds(120));
         
