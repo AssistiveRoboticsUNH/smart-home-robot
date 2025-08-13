@@ -629,7 +629,7 @@ namespace pddl_lib {
                     // cmd_startros += "/start_nav.sh";
                     // std::system(cmd_startros.c_str());
                     
-                    std::string cmd_startros = "/home/hello-robot/smarthome_ws/src/smart-home-robot/external/helper_script/start_nav.sh";
+                    std::string cmd_startros = "/home/hello-robot/smarthome_ws/src/smart-home-robot/external/helper_scripts/start_nav.sh";
                     std::system(cmd_startros.c_str());
 
         
@@ -1085,7 +1085,7 @@ namespace pddl_lib {
             
             // KILING ROS2 
 
-            std::system("python3 /home/hello-robot/smarthome_ws/src/smart-home-robot/external/helper_script/kill_ros.py");
+            std::system("python3 /home/hello-robot/smarthome_ws/src/smart-home-robot/external/helper_scripts/kill_ros.py");
             
             rclcpp::sleep_for(std::chrono::seconds(120));
         
@@ -1129,7 +1129,7 @@ namespace pddl_lib {
             // cmd_startros += "/start_nav.sh";
             // std::system(cmd_startros.c_str());
             
-            std::string cmd_startros = "/home/hello-robot/smarthome_ws/src/smart-home-robot/external/helper_script/start_nav.sh";
+            std::string cmd_startros = "/home/hello-robot/smarthome_ws/src/smart-home-robot/external/helper_scripts/start_nav.sh";
             std::system(cmd_startros.c_str());
 
             rclcpp::sleep_for(std::chrono::seconds(10));
