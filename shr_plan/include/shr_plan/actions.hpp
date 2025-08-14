@@ -46,19 +46,19 @@ namespace pddl_lib {
         // name field should be the same as the name of the protocol in the high_level_problem
         // mak sure the txt files and mp3 are in shr_resources
         const std::unordered_map <InstantiatedParameter, std::unordered_map<std::string, std::pair < int, int>>> wait_times = {
-            {{"am_meds","MedicineProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {60, 0}},}},
-            {{"pm_meds","MedicineProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {60, 0}},}},
+            {{"am_meds","MedicineProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
+            {{"pm_meds","MedicineProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
             {{"gym_reminder","GymReminderProtocol"},{{"voice_msg", {0, 1}},{"wait",{0, 0}},}},
             {{"drinking","DrinkingProtocol"},{{"reminder_1_msg", {0, 1}},{"wait",{0, 0}},}},
-            {{"em_trash","EmptyTrashProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {60, 0}},}},
-            {{"em_dishwasher","EmptyDishwasherProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {60, 0}},}},
+            {{"em_trash","EmptyTrashProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
+            {{"em_dishwasher","EmptyDishwasherProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
 
-            {{"morning_wake","MorningWakeProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {60, 0}},}},
-			{{"shower","ShowerProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {120, 0}},}},
-			{{"pam_location","PamLocationProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {180, 0}},}},
-            {{"pam_wed","PamLocationProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {180, 0}},}},
-            {{"pam_fri","PamLocationProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {180, 0}},}},
-            {{"fitness","FitnessProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {180, 0}},}},
+            {{"morning_wake","MorningWakeProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
+			{{"shower","ShowerProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
+			{{"pam_location","PamLocationProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
+            {{"pam_wed","PamLocationProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
+            {{"pam_fri","PamLocationProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
+            {{"fitness","FitnessProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
         };
 
         const std::unordered_map <InstantiatedParameter, std::unordered_map<std::string, std::string>> automated_reminder_msgs = {
