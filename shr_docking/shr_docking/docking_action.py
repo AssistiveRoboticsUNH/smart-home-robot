@@ -59,6 +59,7 @@ class DockingMainActionServer(Node):
         self.docking_ir.bumped = False
         self.failed_count = 0
         
+        docking_start_time = time.time() 
         while not (self.docking_camera.bumped or self.docking_ir.bumped):
             if goal_handle.is_cancel_requested:
                 self.get_logger().info('Goal cancelled')
@@ -90,37 +91,37 @@ class DockingMainActionServer(Node):
                 self.docking_ir.bumped = False
                 self.docking_camera.get_transformation_from_aptag_to_port()
                 self.failed_count += self.docking_camera.move_towards_tag()
-                self.docking_mode = "camera"
             else:
                 self.failed_count += self.docking_ir.move_to_docking_station()
-                self.docking_mode = "ir"
                  
             if self.failed_count > 10:
-                self.get_logger().info(f'Docking aborted for no bump sensor data')
+                self.get_logger().info(f'Docking aborted for no sensor data')
                 break
                 
+            if time.time() - docking_start_time > 40: # 40 seconds timeout for docking
+                self.get_logger().info("weblog="+' Docking aborted for timeout')
+                self.docking_ir.move_robot(0.0, 0.0)
+                goal_handle.abort()                
+                result = DockingRequest.Result()
+                result.result = False
+                return result
 
         self.get_logger().info(f'Bumped from Camera: {self.docking_camera.bumped}')
         self.get_logger().info(f'Bumped from IR: {self.docking_ir.bumped}')
-        if self.docking_mode == "camera":
-            self.get_logger().info(f'Docked Using Camera')
-        else:
-             self.get_logger().info(f'Docked Using IR')
-
         if (self.docking_camera.bumped or self.docking_ir.bumped):
             print("Bumped!!")
             self.docking_ir.move_robot(0.0, 0.0)
             print(self.docking_camera.charger_status)
             
+            start_time_current_check = time.time()
             # wait for charger status
             while True:
-                start_time = time.time()
 
                 if self.docking_camera.charger_status ==1 or self.docking_ir.is_charging:
-                    if self.docking_mode == "ir":
+                    if self.docking_ir.bumped:
                         self.get_logger().info("weblog="+' Docked with IR and charging!')
                     else:
-                        self.get_logger().info("weblog="+' Docked with camera and charging!')
+                        self.get_logger().info("weblog="+' Docked and charging!')
                     goal_handle.succeed()
                     result = DockingRequest.Result()
                     result.result = True
@@ -137,7 +138,7 @@ class DockingMainActionServer(Node):
                     time.sleep(1)
 
                 # if 15 seconds passed and no charger status, abort
-                if time.time() - start_time > 15:
+                if time.time() - start_time_current_check > 10:
                     goal_handle.abort()
                     result = DockingRequest.Result()
                     result.result = False
@@ -185,6 +186,5 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
-
 
 
