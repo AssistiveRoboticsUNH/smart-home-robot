@@ -60,6 +60,15 @@ class DockingMainActionServer(Node):
         self.failed_count = 0
         
         docking_start_time = time.time() 
+
+        while True:
+            if not self.docking_camera.is_detect:
+                self.docking_ir.move_robot(0.0, -0.2)
+            else:
+                self.docking_ir.move_robot(0.0, 0.0)
+                break
+
+
         while not (self.docking_camera.bumped or self.docking_ir.bumped):
             if goal_handle.is_cancel_requested:
                 self.get_logger().info('Goal cancelled')
@@ -92,7 +101,8 @@ class DockingMainActionServer(Node):
                 self.docking_camera.get_transformation_from_aptag_to_port()
                 self.failed_count += self.docking_camera.move_towards_tag()
             else:
-                self.failed_count += self.docking_ir.move_to_docking_station()
+                # self.failed_count += self.docking_ir.move_to_docking_station()
+                pass
                  
             if self.failed_count > 10:
                 self.get_logger().info(f'Docking aborted for no sensor data')

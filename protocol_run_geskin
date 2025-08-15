@@ -2,6 +2,19 @@ for running the script
 ~/smarthome_ws/src/smart-home-robot/external/helper_script/startup_planner.sh
 
 
+Suzan protocols 
+
+
+for med1
+ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 32600"
+ros2 topic pub -r 1 /person_location std_msgs/msg/String  "data: living_room"
+
+
+for food1
+ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 75800"
+ros2 topic pub -r 1 /person_location std_msgs/msg/String  "data: living_room"
+
+
 for coffee protocol
 ros2 topic pub -r 1 /person_loc std_msgs/msg/Float64MultiArray "{data: [-2.19, 1.4]}"
 ros2 topic pub /coffee std_msgs/msg/Bool "data: true"

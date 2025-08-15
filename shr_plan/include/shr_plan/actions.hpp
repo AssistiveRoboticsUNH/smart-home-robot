@@ -46,6 +46,8 @@ namespace pddl_lib {
         // name field should be the same as the name of the protocol in the high_level_problem
         // mak sure the txt files and mp3 are in shr_resources
         const std::unordered_map <InstantiatedParameter, std::unordered_map<std::string, std::pair < int, int>>> wait_times = {
+            {{"med_r1","OneReminderProtocol"},{{"reminder_1_msg", {0, 1}},{"wait",{0, 0}},}},
+            {{"food_r1","OneReminderProtocol"},{{"reminder_1_msg", {0, 1}},{"wait",{0, 0}},}},
             {{"am_meds","MedicineProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
             {{"pm_meds","MedicineProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
             {{"gym_reminder","GymReminderProtocol"},{{"voice_msg", {0, 1}},{"wait",{0, 0}},}},
@@ -62,6 +64,8 @@ namespace pddl_lib {
         };
 
         const std::unordered_map <InstantiatedParameter, std::unordered_map<std::string, std::string>> automated_reminder_msgs = {
+            {{"med_r1","OneReminderProtocol"},{{"reminder_1_msg", "med1_reminder.txt"},}},
+            {{"food_r1","OneReminderProtocol"},{{"reminder_1_msg", "food1_reminder.txt"},}},
             {{"am_meds","MedicineProtocol"},{{"reminder_1_msg", "am_med_reminder.txt"},{"reminder_2_msg", "am_med_reminder_2.txt"},}},
             {{"pm_meds","MedicineProtocol"},{{"reminder_1_msg", "pm_med_reminder.txt"},{"reminder_2_msg", "pm_med_reminder_2.txt"},}},
             {{"drinking","DrinkingProtocol"},{{"reminder_1_msg", "drinking_reminder.txt"},}},
@@ -725,7 +729,29 @@ namespace pddl_lib {
             kb.insert_predicate({"abort", {}});
         }
 
-        // medicine_protocol
+        BT::NodeStatus high_level_domain_StartOneReminderProtocol(const InstantiatedAction &action) override {
+            auto &kb = KnowledgeBase::getInstance();
+            
+            InstantiatedParameter protocol = action.parameters[0];
+            InstantiatedParameter cur = action.parameters[2];
+            InstantiatedParameter dest = action.parameters[3];
+
+            
+            auto [ps, lock] = ProtocolState::getConcurrentInstance();
+            lock.Lock();
+            std::string currentDateTime = getCurrentDateTime();
+            std::string log_message =
+                    std::string("weblog=") + currentDateTime + " high_level_domain_StartOneReminderProtocol" + " started";
+            RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
+            
+            instantiate_protocol("one_reminder.pddl");
+            
+            ps.active_protocol = protocol;
+            lock.UnLock();
+            return BT::NodeStatus::SUCCESS;
+        }
+
+
         BT::NodeStatus high_level_domain_StartDrinkingProtocol(const InstantiatedAction &action) override {
             auto &kb = KnowledgeBase::getInstance();
             
@@ -743,27 +769,6 @@ namespace pddl_lib {
             
 
             instantiate_protocol("drinking_reminder.pddl");
-
-            // if (dest.name == cur.name) {
-            //     std::string updated_dest = "bedroom"; // Default case
-            
-            //     // Swap destination if current_loc is "living_room" or "bedroom"
-            //     if (cur.name == "living_room") {
-            //         updated_dest = "bedroom";
-            //     } else if (cur.name == "bedroom") {
-            //         updated_dest = "living_room";
-            //     }
-            
-            //     RCLCPP_INFO(rclcpp::get_logger("debug"),
-            //                 "StartMedicineProtocol: Robot is already at %s. Changing destination to %s.", 
-            //                 cur.name.c_str(), updated_dest.c_str());
-            
-            //     // Just proceed with the protocol without moving
-            //     instantiate_protocol("drinking_reminder.pddl", {{"current_loc", cur.name}, {"dest_loc", updated_dest}});
-            // } else {
-            //     // Move to the medicine location if not already there
-            //     instantiate_protocol("drinking_reminder.pddl", {{"current_loc", cur.name}, {"dest_loc", dest.name}});
-            // }
             
             ps.active_protocol = protocol;
             lock.UnLock();
@@ -785,26 +790,6 @@ namespace pddl_lib {
             RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
 
             instantiate_protocol("medicine_reminder.pddl");
-            // if (dest.name == cur.name) {
-            //     std::string updated_dest = "bedroom"; // Default case
-            
-            //     // Swap destination if current_loc is "living_room" or "bedroom"
-            //     if (cur.name == "living_room") {
-            //         updated_dest = "bedroom";
-            //     } else if (cur.name == "bedroom") {
-            //         updated_dest = "living_room";
-            //     }
-            
-            //     RCLCPP_INFO(rclcpp::get_logger("debug"),
-            //                 "StartMedicineProtocol: Robot is already at %s. Changing destination to %s.", 
-            //                 cur.name.c_str(), updated_dest.c_str());
-            
-            //     // Just proceed with the protocol without moving
-            //     instantiate_protocol("medicine_reminder.pddl", {{"current_loc", cur.name}, {"dest_loc", updated_dest}});
-            // } else {
-            //     // Move to the medicine location if not already there
-            //     instantiate_protocol("medicine_reminder.pddl", {{"current_loc", cur.name}, {"dest_loc", dest.name}});
-            // }
             
             ps.active_protocol = protocol;
             lock.UnLock();
@@ -1006,6 +991,8 @@ namespace pddl_lib {
             const std::unordered_map<std::string, std::string> protocol_type_ = {
                 {"am_meds", "MedicineProtocol"},
                 {"pm_meds", "MedicineProtocol"},
+                {"med_r1", "OneReminderProtocol"},
+                {"food_r1", "OneReminderProtocol"},
                 {"gym_reminder", "GymReminderProtocol"},
                 {"drinking", "DrinkingProtocol"},
                 {"em_trash" , "EmptyTrashProtocol"},
@@ -1021,6 +1008,7 @@ namespace pddl_lib {
 
             const std::unordered_map<std::string, std::vector<std::string>> keyword_protocol_ = {
                 {"already_reminded_medicine", {"am_meds", "pm_meds"}},
+                {"already_reminded_one_reminder", {"med_r1", "food_r1"}},
                 {"already_called_about_medicine", {"am_meds", "pm_meds"}},
                 {"already_reminded_gym",{"gym_reminder"}},
                 {"already_reminded_drinking",{"drinking"}},
@@ -1264,6 +1252,9 @@ namespace pddl_lib {
             if (active_protocol.type == "MedicineProtocol") {
                 kb.insert_predicate({"already_reminded_medicine", {active_protocol}});
                 kb.erase_predicate({"medicine_protocol_enabled", {active_protocol}});
+            } else if (active_protocol.type == "OneReminderProtocol") {
+                kb.insert_predicate({"already_reminded_one_reminder", {active_protocol}});
+                kb.erase_predicate({"one_reminder_protocol_enabled", {active_protocol}});
             } else if (active_protocol.type == "DrinkingProtocol") {
                 kb.insert_predicate({"already_reminded_drinking", {active_protocol}});
                 kb.erase_predicate({"drinking_protocol_enabled", {active_protocol}});

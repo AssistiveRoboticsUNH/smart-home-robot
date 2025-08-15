@@ -1,0 +1,881 @@
+2025-07-19 13:16:48.621 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2025-07-19 13:16:48.623 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2025-07-19 13:16:48.623 - RealTimeSTT: realtimestt - DEBUG - Starting audio data worker with target_sample_rate=16000, buffer_size=512, input_device_index=7
+2025-07-19 13:16:48.623 - RealTimeSTT: realtimestt - INFO - Initializing faster_whisper realtime transcription model tiny, default device: cpu, compute type: default, device index: 0, download root: None
+2025-07-19 13:16:48.623 - RealTimeSTT: realtimestt - DEBUG - Creating PyAudio interface...
+2025-07-19 13:16:48.624 - RealTimeSTT: realtimestt - DEBUG - Retrieving highest sample rate for device index 7: {'index': 7, 'structVersion': 2, 'name': 'sysdefault', 'hostApi': 0, 'maxInputChannels': 128, 'maxOutputChannels': 0, 'defaultLowInputLatency': 0.021333333333333333, 'defaultLowOutputLatency': -1.0, 'defaultHighInputLatency': 0.021333333333333333, 'defaultHighOutputLatency': -1.0, 'defaultSampleRate': 48000.0}
+2025-07-19 13:16:48.624 - RealTimeSTT: realtimestt - DEBUG - Highest supported sample rate for device index 7 is 48000
+2025-07-19 13:16:48.624 - RealTimeSTT: realtimestt - DEBUG - Sample rates to try for device 7: [16000, 48000]
+2025-07-19 13:16:48.624 - RealTimeSTT: realtimestt - DEBUG - Attempting to initialize audio stream at 16000 Hz.
+2025-07-19 13:16:48.624 - RealTimeSTT: realtimestt - DEBUG - Found 14 total audio devices on the system.
+2025-07-19 13:16:48.624 - RealTimeSTT: realtimestt - DEBUG - Available input devices with input channels: [0, 6, 7, 9, 10, 11, 12, 13]
+2025-07-19 13:16:48.625 - RealTimeSTT: realtimestt - DEBUG - Validating device index 7 with info: {'index': 7, 'structVersion': 2, 'name': 'sysdefault', 'hostApi': 0, 'maxInputChannels': 128, 'maxOutputChannels': 0, 'defaultLowInputLatency': 0.021333333333333333, 'defaultLowOutputLatency': -1.0, 'defaultHighInputLatency': 0.021333333333333333, 'defaultHighOutputLatency': -1.0, 'defaultSampleRate': 48000.0}
+2025-07-19 13:16:48.734 - RealTimeSTT: realtimestt - DEBUG - Device index 7 successfully validated.
+2025-07-19 13:16:48.734 - RealTimeSTT: realtimestt - DEBUG - Opening stream with device index 7, sample_rate=16000, chunk_size=1024
+2025-07-19 13:16:48.736 - RealTimeSTT: realtimestt - INFO - Microphone connected and validated (device index: 7, sample rate: 16000, chunk size: 1024)
+2025-07-19 13:16:48.736 - RealTimeSTT: realtimestt - DEBUG - Audio recording initialized successfully at 16000 Hz, reading 1024 frames at a time
+2025-07-19 13:16:49.846 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:16:50.870 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:16:51.072 - RealTimeSTT: realtimestt - DEBUG - Faster_whisper realtime speech to text transcription model initialized successfully
+2025-07-19 13:16:51.073 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 2
+2025-07-19 13:16:51.073 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2025-07-19 13:16:51.492 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully
+2025-07-19 13:16:51.492 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2025-07-19 13:16:51.493 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2025-07-19 13:16:51.493 - RealTimeSTT: realtimestt - DEBUG - Main transcription model ready
+2025-07-19 13:16:51.493 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
+2025-07-19 13:16:51.493 - RealTimeSTT: realtimestt - INFO - Setting listen time
+2025-07-19 13:16:51.493 - RealTimeSTT: realtimestt - INFO - State changed from 'inactive' to 'listening'
+2025-07-19 13:16:51.493 - RealTimeSTT: realtimestt - DEBUG - Waiting for recording start
+2025-07-19 13:16:51.915 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:16:52.918 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:16:53.963 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:16:54.966 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:16:55.990 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:16:57.014 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:16:58.059 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:16:59.083 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:00.107 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:01.110 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:02.134 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:03.158 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:04.203 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:05.227 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:06.251 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:07.254 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:08.278 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:09.323 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:10.326 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:11.329 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:12.353 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:13.377 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:14.379 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:15.403 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:16.427 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:17.451 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:18.475 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:19.499 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:20.523 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:21.569 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:22.593 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 13:17:23.351 - RealTimeSTT: realtimestt - INFO - KeyboardInterrupt in wait_audio, shutting down
+2025-07-19 13:17:23.351 - RealTimeSTT: realtimestt - DEBUG - Finishing recording thread
+2025-07-19 13:17:23.357 - RealTimeSTT: realtimestt - DEBUG - Terminating reader process
+2025-07-19 13:17:23.361 - RealTimeSTT: realtimestt - DEBUG - Terminating transcription process
+2025-07-19 13:17:23.448 - RealTimeSTT: realtimestt - DEBUG - Finishing realtime thread
+2025-07-19 13:17:23.517 - RealTimeSTT: realtimestt - INFO - KeyboardInterrupt in text() method
+2025-07-19 14:23:57.032 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2025-07-19 14:23:57.034 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2025-07-19 14:23:57.035 - RealTimeSTT: realtimestt - DEBUG - Starting audio data worker with target_sample_rate=16000, buffer_size=512, input_device_index=14
+2025-07-19 14:23:57.035 - RealTimeSTT: realtimestt - DEBUG - Creating PyAudio interface...
+2025-07-19 14:23:57.035 - RealTimeSTT: realtimestt - DEBUG - Retrieving highest sample rate for device index 14: {'index': 14, 'structVersion': 2, 'name': 'default', 'hostApi': 0, 'maxInputChannels': 32, 'maxOutputChannels': 32, 'defaultLowInputLatency': 0.008684807256235827, 'defaultLowOutputLatency': 0.008684807256235827, 'defaultHighInputLatency': 0.034807256235827665, 'defaultHighOutputLatency': 0.034807256235827665, 'defaultSampleRate': 44100.0}
+2025-07-19 14:23:57.036 - RealTimeSTT: realtimestt - INFO - Initializing faster_whisper realtime transcription model tiny, default device: cpu, compute type: default, device index: 0, download root: None
+2025-07-19 14:23:57.036 - RealTimeSTT: realtimestt - DEBUG - Highest supported sample rate for device index 14 is 44100
+2025-07-19 14:23:57.037 - RealTimeSTT: realtimestt - DEBUG - Sample rates to try for device 14: [16000, 44100]
+2025-07-19 14:23:57.037 - RealTimeSTT: realtimestt - DEBUG - Attempting to initialize audio stream at 16000 Hz.
+2025-07-19 14:23:57.037 - RealTimeSTT: realtimestt - DEBUG - Found 15 total audio devices on the system.
+2025-07-19 14:23:57.037 - RealTimeSTT: realtimestt - DEBUG - Available input devices with input channels: [0, 5, 6, 7, 9, 10, 11, 12, 13, 14]
+2025-07-19 14:23:57.037 - RealTimeSTT: realtimestt - DEBUG - Validating device index 14 with info: {'index': 14, 'structVersion': 2, 'name': 'default', 'hostApi': 0, 'maxInputChannels': 32, 'maxOutputChannels': 32, 'defaultLowInputLatency': 0.008684807256235827, 'defaultLowOutputLatency': 0.008684807256235827, 'defaultHighInputLatency': 0.034807256235827665, 'defaultHighOutputLatency': 0.034807256235827665, 'defaultSampleRate': 44100.0}
+2025-07-19 14:23:57.120 - RealTimeSTT: realtimestt - DEBUG - Device index 14 successfully validated.
+2025-07-19 14:23:57.120 - RealTimeSTT: realtimestt - DEBUG - Opening stream with device index 14, sample_rate=16000, chunk_size=1024
+2025-07-19 14:23:57.125 - RealTimeSTT: realtimestt - INFO - Microphone connected and validated (device index: 14, sample rate: 16000, chunk size: 1024)
+2025-07-19 14:23:57.125 - RealTimeSTT: realtimestt - DEBUG - Audio recording initialized successfully at 16000 Hz, reading 1024 frames at a time
+2025-07-19 14:23:58.215 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:23:58.289 - RealTimeSTT: realtimestt - DEBUG - Faster_whisper realtime speech to text transcription model initialized successfully
+2025-07-19 14:23:58.289 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 2
+2025-07-19 14:23:58.289 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2025-07-19 14:23:58.911 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully
+2025-07-19 14:23:58.913 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2025-07-19 14:23:58.914 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2025-07-19 14:23:58.941 - RealTimeSTT: realtimestt - DEBUG - Main transcription model ready
+2025-07-19 14:23:58.941 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
+2025-07-19 14:23:58.941 - RealTimeSTT: realtimestt - INFO - Setting listen time
+2025-07-19 14:23:58.941 - RealTimeSTT: realtimestt - INFO - State changed from 'inactive' to 'listening'
+2025-07-19 14:23:58.941 - RealTimeSTT: realtimestt - DEBUG - Waiting for recording start
+2025-07-19 14:23:59.263 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:00.268 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:00.818 - RealTimeSTT: realtimestt - INFO - voice activity detected
+2025-07-19 14:24:00.818 - RealTimeSTT: realtimestt - INFO - recording started
+2025-07-19 14:24:00.818 - RealTimeSTT: realtimestt - INFO - State changed from 'listening' to 'recording'
+2025-07-19 14:24:00.818 - RealTimeSTT: realtimestt - DEBUG - Waiting for recording stop
+2025-07-19 14:24:00.823 - RealTimeSTT: realtimestt - DEBUG - Current realtime buffer size: 15872
+2025-07-19 14:24:01.272 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:01.603 - RealTimeSTT: realtimestt - DEBUG - Realtime text detected:  .
+2025-07-19 14:24:01.638 - RealTimeSTT: realtimestt - DEBUG - Current realtime buffer size: 30208
+2025-07-19 14:24:02.277 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:02.441 - RealTimeSTT: realtimestt - DEBUG - Realtime text detected:  And on another one, this one
+2025-07-19 14:24:02.910 - RealTimeSTT: realtimestt - DEBUG - Current realtime buffer size: 50688
+2025-07-19 14:24:03.367 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:03.542 - RealTimeSTT: realtimestt - DEBUG - Realtime text detected:  Hello, hello my existing one to see.
+2025-07-19 14:24:03.916 - RealTimeSTT: realtimestt - DEBUG - Current realtime buffer size: 67072
+2025-07-19 14:24:04.455 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:04.659 - RealTimeSTT: realtimestt - DEBUG - Realtime text detected:  Hello, hello my existing one to see.
+2025-07-19 14:24:04.822 - RealTimeSTT: realtimestt - DEBUG - Current realtime buffer size: 81408
+2025-07-19 14:24:05.459 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:05.489 - RealTimeSTT: realtimestt - DEBUG - Realtime text detected:  Hello, hello my existing one to see.
+2025-07-19 14:24:06.003 - RealTimeSTT: realtimestt - INFO - recording stopped
+2025-07-19 14:24:06.007 - RealTimeSTT: realtimestt - DEBUG - No samples removed, final audio length: 99328
+2025-07-19 14:24:06.007 - RealTimeSTT: realtimestt - INFO - State changed from 'recording' to 'inactive'
+2025-07-19 14:24:06.007 - RealTimeSTT: realtimestt - INFO - State changed from 'inactive' to 'transcribing'
+2025-07-19 14:24:06.460 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:07.549 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:08.556 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:09.644 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:10.733 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:11.822 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:12.828 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:13.916 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:15.006 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:16.013 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:17.102 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:18.190 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:19.278 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:24:20.285 - RealTimeSTT: realtimestt - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:32:16.068 - RealTimeSTT: root - INFO - Starting RealTimeSTT
+2025-07-19 14:32:16.070 - RealTimeSTT: root - INFO - Initializing faster_whisper main transcription model base.en
+2025-07-19 14:32:16.070 - RealTimeSTT: root - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2025-07-19 14:32:16.072 - RealTimeSTT: root - INFO - Initializing faster_whisper realtime transcription model tiny
+2025-07-19 14:32:16.082 - RealTimeSTT: root - DEBUG - Audio recording initialized successfully at 16000 Hz, reading 1024 frames at a time
+2025-07-19 14:32:16.128 - RealTimeSTT: urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-19 14:32:16.129 - RealTimeSTT: urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-19 14:32:16.275 - RealTimeSTT: urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/Systran/faster-whisper-tiny/revision/main HTTP/1.1" 200 1902
+2025-07-19 14:32:16.276 - RealTimeSTT: urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/Systran/faster-whisper-base.en/revision/main HTTP/1.1" 200 961
+2025-07-19 14:32:16.475 - RealTimeSTT: root - DEBUG - Faster_whisper realtime speech to text transcription model initialized successfully
+2025-07-19 14:32:16.475 - RealTimeSTT: root - INFO - Initializing WebRTC voice with Sensitivity 2
+2025-07-19 14:32:16.475 - RealTimeSTT: root - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2025-07-19 14:32:16.565 - RealTimeSTT: root - DEBUG - Faster_whisper main speech to text transcription model initialized successfully
+2025-07-19 14:32:16.629 - RealTimeSTT: torio._extension.utils - DEBUG - Loading FFmpeg6
+2025-07-19 14:32:16.630 - RealTimeSTT: torio._extension.utils - DEBUG - Failed to load FFmpeg6 extension.
+Traceback (most recent call last):
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 116, in _find_ffmpeg_extension
+    ext = _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 108, in _find_versionsed_ffmpeg_extension
+    _load_lib(lib)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 94, in _load_lib
+    torch.ops.load_library(path)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torch/_ops.py", line 1392, in load_library
+    ctypes.CDLL(path)
+  File "/usr/lib/python3.10/ctypes/__init__.py", line 374, in __init__
+    self._handle = _dlopen(self._name, mode)
+OSError: libavutil.so.58: cannot open shared object file: No such file or directory
+2025-07-19 14:32:16.631 - RealTimeSTT: torio._extension.utils - DEBUG - Loading FFmpeg5
+2025-07-19 14:32:16.632 - RealTimeSTT: torio._extension.utils - DEBUG - Failed to load FFmpeg5 extension.
+Traceback (most recent call last):
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 116, in _find_ffmpeg_extension
+    ext = _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 108, in _find_versionsed_ffmpeg_extension
+    _load_lib(lib)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 94, in _load_lib
+    torch.ops.load_library(path)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torch/_ops.py", line 1392, in load_library
+    ctypes.CDLL(path)
+  File "/usr/lib/python3.10/ctypes/__init__.py", line 374, in __init__
+    self._handle = _dlopen(self._name, mode)
+OSError: libavutil.so.57: cannot open shared object file: No such file or directory
+2025-07-19 14:32:16.632 - RealTimeSTT: torio._extension.utils - DEBUG - Loading FFmpeg4
+2025-07-19 14:32:16.689 - RealTimeSTT: torio._extension.utils - DEBUG - Successfully loaded FFmpeg4
+2025-07-19 14:32:16.795 - RealTimeSTT: root - DEBUG - Silero VAD voice activity detection engine initialized successfully
+2025-07-19 14:32:16.798 - RealTimeSTT: root - DEBUG - Starting realtime worker
+2025-07-19 14:32:16.799 - RealTimeSTT: root - DEBUG - Waiting for main transcription model to start
+2025-07-19 14:32:16.800 - RealTimeSTT: root - DEBUG - Main transcription model ready
+2025-07-19 14:32:16.800 - RealTimeSTT: root - DEBUG - RealtimeSTT initialization completed successfully
+2025-07-19 14:32:16.800 - RealTimeSTT: root - INFO - Setting listen time
+2025-07-19 14:32:16.800 - RealTimeSTT: root - INFO - State changed from 'inactive' to 'listening'
+2025-07-19 14:32:16.801 - RealTimeSTT: root - DEBUG - Waiting for recording start
+2025-07-19 14:32:17.169 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:32:18.176 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:32:19.181 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:32:19.182 - RealTimeSTT: root - INFO - voice activity detected
+2025-07-19 14:32:19.183 - RealTimeSTT: root - INFO - recording started
+2025-07-19 14:32:19.183 - RealTimeSTT: root - INFO - State changed from 'listening' to 'recording'
+2025-07-19 14:32:19.183 - RealTimeSTT: root - DEBUG - Waiting for recording stop
+2025-07-19 14:32:19.388 - RealTimeSTT: root - DEBUG - Current realtime buffer size: 19968
+2025-07-19 14:32:19.389 - RealTimeSTT: faster_whisper - INFO - Processing audio with duration 00:01.248
+2025-07-19 14:32:19.775 - RealTimeSTT: faster_whisper - INFO - Detected language 'en' with probability 0.55
+2025-07-19 14:32:19.776 - RealTimeSTT: faster_whisper - DEBUG - Processing segment at 00:00.000
+2025-07-19 14:32:19.852 - RealTimeSTT: faster_whisper - DEBUG - Log probability threshold is not met with temperature 0.0 (-1.022127 < -1.000000)
+2025-07-19 14:32:19.852 - RealTimeSTT: faster_whisper - DEBUG - No speech threshold is met (0.840357 > 0.600000)
+2025-07-19 14:32:19.852 - RealTimeSTT: root - DEBUG - Realtime text detected: 
+2025-07-19 14:32:20.053 - RealTimeSTT: root - DEBUG - Current realtime buffer size: 30208
+2025-07-19 14:32:20.053 - RealTimeSTT: faster_whisper - INFO - Processing audio with duration 00:01.888
+2025-07-19 14:32:20.272 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:32:20.397 - RealTimeSTT: faster_whisper - INFO - Detected language 'en' with probability 0.82
+2025-07-19 14:32:20.398 - RealTimeSTT: faster_whisper - DEBUG - Processing segment at 00:00.000
+2025-07-19 14:32:20.496 - RealTimeSTT: root - DEBUG - Realtime text detected:  Hello, can you hear me?
+2025-07-19 14:32:20.547 - RealTimeSTT: root - INFO - recording stopped
+2025-07-19 14:32:20.548 - RealTimeSTT: root - INFO - State changed from 'recording' to 'inactive'
+2025-07-19 14:32:20.548 - RealTimeSTT: root - INFO - State changed from 'inactive' to 'transcribing'
+2025-07-19 14:32:20.548 - RealTimeSTT: root - DEBUG - Adding transcription request, no early transcription started
+2025-07-19 14:32:20.549 - RealTimeSTT: root - DEBUG - Receive from parent_transcription_pipe after sendiung transcription request, transcribe_count: 1
+2025-07-19 14:32:20.549 - RealTimeSTT: faster_whisper - INFO - Processing audio with duration 00:02.368
+2025-07-19 14:32:20.634 - RealTimeSTT: faster_whisper - DEBUG - Processing segment at 00:00.000
+2025-07-19 14:32:20.638 - RealTimeSTT: root - INFO - State changed from 'transcribing' to 'inactive'
+2025-07-19 14:32:20.696 - RealTimeSTT: root - DEBUG - Current realtime buffer size: 0
+2025-07-19 14:32:20.696 - RealTimeSTT: faster_whisper - INFO - Processing audio with duration 00:00.000
+2025-07-19 14:32:20.768 - RealTimeSTT: root - ERROR - Unhandled exeption in _realtime_worker: max() arg is an empty sequence
+2025-07-19 14:32:21.278 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:32:21.483 - RealTimeSTT: root - DEBUG - Final text detected with main model: Hello, can you hear me?
+2025-07-19 14:32:21.484 - RealTimeSTT: root - DEBUG - Model base.en completed transcription in 0.94 seconds
+2025-07-19 14:32:21.484 - RealTimeSTT: root - INFO - Setting listen time
+2025-07-19 14:32:21.484 - RealTimeSTT: root - INFO - State changed from 'inactive' to 'listening'
+2025-07-19 14:32:21.484 - RealTimeSTT: root - DEBUG - Waiting for recording start
+2025-07-19 14:32:21.485 - RealTimeSTT: gtts.tts - DEBUG - text: Hello, can you hear me?
+2025-07-19 14:32:21.485 - RealTimeSTT: gtts.tts - DEBUG - tld: com
+2025-07-19 14:32:21.485 - RealTimeSTT: gtts.tts - DEBUG - lang: en
+2025-07-19 14:32:21.485 - RealTimeSTT: gtts.tts - DEBUG - slow: False
+2025-07-19 14:32:21.485 - RealTimeSTT: gtts.tts - DEBUG - lang_check: True
+2025-07-19 14:32:21.485 - RealTimeSTT: gtts.tts - DEBUG - pre_processor_funcs: [<function tone_marks at 0x740b6792a290>, <function end_of_line at 0x740b6792a320>, <function abbreviations at 0x740b6792a3b0>, <function word_sub at 0x740b6792a440>]
+2025-07-19 14:32:21.485 - RealTimeSTT: gtts.tts - DEBUG - tokenizer_func: <bound method Tokenizer.run of re.compile('(?<=\\?).|(?<=!).|(?<=？).|(?<=！).|(?<!\\.[a-z])\\. |(?<!\\.[a-z]), |(?<!\\d):|\\\n|\\]|‥|…|\\(|;|¿|：|—|¡|،|，|。|\\)|、|\\[', re.IGNORECASE) from: [<function tone_marks at 0x740b6792a710>, <function period_comma at 0x740b6792a7a0>, <function colon at 0x740b6792a830>, <function other_punctuation at 0x740b6792a8c0>]>
+2025-07-19 14:32:21.485 - RealTimeSTT: gtts.tts - DEBUG - timeout: None
+2025-07-19 14:32:21.485 - RealTimeSTT: gtts.lang - DEBUG - langs: {'af': 'Afrikaans', 'am': 'Amharic', 'ar': 'Arabic', 'bg': 'Bulgarian', 'bn': 'Bengali', 'bs': 'Bosnian', 'ca': 'Catalan', 'cs': 'Czech', 'cy': 'Welsh', 'da': 'Danish', 'de': 'German', 'el': 'Greek', 'en': 'English', 'es': 'Spanish', 'et': 'Estonian', 'eu': 'Basque', 'fi': 'Finnish', 'fr': 'French', 'gl': 'Galician', 'gu': 'Gujarati', 'ha': 'Hausa', 'hi': 'Hindi', 'hr': 'Croatian', 'hu': 'Hungarian', 'id': 'Indonesian', 'is': 'Icelandic', 'it': 'Italian', 'iw': 'Hebrew', 'ja': 'Japanese', 'jw': 'Javanese', 'km': 'Khmer', 'kn': 'Kannada', 'ko': 'Korean', 'la': 'Latin', 'lt': 'Lithuanian', 'lv': 'Latvian', 'ml': 'Malayalam', 'mr': 'Marathi', 'ms': 'Malay', 'my': 'Myanmar (Burmese)', 'ne': 'Nepali', 'nl': 'Dutch', 'no': 'Norwegian', 'pa': 'Punjabi (Gurmukhi)', 'pl': 'Polish', 'pt': 'Portuguese (Brazil)', 'pt-PT': 'Portuguese (Portugal)', 'ro': 'Romanian', 'ru': 'Russian', 'si': 'Sinhala', 'sk': 'Slovak', 'sq': 'Albanian', 'sr': 'Serbian', 'su': 'Sundanese', 'sv': 'Swedish', 'sw': 'Swahili', 'ta': 'Tamil', 'te': 'Telugu', 'th': 'Thai', 'tl': 'Filipino', 'tr': 'Turkish', 'uk': 'Ukrainian', 'ur': 'Urdu', 'vi': 'Vietnamese', 'yue': 'Cantonese', 'zh-CN': 'Chinese (Simplified)', 'zh-TW': 'Chinese (Mandarin/Taiwan)', 'zh': 'Chinese (Mandarin)'}
+2025-07-19 14:32:21.485 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function tone_marks at 0x740b6792a290>
+2025-07-19 14:32:21.486 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function end_of_line at 0x740b6792a320>
+2025-07-19 14:32:21.486 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function abbreviations at 0x740b6792a3b0>
+2025-07-19 14:32:21.486 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function word_sub at 0x740b6792a440>
+2025-07-19 14:32:21.486 - RealTimeSTT: gtts.tts - DEBUG - text_parts: ['Hello, can you hear me?']
+2025-07-19 14:32:21.486 - RealTimeSTT: gtts.tts - DEBUG - text_parts: 1
+2025-07-19 14:32:21.487 - RealTimeSTT: gtts.tts - DEBUG - data-0: f.req=%5B%5B%5B%22jQ1olc%22%2C%22%5B%5C%22Hello%2C%20can%20you%20hear%20me%3F%5C%22%2C%5C%22en%5C%22%2Cnull%2C%5C%22null%5C%22%5D%22%2Cnull%2C%22generic%22%5D%5D%5D&
+2025-07-19 14:32:21.487 - RealTimeSTT: urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): translate.google.com:443
+2025-07-19 14:32:21.719 - RealTimeSTT: urllib3.connectionpool - DEBUG - https://translate.google.com:443 "POST /_/TranslateWebserverUi/data/batchexecute HTTP/1.1" 200 None
+2025-07-19 14:32:21.740 - RealTimeSTT: gtts.tts - DEBUG - headers-0: {'Referer': 'http://translate.google.com/', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8', 'Content-Length': '165'}
+2025-07-19 14:32:21.741 - RealTimeSTT: gtts.tts - DEBUG - url-0: https://translate.google.com/_/TranslateWebserverUi/data/batchexecute
+2025-07-19 14:32:21.741 - RealTimeSTT: gtts.tts - DEBUG - status-0: 200
+2025-07-19 14:32:21.742 - RealTimeSTT: gtts.tts - DEBUG - part-0 written to <_io.BufferedWriter name='/tmp/tmpjuyybk75.mp3'>
+2025-07-19 14:32:21.742 - RealTimeSTT: gtts.tts - DEBUG - part-0 created
+2025-07-19 14:32:21.742 - RealTimeSTT: gtts.tts - DEBUG - Saved to /tmp/tmpjuyybk75.mp3
+2025-07-19 14:32:22.184 - RealTimeSTT: root - INFO - voice activity detected
+2025-07-19 14:32:22.185 - RealTimeSTT: root - INFO - recording started
+2025-07-19 14:32:22.185 - RealTimeSTT: root - INFO - State changed from 'listening' to 'recording'
+2025-07-19 14:32:22.186 - RealTimeSTT: root - DEBUG - Waiting for recording stop
+2025-07-19 14:32:22.367 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:32:23.184 - RealTimeSTT: root - INFO - recording stopped
+2025-07-19 14:32:23.184 - RealTimeSTT: root - INFO - State changed from 'recording' to 'inactive'
+2025-07-19 14:32:23.184 - RealTimeSTT: root - INFO - State changed from 'inactive' to 'transcribing'
+2025-07-19 14:32:23.184 - RealTimeSTT: root - DEBUG - Adding transcription request, no early transcription started
+2025-07-19 14:32:23.185 - RealTimeSTT: root - DEBUG - Receive from parent_transcription_pipe after sendiung transcription request, transcribe_count: 1
+2025-07-19 14:32:23.185 - RealTimeSTT: faster_whisper - INFO - Processing audio with duration 00:02.048
+2025-07-19 14:32:23.233 - RealTimeSTT: faster_whisper - DEBUG - Processing segment at 00:00.000
+2025-07-19 14:32:23.278 - RealTimeSTT: root - INFO - State changed from 'transcribing' to 'inactive'
+2025-07-19 14:32:23.457 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:32:23.868 - RealTimeSTT: root - DEBUG - Final text detected with main model: Hello.
+2025-07-19 14:32:23.869 - RealTimeSTT: root - DEBUG - Model base.en completed transcription in 0.68 seconds
+2025-07-19 14:32:23.869 - RealTimeSTT: root - INFO - Setting listen time
+2025-07-19 14:32:23.869 - RealTimeSTT: root - INFO - State changed from 'inactive' to 'listening'
+2025-07-19 14:32:23.869 - RealTimeSTT: root - DEBUG - Waiting for recording start
+2025-07-19 14:32:23.869 - RealTimeSTT: gtts.tts - DEBUG - text: Hello.
+2025-07-19 14:32:23.869 - RealTimeSTT: gtts.tts - DEBUG - tld: com
+2025-07-19 14:32:23.870 - RealTimeSTT: gtts.tts - DEBUG - lang: en
+2025-07-19 14:32:23.870 - RealTimeSTT: gtts.tts - DEBUG - slow: False
+2025-07-19 14:32:23.870 - RealTimeSTT: gtts.tts - DEBUG - lang_check: True
+2025-07-19 14:32:23.870 - RealTimeSTT: gtts.tts - DEBUG - pre_processor_funcs: [<function tone_marks at 0x740b6792a290>, <function end_of_line at 0x740b6792a320>, <function abbreviations at 0x740b6792a3b0>, <function word_sub at 0x740b6792a440>]
+2025-07-19 14:32:23.870 - RealTimeSTT: gtts.tts - DEBUG - tokenizer_func: <bound method Tokenizer.run of re.compile('(?<=\\?).|(?<=!).|(?<=？).|(?<=！).|(?<!\\.[a-z])\\. |(?<!\\.[a-z]), |(?<!\\d):|\\\n|\\]|‥|…|\\(|;|¿|：|—|¡|،|，|。|\\)|、|\\[', re.IGNORECASE) from: [<function tone_marks at 0x740b6792a710>, <function period_comma at 0x740b6792a7a0>, <function colon at 0x740b6792a830>, <function other_punctuation at 0x740b6792a8c0>]>
+2025-07-19 14:32:23.870 - RealTimeSTT: gtts.tts - DEBUG - timeout: None
+2025-07-19 14:32:23.870 - RealTimeSTT: gtts.lang - DEBUG - langs: {'af': 'Afrikaans', 'am': 'Amharic', 'ar': 'Arabic', 'bg': 'Bulgarian', 'bn': 'Bengali', 'bs': 'Bosnian', 'ca': 'Catalan', 'cs': 'Czech', 'cy': 'Welsh', 'da': 'Danish', 'de': 'German', 'el': 'Greek', 'en': 'English', 'es': 'Spanish', 'et': 'Estonian', 'eu': 'Basque', 'fi': 'Finnish', 'fr': 'French', 'gl': 'Galician', 'gu': 'Gujarati', 'ha': 'Hausa', 'hi': 'Hindi', 'hr': 'Croatian', 'hu': 'Hungarian', 'id': 'Indonesian', 'is': 'Icelandic', 'it': 'Italian', 'iw': 'Hebrew', 'ja': 'Japanese', 'jw': 'Javanese', 'km': 'Khmer', 'kn': 'Kannada', 'ko': 'Korean', 'la': 'Latin', 'lt': 'Lithuanian', 'lv': 'Latvian', 'ml': 'Malayalam', 'mr': 'Marathi', 'ms': 'Malay', 'my': 'Myanmar (Burmese)', 'ne': 'Nepali', 'nl': 'Dutch', 'no': 'Norwegian', 'pa': 'Punjabi (Gurmukhi)', 'pl': 'Polish', 'pt': 'Portuguese (Brazil)', 'pt-PT': 'Portuguese (Portugal)', 'ro': 'Romanian', 'ru': 'Russian', 'si': 'Sinhala', 'sk': 'Slovak', 'sq': 'Albanian', 'sr': 'Serbian', 'su': 'Sundanese', 'sv': 'Swedish', 'sw': 'Swahili', 'ta': 'Tamil', 'te': 'Telugu', 'th': 'Thai', 'tl': 'Filipino', 'tr': 'Turkish', 'uk': 'Ukrainian', 'ur': 'Urdu', 'vi': 'Vietnamese', 'yue': 'Cantonese', 'zh-CN': 'Chinese (Simplified)', 'zh-TW': 'Chinese (Mandarin/Taiwan)', 'zh': 'Chinese (Mandarin)'}
+2025-07-19 14:32:23.870 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function tone_marks at 0x740b6792a290>
+2025-07-19 14:32:23.870 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function end_of_line at 0x740b6792a320>
+2025-07-19 14:32:23.870 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function abbreviations at 0x740b6792a3b0>
+2025-07-19 14:32:23.870 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function word_sub at 0x740b6792a440>
+2025-07-19 14:32:23.870 - RealTimeSTT: gtts.tts - DEBUG - text_parts: ['Hello.']
+2025-07-19 14:32:23.870 - RealTimeSTT: gtts.tts - DEBUG - text_parts: 1
+2025-07-19 14:32:23.870 - RealTimeSTT: gtts.tts - DEBUG - data-0: f.req=%5B%5B%5B%22jQ1olc%22%2C%22%5B%5C%22Hello.%5C%22%2C%5C%22en%5C%22%2Cnull%2C%5C%22null%5C%22%5D%22%2Cnull%2C%22generic%22%5D%5D%5D&
+2025-07-19 14:32:23.871 - RealTimeSTT: urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): translate.google.com:443
+2025-07-19 14:32:24.031 - RealTimeSTT: urllib3.connectionpool - DEBUG - https://translate.google.com:443 "POST /_/TranslateWebserverUi/data/batchexecute HTTP/1.1" 200 None
+2025-07-19 14:32:24.035 - RealTimeSTT: gtts.tts - DEBUG - headers-0: {'Referer': 'http://translate.google.com/', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8', 'Content-Length': '136'}
+2025-07-19 14:32:24.035 - RealTimeSTT: gtts.tts - DEBUG - url-0: https://translate.google.com/_/TranslateWebserverUi/data/batchexecute
+2025-07-19 14:32:24.035 - RealTimeSTT: gtts.tts - DEBUG - status-0: 200
+2025-07-19 14:32:24.036 - RealTimeSTT: gtts.tts - DEBUG - part-0 written to <_io.BufferedWriter name='/tmp/tmpmm7clmyd.mp3'>
+2025-07-19 14:32:24.036 - RealTimeSTT: gtts.tts - DEBUG - part-0 created
+2025-07-19 14:32:24.036 - RealTimeSTT: gtts.tts - DEBUG - Saved to /tmp/tmpmm7clmyd.mp3
+2025-07-19 14:32:24.373 - RealTimeSTT: root - INFO - voice activity detected
+2025-07-19 14:32:24.373 - RealTimeSTT: root - INFO - recording started
+2025-07-19 14:32:24.373 - RealTimeSTT: root - INFO - State changed from 'listening' to 'recording'
+2025-07-19 14:32:24.373 - RealTimeSTT: root - DEBUG - Waiting for recording stop
+2025-07-19 14:32:24.464 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:32:25.369 - RealTimeSTT: root - INFO - recording stopped
+2025-07-19 14:32:25.370 - RealTimeSTT: root - INFO - State changed from 'recording' to 'inactive'
+2025-07-19 14:32:25.370 - RealTimeSTT: root - INFO - State changed from 'inactive' to 'transcribing'
+2025-07-19 14:32:25.370 - RealTimeSTT: root - DEBUG - Adding transcription request, no early transcription started
+2025-07-19 14:32:25.370 - RealTimeSTT: root - DEBUG - Receive from parent_transcription_pipe after sendiung transcription request, transcribe_count: 1
+2025-07-19 14:32:25.371 - RealTimeSTT: faster_whisper - INFO - Processing audio with duration 00:01.984
+2025-07-19 14:32:25.443 - RealTimeSTT: faster_whisper - DEBUG - Processing segment at 00:00.000
+2025-07-19 14:32:25.460 - RealTimeSTT: root - INFO - State changed from 'transcribing' to 'inactive'
+2025-07-19 14:32:25.551 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:32:26.142 - RealTimeSTT: faster_whisper - DEBUG - Log probability threshold is not met with temperature 0.0 (-1.072963 < -1.000000)
+2025-07-19 14:32:26.532 - RealTimeSTT: faster_whisper - DEBUG - Log probability threshold is not met with temperature 0.2 (-1.072963 < -1.000000)
+2025-07-19 14:32:26.642 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:32:26.875 - RealTimeSTT: faster_whisper - DEBUG - Log probability threshold is not met with temperature 0.4 (-1.072963 < -1.000000)
+2025-07-19 14:32:27.214 - RealTimeSTT: faster_whisper - DEBUG - Log probability threshold is not met with temperature 0.6 (-1.081926 < -1.000000)
+2025-07-19 14:32:27.577 - RealTimeSTT: faster_whisper - DEBUG - Log probability threshold is not met with temperature 0.8 (-1.571632 < -1.000000)
+2025-07-19 14:32:27.730 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:32:28.157 - RealTimeSTT: faster_whisper - DEBUG - Log probability threshold is not met with temperature 1.0 (-1.740013 < -1.000000)
+2025-07-19 14:32:28.158 - RealTimeSTT: faster_whisper - DEBUG - Reset prompt. prompt_reset_on_temperature threshold is met 1.000000 > 0.500000
+2025-07-19 14:32:28.158 - RealTimeSTT: root - DEBUG - Final text detected with main model: Help.
+2025-07-19 14:32:28.158 - RealTimeSTT: root - DEBUG - Model base.en completed transcription in 2.79 seconds
+2025-07-19 14:32:28.159 - RealTimeSTT: root - INFO - Setting listen time
+2025-07-19 14:32:28.159 - RealTimeSTT: root - INFO - State changed from 'inactive' to 'listening'
+2025-07-19 14:32:28.159 - RealTimeSTT: root - DEBUG - Waiting for recording start
+2025-07-19 14:32:28.159 - RealTimeSTT: gtts.tts - DEBUG - text: Help.
+2025-07-19 14:32:28.159 - RealTimeSTT: gtts.tts - DEBUG - tld: com
+2025-07-19 14:32:28.159 - RealTimeSTT: gtts.tts - DEBUG - lang: en
+2025-07-19 14:32:28.159 - RealTimeSTT: gtts.tts - DEBUG - slow: False
+2025-07-19 14:32:28.159 - RealTimeSTT: gtts.tts - DEBUG - lang_check: True
+2025-07-19 14:32:28.159 - RealTimeSTT: gtts.tts - DEBUG - pre_processor_funcs: [<function tone_marks at 0x740b6792a290>, <function end_of_line at 0x740b6792a320>, <function abbreviations at 0x740b6792a3b0>, <function word_sub at 0x740b6792a440>]
+2025-07-19 14:32:28.159 - RealTimeSTT: gtts.tts - DEBUG - tokenizer_func: <bound method Tokenizer.run of re.compile('(?<=\\?).|(?<=!).|(?<=？).|(?<=！).|(?<!\\.[a-z])\\. |(?<!\\.[a-z]), |(?<!\\d):|\\\n|\\]|‥|…|\\(|;|¿|：|—|¡|،|，|。|\\)|、|\\[', re.IGNORECASE) from: [<function tone_marks at 0x740b6792a710>, <function period_comma at 0x740b6792a7a0>, <function colon at 0x740b6792a830>, <function other_punctuation at 0x740b6792a8c0>]>
+2025-07-19 14:32:28.159 - RealTimeSTT: gtts.tts - DEBUG - timeout: None
+2025-07-19 14:32:28.159 - RealTimeSTT: gtts.lang - DEBUG - langs: {'af': 'Afrikaans', 'am': 'Amharic', 'ar': 'Arabic', 'bg': 'Bulgarian', 'bn': 'Bengali', 'bs': 'Bosnian', 'ca': 'Catalan', 'cs': 'Czech', 'cy': 'Welsh', 'da': 'Danish', 'de': 'German', 'el': 'Greek', 'en': 'English', 'es': 'Spanish', 'et': 'Estonian', 'eu': 'Basque', 'fi': 'Finnish', 'fr': 'French', 'gl': 'Galician', 'gu': 'Gujarati', 'ha': 'Hausa', 'hi': 'Hindi', 'hr': 'Croatian', 'hu': 'Hungarian', 'id': 'Indonesian', 'is': 'Icelandic', 'it': 'Italian', 'iw': 'Hebrew', 'ja': 'Japanese', 'jw': 'Javanese', 'km': 'Khmer', 'kn': 'Kannada', 'ko': 'Korean', 'la': 'Latin', 'lt': 'Lithuanian', 'lv': 'Latvian', 'ml': 'Malayalam', 'mr': 'Marathi', 'ms': 'Malay', 'my': 'Myanmar (Burmese)', 'ne': 'Nepali', 'nl': 'Dutch', 'no': 'Norwegian', 'pa': 'Punjabi (Gurmukhi)', 'pl': 'Polish', 'pt': 'Portuguese (Brazil)', 'pt-PT': 'Portuguese (Portugal)', 'ro': 'Romanian', 'ru': 'Russian', 'si': 'Sinhala', 'sk': 'Slovak', 'sq': 'Albanian', 'sr': 'Serbian', 'su': 'Sundanese', 'sv': 'Swedish', 'sw': 'Swahili', 'ta': 'Tamil', 'te': 'Telugu', 'th': 'Thai', 'tl': 'Filipino', 'tr': 'Turkish', 'uk': 'Ukrainian', 'ur': 'Urdu', 'vi': 'Vietnamese', 'yue': 'Cantonese', 'zh-CN': 'Chinese (Simplified)', 'zh-TW': 'Chinese (Mandarin/Taiwan)', 'zh': 'Chinese (Mandarin)'}
+2025-07-19 14:32:28.160 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function tone_marks at 0x740b6792a290>
+2025-07-19 14:32:28.160 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function end_of_line at 0x740b6792a320>
+2025-07-19 14:32:28.160 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function abbreviations at 0x740b6792a3b0>
+2025-07-19 14:32:28.160 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function word_sub at 0x740b6792a440>
+2025-07-19 14:32:28.160 - RealTimeSTT: gtts.tts - DEBUG - text_parts: ['Help.']
+2025-07-19 14:32:28.160 - RealTimeSTT: gtts.tts - DEBUG - text_parts: 1
+2025-07-19 14:32:28.160 - RealTimeSTT: gtts.tts - DEBUG - data-0: f.req=%5B%5B%5B%22jQ1olc%22%2C%22%5B%5C%22Help.%5C%22%2C%5C%22en%5C%22%2Cnull%2C%5C%22null%5C%22%5D%22%2Cnull%2C%22generic%22%5D%5D%5D&
+2025-07-19 14:32:28.161 - RealTimeSTT: urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): translate.google.com:443
+2025-07-19 14:32:28.410 - RealTimeSTT: urllib3.connectionpool - DEBUG - https://translate.google.com:443 "POST /_/TranslateWebserverUi/data/batchexecute HTTP/1.1" 200 None
+2025-07-19 14:32:28.413 - RealTimeSTT: gtts.tts - DEBUG - headers-0: {'Referer': 'http://translate.google.com/', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8', 'Content-Length': '135'}
+2025-07-19 14:32:28.413 - RealTimeSTT: gtts.tts - DEBUG - url-0: https://translate.google.com/_/TranslateWebserverUi/data/batchexecute
+2025-07-19 14:32:28.413 - RealTimeSTT: gtts.tts - DEBUG - status-0: 200
+2025-07-19 14:32:28.413 - RealTimeSTT: gtts.tts - DEBUG - part-0 written to <_io.BufferedWriter name='/tmp/tmp411k5fhw.mp3'>
+2025-07-19 14:32:28.414 - RealTimeSTT: gtts.tts - DEBUG - part-0 created
+2025-07-19 14:32:28.414 - RealTimeSTT: gtts.tts - DEBUG - Saved to /tmp/tmp411k5fhw.mp3
+2025-07-19 14:32:28.738 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:32:28.830 - RealTimeSTT: root - INFO - voice activity detected
+2025-07-19 14:32:28.830 - RealTimeSTT: root - INFO - recording started
+2025-07-19 14:32:28.831 - RealTimeSTT: root - INFO - State changed from 'listening' to 'recording'
+2025-07-19 14:32:28.831 - RealTimeSTT: root - DEBUG - Waiting for recording stop
+2025-07-19 14:32:29.827 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:32:29.828 - RealTimeSTT: root - INFO - recording stopped
+2025-07-19 14:32:29.829 - RealTimeSTT: root - INFO - State changed from 'recording' to 'inactive'
+2025-07-19 14:32:29.829 - RealTimeSTT: root - INFO - State changed from 'inactive' to 'transcribing'
+2025-07-19 14:32:29.829 - RealTimeSTT: root - DEBUG - Adding transcription request, no early transcription started
+2025-07-19 14:32:29.830 - RealTimeSTT: root - DEBUG - Receive from parent_transcription_pipe after sendiung transcription request, transcribe_count: 1
+2025-07-19 14:32:29.851 - RealTimeSTT: faster_whisper - INFO - Processing audio with duration 00:02.048
+2025-07-19 14:32:29.907 - RealTimeSTT: faster_whisper - DEBUG - Processing segment at 00:00.000
+2025-07-19 14:32:29.919 - RealTimeSTT: root - INFO - State changed from 'transcribing' to 'inactive'
+2025-07-19 14:32:30.576 - RealTimeSTT: root - DEBUG - Final text detected with main model: So
+2025-07-19 14:32:30.576 - RealTimeSTT: root - DEBUG - Model base.en completed transcription in 0.75 seconds
+2025-07-19 14:32:30.577 - RealTimeSTT: root - INFO - Setting listen time
+2025-07-19 14:32:30.577 - RealTimeSTT: gtts.tts - DEBUG - text: So.
+2025-07-19 14:32:30.577 - RealTimeSTT: root - INFO - State changed from 'inactive' to 'listening'
+2025-07-19 14:32:30.577 - RealTimeSTT: gtts.tts - DEBUG - tld: com
+2025-07-19 14:32:30.577 - RealTimeSTT: root - DEBUG - Waiting for recording start
+2025-07-19 14:32:30.577 - RealTimeSTT: gtts.tts - DEBUG - lang: en
+2025-07-19 14:32:30.577 - RealTimeSTT: gtts.tts - DEBUG - slow: False
+2025-07-19 14:32:30.577 - RealTimeSTT: gtts.tts - DEBUG - lang_check: True
+2025-07-19 14:32:30.577 - RealTimeSTT: gtts.tts - DEBUG - pre_processor_funcs: [<function tone_marks at 0x740b6792a290>, <function end_of_line at 0x740b6792a320>, <function abbreviations at 0x740b6792a3b0>, <function word_sub at 0x740b6792a440>]
+2025-07-19 14:32:30.577 - RealTimeSTT: gtts.tts - DEBUG - tokenizer_func: <bound method Tokenizer.run of re.compile('(?<=\\?).|(?<=!).|(?<=？).|(?<=！).|(?<!\\.[a-z])\\. |(?<!\\.[a-z]), |(?<!\\d):|\\\n|\\]|‥|…|\\(|;|¿|：|—|¡|،|，|。|\\)|、|\\[', re.IGNORECASE) from: [<function tone_marks at 0x740b6792a710>, <function period_comma at 0x740b6792a7a0>, <function colon at 0x740b6792a830>, <function other_punctuation at 0x740b6792a8c0>]>
+2025-07-19 14:32:30.577 - RealTimeSTT: gtts.tts - DEBUG - timeout: None
+2025-07-19 14:32:30.577 - RealTimeSTT: gtts.lang - DEBUG - langs: {'af': 'Afrikaans', 'am': 'Amharic', 'ar': 'Arabic', 'bg': 'Bulgarian', 'bn': 'Bengali', 'bs': 'Bosnian', 'ca': 'Catalan', 'cs': 'Czech', 'cy': 'Welsh', 'da': 'Danish', 'de': 'German', 'el': 'Greek', 'en': 'English', 'es': 'Spanish', 'et': 'Estonian', 'eu': 'Basque', 'fi': 'Finnish', 'fr': 'French', 'gl': 'Galician', 'gu': 'Gujarati', 'ha': 'Hausa', 'hi': 'Hindi', 'hr': 'Croatian', 'hu': 'Hungarian', 'id': 'Indonesian', 'is': 'Icelandic', 'it': 'Italian', 'iw': 'Hebrew', 'ja': 'Japanese', 'jw': 'Javanese', 'km': 'Khmer', 'kn': 'Kannada', 'ko': 'Korean', 'la': 'Latin', 'lt': 'Lithuanian', 'lv': 'Latvian', 'ml': 'Malayalam', 'mr': 'Marathi', 'ms': 'Malay', 'my': 'Myanmar (Burmese)', 'ne': 'Nepali', 'nl': 'Dutch', 'no': 'Norwegian', 'pa': 'Punjabi (Gurmukhi)', 'pl': 'Polish', 'pt': 'Portuguese (Brazil)', 'pt-PT': 'Portuguese (Portugal)', 'ro': 'Romanian', 'ru': 'Russian', 'si': 'Sinhala', 'sk': 'Slovak', 'sq': 'Albanian', 'sr': 'Serbian', 'su': 'Sundanese', 'sv': 'Swedish', 'sw': 'Swahili', 'ta': 'Tamil', 'te': 'Telugu', 'th': 'Thai', 'tl': 'Filipino', 'tr': 'Turkish', 'uk': 'Ukrainian', 'ur': 'Urdu', 'vi': 'Vietnamese', 'yue': 'Cantonese', 'zh-CN': 'Chinese (Simplified)', 'zh-TW': 'Chinese (Mandarin/Taiwan)', 'zh': 'Chinese (Mandarin)'}
+2025-07-19 14:32:30.577 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function tone_marks at 0x740b6792a290>
+2025-07-19 14:32:30.578 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function end_of_line at 0x740b6792a320>
+2025-07-19 14:32:30.578 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function abbreviations at 0x740b6792a3b0>
+2025-07-19 14:32:30.578 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function word_sub at 0x740b6792a440>
+2025-07-19 14:32:30.578 - RealTimeSTT: gtts.tts - DEBUG - text_parts: ['So.']
+2025-07-19 14:32:30.578 - RealTimeSTT: gtts.tts - DEBUG - text_parts: 1
+2025-07-19 14:32:30.578 - RealTimeSTT: gtts.tts - DEBUG - data-0: f.req=%5B%5B%5B%22jQ1olc%22%2C%22%5B%5C%22So.%5C%22%2C%5C%22en%5C%22%2Cnull%2C%5C%22null%5C%22%5D%22%2Cnull%2C%22generic%22%5D%5D%5D&
+2025-07-19 14:32:30.579 - RealTimeSTT: urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): translate.google.com:443
+2025-07-19 14:32:30.751 - RealTimeSTT: urllib3.connectionpool - DEBUG - https://translate.google.com:443 "POST /_/TranslateWebserverUi/data/batchexecute HTTP/1.1" 200 None
+2025-07-19 14:32:30.755 - RealTimeSTT: gtts.tts - DEBUG - headers-0: {'Referer': 'http://translate.google.com/', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8', 'Content-Length': '133'}
+2025-07-19 14:32:30.756 - RealTimeSTT: gtts.tts - DEBUG - url-0: https://translate.google.com/_/TranslateWebserverUi/data/batchexecute
+2025-07-19 14:32:30.756 - RealTimeSTT: gtts.tts - DEBUG - status-0: 200
+2025-07-19 14:32:30.756 - RealTimeSTT: gtts.tts - DEBUG - part-0 written to <_io.BufferedWriter name='/tmp/tmp4lc_bavt.mp3'>
+2025-07-19 14:32:30.756 - RealTimeSTT: gtts.tts - DEBUG - part-0 created
+2025-07-19 14:32:30.756 - RealTimeSTT: gtts.tts - DEBUG - Saved to /tmp/tmp4lc_bavt.mp3
+2025-07-19 14:32:30.915 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:32:31.281 - RealTimeSTT: root - INFO - voice activity detected
+2025-07-19 14:32:31.281 - RealTimeSTT: root - INFO - recording started
+2025-07-19 14:32:31.281 - RealTimeSTT: root - INFO - State changed from 'listening' to 'recording'
+2025-07-19 14:32:31.281 - RealTimeSTT: root - DEBUG - Waiting for recording stop
+2025-07-19 14:32:31.921 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:32:32.279 - RealTimeSTT: root - INFO - recording stopped
+2025-07-19 14:32:32.279 - RealTimeSTT: root - INFO - State changed from 'recording' to 'inactive'
+2025-07-19 14:32:32.280 - RealTimeSTT: root - INFO - State changed from 'inactive' to 'transcribing'
+2025-07-19 14:32:32.280 - RealTimeSTT: root - DEBUG - Adding transcription request, no early transcription started
+2025-07-19 14:32:32.280 - RealTimeSTT: root - INFO - State changed from 'transcribing' to 'inactive'
+2025-07-19 14:32:32.280 - RealTimeSTT: root - DEBUG - Receive from parent_transcription_pipe after sendiung transcription request, transcribe_count: 1
+2025-07-19 14:32:32.299 - RealTimeSTT: faster_whisper - INFO - Processing audio with duration 00:01.984
+2025-07-19 14:32:32.340 - RealTimeSTT: faster_whisper - DEBUG - Processing segment at 00:00.000
+2025-07-19 14:32:32.998 - RealTimeSTT: root - DEBUG - Final text detected with main model: So...
+2025-07-19 14:32:32.999 - RealTimeSTT: root - DEBUG - Model base.en completed transcription in 0.72 seconds
+2025-07-19 14:32:32.999 - RealTimeSTT: root - INFO - Setting listen time
+2025-07-19 14:32:32.999 - RealTimeSTT: root - INFO - State changed from 'inactive' to 'listening'
+2025-07-19 14:32:32.999 - RealTimeSTT: root - DEBUG - Waiting for recording start
+2025-07-19 14:32:33.000 - RealTimeSTT: gtts.tts - DEBUG - text: So...
+2025-07-19 14:32:33.000 - RealTimeSTT: gtts.tts - DEBUG - tld: com
+2025-07-19 14:32:33.000 - RealTimeSTT: gtts.tts - DEBUG - lang: en
+2025-07-19 14:32:33.000 - RealTimeSTT: gtts.tts - DEBUG - slow: False
+2025-07-19 14:32:33.000 - RealTimeSTT: gtts.tts - DEBUG - lang_check: True
+2025-07-19 14:32:33.000 - RealTimeSTT: gtts.tts - DEBUG - pre_processor_funcs: [<function tone_marks at 0x740b6792a290>, <function end_of_line at 0x740b6792a320>, <function abbreviations at 0x740b6792a3b0>, <function word_sub at 0x740b6792a440>]
+2025-07-19 14:32:33.000 - RealTimeSTT: gtts.tts - DEBUG - tokenizer_func: <bound method Tokenizer.run of re.compile('(?<=\\?).|(?<=!).|(?<=？).|(?<=！).|(?<!\\.[a-z])\\. |(?<!\\.[a-z]), |(?<!\\d):|\\\n|\\]|‥|…|\\(|;|¿|：|—|¡|،|，|。|\\)|、|\\[', re.IGNORECASE) from: [<function tone_marks at 0x740b6792a710>, <function period_comma at 0x740b6792a7a0>, <function colon at 0x740b6792a830>, <function other_punctuation at 0x740b6792a8c0>]>
+2025-07-19 14:32:33.000 - RealTimeSTT: gtts.tts - DEBUG - timeout: None
+2025-07-19 14:32:33.000 - RealTimeSTT: gtts.lang - DEBUG - langs: {'af': 'Afrikaans', 'am': 'Amharic', 'ar': 'Arabic', 'bg': 'Bulgarian', 'bn': 'Bengali', 'bs': 'Bosnian', 'ca': 'Catalan', 'cs': 'Czech', 'cy': 'Welsh', 'da': 'Danish', 'de': 'German', 'el': 'Greek', 'en': 'English', 'es': 'Spanish', 'et': 'Estonian', 'eu': 'Basque', 'fi': 'Finnish', 'fr': 'French', 'gl': 'Galician', 'gu': 'Gujarati', 'ha': 'Hausa', 'hi': 'Hindi', 'hr': 'Croatian', 'hu': 'Hungarian', 'id': 'Indonesian', 'is': 'Icelandic', 'it': 'Italian', 'iw': 'Hebrew', 'ja': 'Japanese', 'jw': 'Javanese', 'km': 'Khmer', 'kn': 'Kannada', 'ko': 'Korean', 'la': 'Latin', 'lt': 'Lithuanian', 'lv': 'Latvian', 'ml': 'Malayalam', 'mr': 'Marathi', 'ms': 'Malay', 'my': 'Myanmar (Burmese)', 'ne': 'Nepali', 'nl': 'Dutch', 'no': 'Norwegian', 'pa': 'Punjabi (Gurmukhi)', 'pl': 'Polish', 'pt': 'Portuguese (Brazil)', 'pt-PT': 'Portuguese (Portugal)', 'ro': 'Romanian', 'ru': 'Russian', 'si': 'Sinhala', 'sk': 'Slovak', 'sq': 'Albanian', 'sr': 'Serbian', 'su': 'Sundanese', 'sv': 'Swedish', 'sw': 'Swahili', 'ta': 'Tamil', 'te': 'Telugu', 'th': 'Thai', 'tl': 'Filipino', 'tr': 'Turkish', 'uk': 'Ukrainian', 'ur': 'Urdu', 'vi': 'Vietnamese', 'yue': 'Cantonese', 'zh-CN': 'Chinese (Simplified)', 'zh-TW': 'Chinese (Mandarin/Taiwan)', 'zh': 'Chinese (Mandarin)'}
+2025-07-19 14:32:33.000 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function tone_marks at 0x740b6792a290>
+2025-07-19 14:32:33.000 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function end_of_line at 0x740b6792a320>
+2025-07-19 14:32:33.000 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function abbreviations at 0x740b6792a3b0>
+2025-07-19 14:32:33.000 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function word_sub at 0x740b6792a440>
+2025-07-19 14:32:33.000 - RealTimeSTT: gtts.tts - DEBUG - text_parts: ['So...']
+2025-07-19 14:32:33.000 - RealTimeSTT: gtts.tts - DEBUG - text_parts: 1
+2025-07-19 14:32:33.001 - RealTimeSTT: gtts.tts - DEBUG - data-0: f.req=%5B%5B%5B%22jQ1olc%22%2C%22%5B%5C%22So...%5C%22%2C%5C%22en%5C%22%2Cnull%2C%5C%22null%5C%22%5D%22%2Cnull%2C%22generic%22%5D%5D%5D&
+2025-07-19 14:32:33.001 - RealTimeSTT: urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): translate.google.com:443
+2025-07-19 14:32:33.009 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-19 14:32:33.261 - RealTimeSTT: urllib3.connectionpool - DEBUG - https://translate.google.com:443 "POST /_/TranslateWebserverUi/data/batchexecute HTTP/1.1" 200 None
+2025-07-19 14:32:33.264 - RealTimeSTT: gtts.tts - DEBUG - headers-0: {'Referer': 'http://translate.google.com/', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8', 'Content-Length': '135'}
+2025-07-19 14:32:33.264 - RealTimeSTT: gtts.tts - DEBUG - url-0: https://translate.google.com/_/TranslateWebserverUi/data/batchexecute
+2025-07-19 14:32:33.264 - RealTimeSTT: gtts.tts - DEBUG - status-0: 200
+2025-07-19 14:32:33.265 - RealTimeSTT: gtts.tts - DEBUG - part-0 written to <_io.BufferedWriter name='/tmp/tmpfnsfae1c.mp3'>
+2025-07-19 14:32:33.265 - RealTimeSTT: gtts.tts - DEBUG - part-0 created
+2025-07-19 14:32:33.265 - RealTimeSTT: gtts.tts - DEBUG - Saved to /tmp/tmpfnsfae1c.mp3
+2025-07-19 14:32:33.733 - RealTimeSTT: root - INFO - voice activity detected
+2025-07-19 14:32:33.734 - RealTimeSTT: root - INFO - recording started
+2025-07-19 14:32:33.734 - RealTimeSTT: root - INFO - State changed from 'listening' to 'recording'
+2025-07-19 14:32:33.735 - RealTimeSTT: root - DEBUG - Waiting for recording stop
+2025-07-19 14:32:33.833 - RealTimeSTT: root - INFO - KeyboardInterrupt in wait_audio, shutting down
+2025-07-19 14:32:33.833 - RealTimeSTT: root - DEBUG - Finishing recording thread
+2025-07-19 14:32:33.835 - RealTimeSTT: root - DEBUG - Terminating reader process
+2025-07-19 14:32:33.920 - RealTimeSTT: root - DEBUG - Terminating transcription process
+2025-07-19 14:32:33.930 - RealTimeSTT: root - DEBUG - Finishing realtime thread
+2025-07-19 14:32:33.994 - RealTimeSTT: root - INFO - KeyboardInterrupt in text() method
+2025-07-21 09:48:26.443 - RealTimeSTT: root - INFO - Starting RealTimeSTT
+2025-07-21 09:48:26.444 - RealTimeSTT: root - INFO - Initializing faster_whisper main transcription model base.en
+2025-07-21 09:48:26.444 - RealTimeSTT: root - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2025-07-21 09:48:26.445 - RealTimeSTT: root - INFO - Initializing WebRTC voice with Sensitivity 2
+2025-07-21 09:48:26.445 - RealTimeSTT: root - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2025-07-21 09:48:26.518 - RealTimeSTT: root - ERROR - Error initializing audio stream: [Errno -9998] Invalid number of channels
+2025-07-21 09:48:26.518 - RealTimeSTT: root - WARNING - Failed to initialize audio23 stream at 16000 Hz: [Errno -9998] Invalid number of channels
+2025-07-21 09:48:26.521 - RealTimeSTT: root - ERROR - Error initializing audio stream: [Errno -9998] Invalid number of channels
+2025-07-21 09:48:26.521 - RealTimeSTT: root - WARNING - Failed to initialize audio23 stream at 44100 Hz: [Errno -9998] Invalid number of channels
+2025-07-21 09:48:26.525 - RealTimeSTT: root - ERROR - Error initializing pyaudio audio recording: Failed to initialize audio stream12 with all sample rates.
+Traceback (most recent call last):
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/RealtimeSTT/audio_recorder.py", line 1004, in setup_audio
+    raise Exception("Failed to initialize audio stream12 with all sample rates.")
+Exception: Failed to initialize audio stream12 with all sample rates.
+2025-07-21 09:48:26.555 - RealTimeSTT: urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-21 09:48:26.705 - RealTimeSTT: urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/Systran/faster-whisper-base.en/revision/main HTTP/1.1" 200 961
+2025-07-21 09:48:26.752 - RealTimeSTT: torio._extension.utils - DEBUG - Loading FFmpeg6
+2025-07-21 09:48:26.754 - RealTimeSTT: torio._extension.utils - DEBUG - Failed to load FFmpeg6 extension.
+Traceback (most recent call last):
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 116, in _find_ffmpeg_extension
+    ext = _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 108, in _find_versionsed_ffmpeg_extension
+    _load_lib(lib)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 94, in _load_lib
+    torch.ops.load_library(path)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torch/_ops.py", line 1392, in load_library
+    ctypes.CDLL(path)
+  File "/usr/lib/python3.10/ctypes/__init__.py", line 374, in __init__
+    self._handle = _dlopen(self._name, mode)
+OSError: libavutil.so.58: cannot open shared object file: No such file or directory
+2025-07-21 09:48:26.756 - RealTimeSTT: torio._extension.utils - DEBUG - Loading FFmpeg5
+2025-07-21 09:48:26.757 - RealTimeSTT: torio._extension.utils - DEBUG - Failed to load FFmpeg5 extension.
+Traceback (most recent call last):
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 116, in _find_ffmpeg_extension
+    ext = _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 108, in _find_versionsed_ffmpeg_extension
+    _load_lib(lib)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 94, in _load_lib
+    torch.ops.load_library(path)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torch/_ops.py", line 1392, in load_library
+    ctypes.CDLL(path)
+  File "/usr/lib/python3.10/ctypes/__init__.py", line 374, in __init__
+    self._handle = _dlopen(self._name, mode)
+OSError: libavutil.so.57: cannot open shared object file: No such file or directory
+2025-07-21 09:48:26.758 - RealTimeSTT: torio._extension.utils - DEBUG - Loading FFmpeg4
+2025-07-21 09:48:26.922 - RealTimeSTT: torio._extension.utils - DEBUG - Successfully loaded FFmpeg4
+2025-07-21 09:48:27.048 - RealTimeSTT: root - DEBUG - Silero VAD voice activity detection engine initialized successfully
+2025-07-21 09:48:27.049 - RealTimeSTT: root - DEBUG - Starting realtime worker
+2025-07-21 09:48:27.049 - RealTimeSTT: root - DEBUG - Waiting for main transcription model to start
+2025-07-21 09:48:27.142 - RealTimeSTT: root - DEBUG - Faster_whisper main speech to text transcription model initialized successfully
+2025-07-21 09:48:27.142 - RealTimeSTT: root - DEBUG - Main transcription model ready
+2025-07-21 09:48:27.142 - RealTimeSTT: root - DEBUG - RealtimeSTT initialization completed successfully
+2025-07-21 09:50:11.203 - RealTimeSTT: root - INFO - Starting RealTimeSTT
+2025-07-21 09:50:11.204 - RealTimeSTT: root - INFO - Initializing faster_whisper main transcription model base.en
+2025-07-21 09:50:11.204 - RealTimeSTT: root - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2025-07-21 09:50:11.204 - RealTimeSTT: root - INFO - Initializing WebRTC voice with Sensitivity 2
+2025-07-21 09:50:11.204 - RealTimeSTT: root - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2025-07-21 09:50:11.256 - RealTimeSTT: urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-21 09:50:11.273 - RealTimeSTT: root - DEBUG - Audio recording initialized successfully at 16000 Hz, reading 1024 frames at a time
+2025-07-21 09:50:11.297 - RealTimeSTT: torio._extension.utils - DEBUG - Loading FFmpeg6
+2025-07-21 09:50:11.298 - RealTimeSTT: torio._extension.utils - DEBUG - Failed to load FFmpeg6 extension.
+Traceback (most recent call last):
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 116, in _find_ffmpeg_extension
+    ext = _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 108, in _find_versionsed_ffmpeg_extension
+    _load_lib(lib)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 94, in _load_lib
+    torch.ops.load_library(path)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torch/_ops.py", line 1392, in load_library
+    ctypes.CDLL(path)
+  File "/usr/lib/python3.10/ctypes/__init__.py", line 374, in __init__
+    self._handle = _dlopen(self._name, mode)
+OSError: libavutil.so.58: cannot open shared object file: No such file or directory
+2025-07-21 09:50:11.299 - RealTimeSTT: torio._extension.utils - DEBUG - Loading FFmpeg5
+2025-07-21 09:50:11.300 - RealTimeSTT: torio._extension.utils - DEBUG - Failed to load FFmpeg5 extension.
+Traceback (most recent call last):
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 116, in _find_ffmpeg_extension
+    ext = _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 108, in _find_versionsed_ffmpeg_extension
+    _load_lib(lib)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 94, in _load_lib
+    torch.ops.load_library(path)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torch/_ops.py", line 1392, in load_library
+    ctypes.CDLL(path)
+  File "/usr/lib/python3.10/ctypes/__init__.py", line 374, in __init__
+    self._handle = _dlopen(self._name, mode)
+OSError: libavutil.so.57: cannot open shared object file: No such file or directory
+2025-07-21 09:50:11.300 - RealTimeSTT: torio._extension.utils - DEBUG - Loading FFmpeg4
+2025-07-21 09:50:11.382 - RealTimeSTT: torio._extension.utils - DEBUG - Successfully loaded FFmpeg4
+2025-07-21 09:50:11.466 - RealTimeSTT: urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/Systran/faster-whisper-base.en/revision/main HTTP/1.1" 200 961
+2025-07-21 09:50:11.470 - RealTimeSTT: root - DEBUG - Silero VAD voice activity detection engine initialized successfully
+2025-07-21 09:50:11.472 - RealTimeSTT: root - DEBUG - Starting realtime worker
+2025-07-21 09:50:11.472 - RealTimeSTT: root - DEBUG - Waiting for main transcription model to start
+2025-07-21 09:50:11.694 - RealTimeSTT: root - DEBUG - Faster_whisper main speech to text transcription model initialized successfully
+2025-07-21 09:50:11.694 - RealTimeSTT: root - DEBUG - Main transcription model ready
+2025-07-21 09:50:11.694 - RealTimeSTT: root - DEBUG - RealtimeSTT initialization completed successfully
+2025-07-21 09:50:12.406 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:13.412 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:14.418 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:15.508 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:16.515 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:17.605 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:18.694 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:19.699 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:20.787 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:21.878 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:22.967 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:23.972 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:25.062 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:26.151 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:27.156 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:28.246 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:29.334 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:30.424 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:31.430 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:32.518 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:33.606 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:34.611 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:35.611 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:36.699 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:37.704 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:38.793 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:39.882 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:40.972 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:41.979 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:43.067 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:44.156 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:45.163 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:46.251 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:47.340 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:48.429 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:49.434 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:50.523 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:51.613 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:52.620 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:53.705 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:54.705 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:55.710 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:56.800 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:57.890 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:58.977 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:50:59.984 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:01.073 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:02.162 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:03.168 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:04.258 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:05.347 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:06.436 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:07.441 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:08.531 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:09.620 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:10.625 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:11.715 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:12.805 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:13.810 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:14.899 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:15.987 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:17.077 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:18.082 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:19.173 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:20.261 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:21.265 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:22.356 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:23.446 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:24.534 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:25.538 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:26.539 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:27.627 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:28.633 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:29.721 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:30.812 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:31.816 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:32.905 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:33.993 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:35.083 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:36.087 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:37.088 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:38.177 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:39.184 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:40.270 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:41.360 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:42.360 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:43.366 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:44.454 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:45.544 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:46.547 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:47.548 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:48.635 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:49.641 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:50.732 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:51.821 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:52.826 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:53.915 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:55.004 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:56.095 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:57.100 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:58.190 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:51:59.277 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:00.284 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:01.372 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:02.462 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:03.550 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:04.556 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:05.645 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:06.735 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:07.740 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:08.829 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:09.918 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:11.005 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:12.012 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:13.102 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:14.190 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:15.195 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:16.285 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:17.374 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:18.464 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:19.470 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:19.585 - RealTimeSTT: gtts.tts - DEBUG - text: Do you want me to show how to operate the Microwave oven?
+2025-07-21 09:52:19.585 - RealTimeSTT: gtts.tts - DEBUG - tld: com
+2025-07-21 09:52:19.585 - RealTimeSTT: gtts.tts - DEBUG - lang: en
+2025-07-21 09:52:19.585 - RealTimeSTT: gtts.tts - DEBUG - slow: False
+2025-07-21 09:52:19.585 - RealTimeSTT: gtts.tts - DEBUG - lang_check: True
+2025-07-21 09:52:19.585 - RealTimeSTT: gtts.tts - DEBUG - pre_processor_funcs: [<function tone_marks at 0x758327d07490>, <function end_of_line at 0x758327d07520>, <function abbreviations at 0x758327d075b0>, <function word_sub at 0x758327d07640>]
+2025-07-21 09:52:19.585 - RealTimeSTT: gtts.tts - DEBUG - tokenizer_func: <bound method Tokenizer.run of re.compile('(?<=\\?).|(?<=!).|(?<=？).|(?<=！).|(?<!\\.[a-z])\\. |(?<!\\.[a-z]), |(?<!\\d):|。|¡|;|¿|\\)|，|،|\\]|\\(|：|\\[|、|‥|—|\\\n|…', re.IGNORECASE) from: [<function tone_marks at 0x758327d07910>, <function period_comma at 0x758327d079a0>, <function colon at 0x758327d07a30>, <function other_punctuation at 0x758327d07ac0>]>
+2025-07-21 09:52:19.585 - RealTimeSTT: gtts.tts - DEBUG - timeout: None
+2025-07-21 09:52:19.585 - RealTimeSTT: gtts.lang - DEBUG - langs: {'af': 'Afrikaans', 'am': 'Amharic', 'ar': 'Arabic', 'bg': 'Bulgarian', 'bn': 'Bengali', 'bs': 'Bosnian', 'ca': 'Catalan', 'cs': 'Czech', 'cy': 'Welsh', 'da': 'Danish', 'de': 'German', 'el': 'Greek', 'en': 'English', 'es': 'Spanish', 'et': 'Estonian', 'eu': 'Basque', 'fi': 'Finnish', 'fr': 'French', 'gl': 'Galician', 'gu': 'Gujarati', 'ha': 'Hausa', 'hi': 'Hindi', 'hr': 'Croatian', 'hu': 'Hungarian', 'id': 'Indonesian', 'is': 'Icelandic', 'it': 'Italian', 'iw': 'Hebrew', 'ja': 'Japanese', 'jw': 'Javanese', 'km': 'Khmer', 'kn': 'Kannada', 'ko': 'Korean', 'la': 'Latin', 'lt': 'Lithuanian', 'lv': 'Latvian', 'ml': 'Malayalam', 'mr': 'Marathi', 'ms': 'Malay', 'my': 'Myanmar (Burmese)', 'ne': 'Nepali', 'nl': 'Dutch', 'no': 'Norwegian', 'pa': 'Punjabi (Gurmukhi)', 'pl': 'Polish', 'pt': 'Portuguese (Brazil)', 'pt-PT': 'Portuguese (Portugal)', 'ro': 'Romanian', 'ru': 'Russian', 'si': 'Sinhala', 'sk': 'Slovak', 'sq': 'Albanian', 'sr': 'Serbian', 'su': 'Sundanese', 'sv': 'Swedish', 'sw': 'Swahili', 'ta': 'Tamil', 'te': 'Telugu', 'th': 'Thai', 'tl': 'Filipino', 'tr': 'Turkish', 'uk': 'Ukrainian', 'ur': 'Urdu', 'vi': 'Vietnamese', 'yue': 'Cantonese', 'zh-CN': 'Chinese (Simplified)', 'zh-TW': 'Chinese (Mandarin/Taiwan)', 'zh': 'Chinese (Mandarin)'}
+2025-07-21 09:52:19.585 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function tone_marks at 0x758327d07490>
+2025-07-21 09:52:19.585 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function end_of_line at 0x758327d07520>
+2025-07-21 09:52:19.585 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function abbreviations at 0x758327d075b0>
+2025-07-21 09:52:19.586 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function word_sub at 0x758327d07640>
+2025-07-21 09:52:19.586 - RealTimeSTT: gtts.tts - DEBUG - text_parts: ['Do you want me to show how to operate the Microwave oven?']
+2025-07-21 09:52:19.586 - RealTimeSTT: gtts.tts - DEBUG - text_parts: 1
+2025-07-21 09:52:19.586 - RealTimeSTT: gtts.tts - DEBUG - data-0: f.req=%5B%5B%5B%22jQ1olc%22%2C%22%5B%5C%22Do%20you%20want%20me%20to%20show%20how%20to%20operate%20the%20Microwave%20oven%3F%5C%22%2C%5C%22en%5C%22%2Cnull%2C%5C%22null%5C%22%5D%22%2Cnull%2C%22generic%22%5D%5D%5D&
+2025-07-21 09:52:19.587 - RealTimeSTT: urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): translate.google.com:443
+2025-07-21 09:52:19.915 - RealTimeSTT: urllib3.connectionpool - DEBUG - https://translate.google.com:443 "POST /_/TranslateWebserverUi/data/batchexecute HTTP/1.1" 200 None
+2025-07-21 09:52:19.953 - RealTimeSTT: gtts.tts - DEBUG - headers-0: {'Referer': 'http://translate.google.com/', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8', 'Content-Length': '211'}
+2025-07-21 09:52:19.953 - RealTimeSTT: gtts.tts - DEBUG - url-0: https://translate.google.com/_/TranslateWebserverUi/data/batchexecute
+2025-07-21 09:52:19.953 - RealTimeSTT: gtts.tts - DEBUG - status-0: 200
+2025-07-21 09:52:19.956 - RealTimeSTT: gtts.tts - DEBUG - part-0 written to <_io.BufferedWriter name='/tmp/tmp8f9sdf2n.mp3'>
+2025-07-21 09:52:19.956 - RealTimeSTT: gtts.tts - DEBUG - part-0 created
+2025-07-21 09:52:19.956 - RealTimeSTT: gtts.tts - DEBUG - Saved to /tmp/tmp8f9sdf2n.mp3
+2025-07-21 09:52:20.559 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:21.648 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:22.653 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:23.741 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:23.892 - RealTimeSTT: root - INFO - Setting listen time
+2025-07-21 09:52:23.893 - RealTimeSTT: root - INFO - State changed from 'inactive' to 'listening'
+2025-07-21 09:52:24.133 - RealTimeSTT: root - DEBUG - Waiting for recording start
+2025-07-21 09:52:24.832 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:25.199 - RealTimeSTT: root - INFO - voice activity detected
+2025-07-21 09:52:25.199 - RealTimeSTT: root - INFO - recording started
+2025-07-21 09:52:25.199 - RealTimeSTT: root - INFO - State changed from 'listening' to 'recording'
+2025-07-21 09:52:25.201 - RealTimeSTT: root - DEBUG - Waiting for recording stop
+2025-07-21 09:52:25.839 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:26.378 - RealTimeSTT: root - INFO - recording stopped
+2025-07-21 09:52:26.380 - RealTimeSTT: root - INFO - State changed from 'recording' to 'inactive'
+2025-07-21 09:52:26.419 - RealTimeSTT: root - INFO - State changed from 'inactive' to 'transcribing'
+2025-07-21 09:52:26.421 - RealTimeSTT: root - DEBUG - Adding transcription request, no early transcription started
+2025-07-21 09:52:26.423 - RealTimeSTT: root - DEBUG - Receive from parent_transcription_pipe after sendiung transcription request, transcribe_count: 1
+2025-07-21 09:52:26.424 - RealTimeSTT: faster_whisper - INFO - Processing audio with duration 00:02.176
+2025-07-21 09:52:26.469 - RealTimeSTT: root - INFO - State changed from 'transcribing' to 'inactive'
+2025-07-21 09:52:26.504 - RealTimeSTT: faster_whisper - DEBUG - Processing segment at 00:00.000
+2025-07-21 09:52:26.925 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:27.271 - RealTimeSTT: root - DEBUG - Final text detected with main model: Yes?
+2025-07-21 09:52:27.272 - RealTimeSTT: root - DEBUG - Model base.en completed transcription in 0.85 seconds
+2025-07-21 09:52:28.016 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:29.103 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:30.109 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:31.198 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:32.289 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:33.293 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:34.381 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:35.472 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:36.560 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:37.566 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:38.656 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:39.745 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:40.751 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:41.840 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:42.928 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:44.018 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:45.024 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:46.114 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:47.203 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:52:48.208 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:59:40.321 - RealTimeSTT: root - INFO - Starting RealTimeSTT
+2025-07-21 09:59:40.323 - RealTimeSTT: root - INFO - Initializing faster_whisper main transcription model base.en
+2025-07-21 09:59:40.323 - RealTimeSTT: root - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2025-07-21 09:59:40.324 - RealTimeSTT: root - INFO - Initializing WebRTC voice with Sensitivity 2
+2025-07-21 09:59:40.324 - RealTimeSTT: root - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2025-07-21 09:59:40.337 - RealTimeSTT: root - DEBUG - Audio recording initialized successfully at 16000 Hz, reading 1024 frames at a time
+2025-07-21 09:59:40.403 - RealTimeSTT: urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-21 09:59:40.530 - RealTimeSTT: urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/Systran/faster-whisper-base.en/revision/main HTTP/1.1" 200 961
+2025-07-21 09:59:40.567 - RealTimeSTT: torio._extension.utils - DEBUG - Loading FFmpeg6
+2025-07-21 09:59:40.568 - RealTimeSTT: torio._extension.utils - DEBUG - Failed to load FFmpeg6 extension.
+Traceback (most recent call last):
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 116, in _find_ffmpeg_extension
+    ext = _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 108, in _find_versionsed_ffmpeg_extension
+    _load_lib(lib)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 94, in _load_lib
+    torch.ops.load_library(path)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torch/_ops.py", line 1392, in load_library
+    ctypes.CDLL(path)
+  File "/usr/lib/python3.10/ctypes/__init__.py", line 374, in __init__
+    self._handle = _dlopen(self._name, mode)
+OSError: libavutil.so.58: cannot open shared object file: No such file or directory
+2025-07-21 09:59:40.569 - RealTimeSTT: torio._extension.utils - DEBUG - Loading FFmpeg5
+2025-07-21 09:59:40.570 - RealTimeSTT: torio._extension.utils - DEBUG - Failed to load FFmpeg5 extension.
+Traceback (most recent call last):
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 116, in _find_ffmpeg_extension
+    ext = _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 108, in _find_versionsed_ffmpeg_extension
+    _load_lib(lib)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 94, in _load_lib
+    torch.ops.load_library(path)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torch/_ops.py", line 1392, in load_library
+    ctypes.CDLL(path)
+  File "/usr/lib/python3.10/ctypes/__init__.py", line 374, in __init__
+    self._handle = _dlopen(self._name, mode)
+OSError: libavutil.so.57: cannot open shared object file: No such file or directory
+2025-07-21 09:59:40.570 - RealTimeSTT: torio._extension.utils - DEBUG - Loading FFmpeg4
+2025-07-21 09:59:40.637 - RealTimeSTT: torio._extension.utils - DEBUG - Successfully loaded FFmpeg4
+2025-07-21 09:59:40.727 - RealTimeSTT: root - DEBUG - Silero VAD voice activity detection engine initialized successfully
+2025-07-21 09:59:40.728 - RealTimeSTT: root - DEBUG - Starting realtime worker
+2025-07-21 09:59:40.728 - RealTimeSTT: root - DEBUG - Waiting for main transcription model to start
+2025-07-21 09:59:40.819 - RealTimeSTT: root - DEBUG - Faster_whisper main speech to text transcription model initialized successfully
+2025-07-21 09:59:40.819 - RealTimeSTT: root - DEBUG - Main transcription model ready
+2025-07-21 09:59:40.819 - RealTimeSTT: root - DEBUG - RealtimeSTT initialization completed successfully
+2025-07-21 09:59:41.468 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:59:42.473 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:59:43.479 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:59:44.481 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:59:45.486 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:59:46.574 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:59:47.665 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:59:48.671 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:59:49.761 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:59:50.850 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:59:51.856 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:59:52.944 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:59:54.035 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:59:55.123 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:59:56.129 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 09:59:56.296 - RealTimeSTT: root - DEBUG - Debug: Caught exception in main try block
+2025-07-21 09:59:59.684 - RealTimeSTT: root - INFO - Starting RealTimeSTT
+2025-07-21 09:59:59.685 - RealTimeSTT: root - INFO - Initializing faster_whisper main transcription model base.en
+2025-07-21 09:59:59.685 - RealTimeSTT: root - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2025-07-21 09:59:59.686 - RealTimeSTT: root - INFO - Initializing WebRTC voice with Sensitivity 2
+2025-07-21 09:59:59.686 - RealTimeSTT: root - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2025-07-21 09:59:59.692 - RealTimeSTT: root - DEBUG - Audio recording initialized successfully at 16000 Hz, reading 1024 frames at a time
+2025-07-21 09:59:59.748 - RealTimeSTT: urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-21 09:59:59.780 - RealTimeSTT: torio._extension.utils - DEBUG - Loading FFmpeg6
+2025-07-21 09:59:59.780 - RealTimeSTT: torio._extension.utils - DEBUG - Failed to load FFmpeg6 extension.
+Traceback (most recent call last):
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 116, in _find_ffmpeg_extension
+    ext = _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 108, in _find_versionsed_ffmpeg_extension
+    _load_lib(lib)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 94, in _load_lib
+    torch.ops.load_library(path)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torch/_ops.py", line 1392, in load_library
+    ctypes.CDLL(path)
+  File "/usr/lib/python3.10/ctypes/__init__.py", line 374, in __init__
+    self._handle = _dlopen(self._name, mode)
+OSError: libavutil.so.58: cannot open shared object file: No such file or directory
+2025-07-21 09:59:59.781 - RealTimeSTT: torio._extension.utils - DEBUG - Loading FFmpeg5
+2025-07-21 09:59:59.781 - RealTimeSTT: torio._extension.utils - DEBUG - Failed to load FFmpeg5 extension.
+Traceback (most recent call last):
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 116, in _find_ffmpeg_extension
+    ext = _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 108, in _find_versionsed_ffmpeg_extension
+    _load_lib(lib)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torio/_extension/utils.py", line 94, in _load_lib
+    torch.ops.load_library(path)
+  File "/home/hello-robot/.local/lib/python3.10/site-packages/torch/_ops.py", line 1392, in load_library
+    ctypes.CDLL(path)
+  File "/usr/lib/python3.10/ctypes/__init__.py", line 374, in __init__
+    self._handle = _dlopen(self._name, mode)
+OSError: libavutil.so.57: cannot open shared object file: No such file or directory
+2025-07-21 09:59:59.781 - RealTimeSTT: torio._extension.utils - DEBUG - Loading FFmpeg4
+2025-07-21 09:59:59.839 - RealTimeSTT: torio._extension.utils - DEBUG - Successfully loaded FFmpeg4
+2025-07-21 09:59:59.927 - RealTimeSTT: urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/Systran/faster-whisper-base.en/revision/main HTTP/1.1" 200 961
+2025-07-21 09:59:59.937 - RealTimeSTT: root - DEBUG - Silero VAD voice activity detection engine initialized successfully
+2025-07-21 09:59:59.938 - RealTimeSTT: root - DEBUG - Starting realtime worker
+2025-07-21 09:59:59.938 - RealTimeSTT: root - DEBUG - Waiting for main transcription model to start
+2025-07-21 10:00:00.160 - RealTimeSTT: root - DEBUG - Faster_whisper main speech to text transcription model initialized successfully
+2025-07-21 10:00:00.160 - RealTimeSTT: root - DEBUG - Main transcription model ready
+2025-07-21 10:00:00.160 - RealTimeSTT: root - DEBUG - RealtimeSTT initialization completed successfully
+2025-07-21 10:00:00.827 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 10:00:01.834 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 10:00:02.839 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 10:00:03.197 - RealTimeSTT: gtts.tts - DEBUG - text: Do you want me to show how to operate the Microwave oven?
+2025-07-21 10:00:03.197 - RealTimeSTT: gtts.tts - DEBUG - tld: com
+2025-07-21 10:00:03.197 - RealTimeSTT: gtts.tts - DEBUG - lang: en
+2025-07-21 10:00:03.197 - RealTimeSTT: gtts.tts - DEBUG - slow: False
+2025-07-21 10:00:03.197 - RealTimeSTT: gtts.tts - DEBUG - lang_check: True
+2025-07-21 10:00:03.197 - RealTimeSTT: gtts.tts - DEBUG - pre_processor_funcs: [<function tone_marks at 0x7e6ed6bf7640>, <function end_of_line at 0x7e6ed6bf76d0>, <function abbreviations at 0x7e6ed6bf7760>, <function word_sub at 0x7e6ed6bf77f0>]
+2025-07-21 10:00:03.197 - RealTimeSTT: gtts.tts - DEBUG - tokenizer_func: <bound method Tokenizer.run of re.compile('(?<=\\?).|(?<=!).|(?<=？).|(?<=！).|(?<!\\.[a-z])\\. |(?<!\\.[a-z]), |(?<!\\d):|：|¡|\\(|\\[|¿|\\)|،|、|‥|，|。|…|\\\n|—|\\]|;', re.IGNORECASE) from: [<function tone_marks at 0x7e6ed6bf7ac0>, <function period_comma at 0x7e6ed6bf7b50>, <function colon at 0x7e6ed6bf7be0>, <function other_punctuation at 0x7e6ed6bf7c70>]>
+2025-07-21 10:00:03.198 - RealTimeSTT: gtts.tts - DEBUG - timeout: None
+2025-07-21 10:00:03.198 - RealTimeSTT: gtts.lang - DEBUG - langs: {'af': 'Afrikaans', 'am': 'Amharic', 'ar': 'Arabic', 'bg': 'Bulgarian', 'bn': 'Bengali', 'bs': 'Bosnian', 'ca': 'Catalan', 'cs': 'Czech', 'cy': 'Welsh', 'da': 'Danish', 'de': 'German', 'el': 'Greek', 'en': 'English', 'es': 'Spanish', 'et': 'Estonian', 'eu': 'Basque', 'fi': 'Finnish', 'fr': 'French', 'gl': 'Galician', 'gu': 'Gujarati', 'ha': 'Hausa', 'hi': 'Hindi', 'hr': 'Croatian', 'hu': 'Hungarian', 'id': 'Indonesian', 'is': 'Icelandic', 'it': 'Italian', 'iw': 'Hebrew', 'ja': 'Japanese', 'jw': 'Javanese', 'km': 'Khmer', 'kn': 'Kannada', 'ko': 'Korean', 'la': 'Latin', 'lt': 'Lithuanian', 'lv': 'Latvian', 'ml': 'Malayalam', 'mr': 'Marathi', 'ms': 'Malay', 'my': 'Myanmar (Burmese)', 'ne': 'Nepali', 'nl': 'Dutch', 'no': 'Norwegian', 'pa': 'Punjabi (Gurmukhi)', 'pl': 'Polish', 'pt': 'Portuguese (Brazil)', 'pt-PT': 'Portuguese (Portugal)', 'ro': 'Romanian', 'ru': 'Russian', 'si': 'Sinhala', 'sk': 'Slovak', 'sq': 'Albanian', 'sr': 'Serbian', 'su': 'Sundanese', 'sv': 'Swedish', 'sw': 'Swahili', 'ta': 'Tamil', 'te': 'Telugu', 'th': 'Thai', 'tl': 'Filipino', 'tr': 'Turkish', 'uk': 'Ukrainian', 'ur': 'Urdu', 'vi': 'Vietnamese', 'yue': 'Cantonese', 'zh-CN': 'Chinese (Simplified)', 'zh-TW': 'Chinese (Mandarin/Taiwan)', 'zh': 'Chinese (Mandarin)'}
+2025-07-21 10:00:03.198 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function tone_marks at 0x7e6ed6bf7640>
+2025-07-21 10:00:03.199 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function end_of_line at 0x7e6ed6bf76d0>
+2025-07-21 10:00:03.199 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function abbreviations at 0x7e6ed6bf7760>
+2025-07-21 10:00:03.200 - RealTimeSTT: gtts.tts - DEBUG - pre-processing: <function word_sub at 0x7e6ed6bf77f0>
+2025-07-21 10:00:03.200 - RealTimeSTT: gtts.tts - DEBUG - text_parts: ['Do you want me to show how to operate the Microwave oven?']
+2025-07-21 10:00:03.200 - RealTimeSTT: gtts.tts - DEBUG - text_parts: 1
+2025-07-21 10:00:03.200 - RealTimeSTT: gtts.tts - DEBUG - data-0: f.req=%5B%5B%5B%22jQ1olc%22%2C%22%5B%5C%22Do%20you%20want%20me%20to%20show%20how%20to%20operate%20the%20Microwave%20oven%3F%5C%22%2C%5C%22en%5C%22%2Cnull%2C%5C%22null%5C%22%5D%22%2Cnull%2C%22generic%22%5D%5D%5D&
+2025-07-21 10:00:03.201 - RealTimeSTT: urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): translate.google.com:443
+2025-07-21 10:00:03.471 - RealTimeSTT: urllib3.connectionpool - DEBUG - https://translate.google.com:443 "POST /_/TranslateWebserverUi/data/batchexecute HTTP/1.1" 200 None
+2025-07-21 10:00:03.506 - RealTimeSTT: gtts.tts - DEBUG - headers-0: {'Referer': 'http://translate.google.com/', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8', 'Content-Length': '211'}
+2025-07-21 10:00:03.507 - RealTimeSTT: gtts.tts - DEBUG - url-0: https://translate.google.com/_/TranslateWebserverUi/data/batchexecute
+2025-07-21 10:00:03.507 - RealTimeSTT: gtts.tts - DEBUG - status-0: 200
+2025-07-21 10:00:03.510 - RealTimeSTT: gtts.tts - DEBUG - part-0 written to <_io.BufferedWriter name='/tmp/tmphwwhrigr.mp3'>
+2025-07-21 10:00:03.510 - RealTimeSTT: gtts.tts - DEBUG - part-0 created
+2025-07-21 10:00:03.510 - RealTimeSTT: gtts.tts - DEBUG - Saved to /tmp/tmphwwhrigr.mp3
+2025-07-21 10:00:03.930 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 10:00:04.937 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 10:00:06.024 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 10:00:07.114 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 10:00:07.438 - RealTimeSTT: root - INFO - Setting listen time
+2025-07-21 10:00:07.439 - RealTimeSTT: root - INFO - State changed from 'inactive' to 'listening'
+2025-07-21 10:00:07.655 - RealTimeSTT: root - DEBUG - Waiting for recording start
+2025-07-21 10:00:08.120 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 10:00:08.754 - RealTimeSTT: root - INFO - voice activity detected
+2025-07-21 10:00:08.754 - RealTimeSTT: root - INFO - recording started
+2025-07-21 10:00:08.754 - RealTimeSTT: root - INFO - State changed from 'listening' to 'recording'
+2025-07-21 10:00:08.757 - RealTimeSTT: root - DEBUG - Waiting for recording stop
+2025-07-21 10:00:09.210 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 10:00:09.934 - RealTimeSTT: root - INFO - recording stopped
+2025-07-21 10:00:09.936 - RealTimeSTT: root - INFO - State changed from 'recording' to 'inactive'
+2025-07-21 10:00:10.012 - RealTimeSTT: root - INFO - State changed from 'inactive' to 'transcribing'
+2025-07-21 10:00:10.012 - RealTimeSTT: root - DEBUG - Adding transcription request, no early transcription started
+2025-07-21 10:00:10.013 - RealTimeSTT: root - DEBUG - Receive from parent_transcription_pipe after sendiung transcription request, transcribe_count: 1
+2025-07-21 10:00:10.025 - RealTimeSTT: faster_whisper - INFO - Processing audio with duration 00:02.176
+2025-07-21 10:00:10.025 - RealTimeSTT: root - INFO - State changed from 'transcribing' to 'inactive'
+2025-07-21 10:00:10.086 - RealTimeSTT: faster_whisper - DEBUG - Processing segment at 00:00.000
+2025-07-21 10:00:10.298 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 10:00:10.788 - RealTimeSTT: root - DEBUG - Final text detected with main model: Yes?
+2025-07-21 10:00:10.789 - RealTimeSTT: root - DEBUG - Model base.en completed transcription in 0.78 seconds
+2025-07-21 10:00:11.387 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 10:00:12.392 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 10:00:13.483 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.
+2025-07-21 10:00:14.571 - RealTimeSTT: root - DEBUG - _audio_data_worker writing audio data into queue.

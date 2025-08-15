@@ -15,7 +15,7 @@ shr_parameters:
       }
       drinking_reminder_times: {
         type: string_array,
-        default_value: [ "Everyday 14h00m0s/16h00m0s"],
+        default_value: [ "Everyday 22h00m0s/23h00m0s"],
         description: "time that each protocol is triggered",
       }
     
@@ -27,7 +27,18 @@ shr_parameters:
       }
       take_medication_times: {
         type: string_array,
-        default_value: [ "Everyday 09h15m0s/10h15m0s", "Everyday 21h00m0s/22h00m0s" ],
+        default_value: [ "Everyday 22h00m0s/23h00m0s", "Everyday 22h00m0s/23h00m0s" ],
+        description: "time that each protocol is triggered",
+      }
+    OneReminderProtocol:
+      instances: {
+        type: string_array,
+        default_value: [ "med_r1" , "food_r1" ],
+        description: "one_reminder protocols",
+      }
+      one_reminder_times: {
+        type: string_array,
+        default_value: [ "Everyday 09h00m0s/10h00m0s", "Everyday 21h00m0s/22h00m0s" ],
         description: "time that each protocol is triggered",
       }
     EmptyDishwasherProtocol:
@@ -38,7 +49,7 @@ shr_parameters:
       }
       empty_dishwasher_reminder_times: {
         type: string_array,
-        default_value: [ "Everyday 10h30m0s/11h30m0s"],
+        default_value: [ "Everyday 22h00m0s/23h00m0s"],
         description: "time that each protocol is triggered",
       }
     EmptyTrashProtocol:
@@ -49,7 +60,7 @@ shr_parameters:
       }
       empty_trash_reminder_times: {
         type: string_array,
-        default_value: [ "Everyday 09h30m0s/10h30m0s"],
+        default_value: [ "Everyday 22h00m0s/23h00m0s"],
         description: "time that each protocol is triggered",
       }
     MorningWakeProtocol:
@@ -60,7 +71,7 @@ shr_parameters:
       }
       morning_wake_reminder_times: {
         type: string_array,
-        default_value: [ "Everyday 08h25m0s/8h45m0s" ],
+        default_value: [ "Everyday 22h00m0s/23h00m0s" ],
         description: "time that each protocol is triggered",
       }
     ShowerProtocol:
@@ -71,7 +82,7 @@ shr_parameters:
       }
       shower_reminder_times: {
         type: string_array,
-        default_value: [ "Everyday 07h25m0s/7h45m0s"],
+        default_value: [ "Everyday 22h00m0s/23h00m0s"],
         description: "time that each protocol is triggered",
       }
     PamLocationProtocol:
@@ -82,7 +93,7 @@ shr_parameters:
       }
       pam_location_reminder_times: {
         type: string_array,
-        default_value: [ "Everyday 04h25m0s/4h45m0s", "Everyday 05h25m0s/5h45m0s", "Everyday 06h25m0s/6h45m0s" ],
+        default_value: [ "Everyday 22h00m0s/23h00m0s", "Everyday 22h00m0s/23h00m0s", "Everyday 22h00m0s/23h00m0s" ],
         description: "time that each protocol is triggered",
       }
 
@@ -94,7 +105,7 @@ shr_parameters:
       }
       fitness_reminder_times: {
         type: string_array,
-        default_value: [ "Everyday 03h25m0s/3h45m0s" ],
+        default_value: [ "Everyday 22h00m0s/23h00m0s" ],
         description: "time that each protocol is triggered",
       }
 

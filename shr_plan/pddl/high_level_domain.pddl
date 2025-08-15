@@ -6,6 +6,7 @@
 )
 
 (:types
+  OneReminderProtocol
   DrinkingProtocol
   MedicineProtocol
   EmptyDishwasherProtocol
@@ -38,8 +39,14 @@
   (visible_location ?lmp - Landmark)
   (not_visible_location ?lmp - Landmark)
   (check_location_wakeup ?lmp - Landmark)
+  
+  ;; one reminder
+  (one_reminder_protocol_enabled ?oner - OneReminderProtocol)
+  (time_for_one_reminder ?oner - OneReminderProtocol)
+  (already_reminded_one_reminder ?oner - OneReminderProtocol)
 
-   ;; drinking reminder
+
+  ;; drinking reminder
   (drinking_protocol_enabled ?dr - DrinkingProtocol)
   (time_for_drinking_reminder ?dr - DrinkingProtocol)
   (already_reminded_drinking ?dr - DrinkingProtocol)
@@ -172,6 +179,52 @@
           )
 )
 
+(:action StartOneReminderProtocol
+	:parameters (?o - OneReminderProtocol ?p - Person ?cur - Landmark ?dest - Landmark)
+	:precondition (and
+	  ;; all protocols should have a priority higher than that of idle
+	  (priority_3)
+      (time_for_one_reminder ?o)
+
+      (visible_location ?dest)
+      ;;(visible_location ?cur)
+
+      (person_currently_at ?p ?cur)
+      (robot_at ?cur)
+
+      (not (already_reminded_one_reminder ?o))
+
+      (forall (?o - OneReminderProtocol) (not (one_reminder_protocol_enabled ?o)) )
+      (started)
+		)
+	:effect (and
+	        (success)
+            (not (priority_2))
+            (one_reminder_protocol_enabled ?o)
+            (not (low_level_failed))
+            ;; for every protocol in types it has to have a forall to disable other protocols before starting this one
+            (forall (?medicine_protocol - MedicineProtocol) (not (medicine_protocol_enabled ?medicine_protocol)) )
+            (forall (?empty_trash_protocol - EmptyTrashProtocol) (not (empty_trash_protocol_enabled ?empty_trash_protocol)) )
+            (forall (?empty_dishwasher_protocol - EmptyDishwasherProtocol) (not (empty_dishwasher_protocol_enabled ?empty_dishwasher_protocol)) )
+            (forall (?morning_wake_protocol - MorningWakeProtocol) (not (morning_wake_protocol_enabled ?morning_wake_protocol)) )
+            (forall (?shower - ShowerProtocol) (not (shower_reminder_enabled ?shower)) )
+            (forall (?pam_location - PamLocationProtocol) (not (pam_location_reminder_enabled ?pam_location)) )
+            (forall (?fitness - FitnessProtocol) (not (fitness_protocol_enabled ?fitness)) )
+          )
+)
+
+(:action ContinueOneReminderProtocol
+	:parameters (?o - OneReminderProtocol)
+	:precondition (and
+	    (priority_2)
+	    (not (low_level_failed))
+      (time_for_one_reminder ?o)
+      (not (already_reminded_one_reminder ?o))
+      (one_reminder_protocol_enabled ?o)
+		)
+	:effect (and (success) (not (priority_3)) )
+)
+
 (:action StartDrinkingProtocol
 	:parameters (?d - DrinkingProtocol ?p - Person ?cur - Landmark ?dest - Landmark)
 	:precondition (and
@@ -203,6 +256,7 @@
             (forall (?shower - ShowerProtocol) (not (shower_reminder_enabled ?shower)) )
             (forall (?pam_location - PamLocationProtocol) (not (pam_location_reminder_enabled ?pam_location)) )
             (forall (?fitness - FitnessProtocol) (not (fitness_protocol_enabled ?fitness)) )
+            (forall (?one_reminder_protocol - OneReminderProtocol) (not (one_reminder_protocol_enabled ?one_reminder_protocol)) )
           )
 )
 
@@ -249,7 +303,7 @@
             (forall (?shower - ShowerProtocol) (not (shower_reminder_enabled ?shower)) )
             (forall (?pam_location - PamLocationProtocol) (not (pam_location_reminder_enabled ?pam_location)) )
             (forall (?fitness - FitnessProtocol) (not (fitness_protocol_enabled ?fitness)) )
-
+            (forall (?one_reminder_protocol - OneReminderProtocol) (not (one_reminder_protocol_enabled ?one_reminder_protocol)) )
           )
 )
 
@@ -295,6 +349,7 @@
             (forall (?shower - ShowerProtocol) (not (shower_reminder_enabled ?shower)) )
             (forall (?pam_location - PamLocationProtocol) (not (pam_location_reminder_enabled ?pam_location)) )
             (forall (?fitness - FitnessProtocol) (not (fitness_protocol_enabled ?fitness)) )
+            (forall (?one_reminder_protocol - OneReminderProtocol) (not (one_reminder_protocol_enabled ?one_reminder_protocol)) )
           )
 )
 
@@ -338,6 +393,7 @@
             (forall (?shower - ShowerProtocol) (not (shower_reminder_enabled ?shower)) )
             (forall (?pam_location - PamLocationProtocol) (not (pam_location_reminder_enabled ?pam_location)) )
             (forall (?fitness - FitnessProtocol) (not (fitness_protocol_enabled ?fitness)) )
+            (forall (?one_reminder_protocol - OneReminderProtocol) (not (one_reminder_protocol_enabled ?one_reminder_protocol)) )
           )
 )
 
@@ -385,6 +441,7 @@
             (forall (?shower - ShowerProtocol) (not (shower_reminder_enabled ?shower)) )
             (forall (?pam_location - PamLocationProtocol) (not (pam_location_reminder_enabled ?pam_location)) )
             (forall (?fitness - FitnessProtocol) (not (fitness_protocol_enabled ?fitness)) )
+            (forall (?one_reminder_protocol - OneReminderProtocol) (not (one_reminder_protocol_enabled ?one_reminder_protocol)) )
           )
 )
 
@@ -431,6 +488,7 @@
               (forall (?morning_wake_protocol - MorningWakeProtocol) (not (morning_wake_protocol_enabled ?morning_wake_protocol)) )
               (forall (?pam_location - PamLocationProtocol) (not (pam_location_reminder_enabled ?pam_location)) )
               (forall (?fitness - FitnessProtocol) (not (fitness_protocol_enabled ?fitness)) )
+              (forall (?one_reminder_protocol - OneReminderProtocol) (not (one_reminder_protocol_enabled ?one_reminder_protocol)) )
           )
 )
 
@@ -478,6 +536,7 @@
               (forall (?morning_wake_protocol - MorningWakeProtocol) (not (morning_wake_protocol_enabled ?morning_wake_protocol)) )
               (forall (?shower - ShowerProtocol) (not (shower_reminder_enabled ?shower)) )
               (forall (?fitness - FitnessProtocol) (not (fitness_protocol_enabled ?fitness)) )
+              (forall (?one_reminder_protocol - OneReminderProtocol) (not (one_reminder_protocol_enabled ?one_reminder_protocol)) )
 
               
           )
@@ -525,6 +584,7 @@
             (forall (?shower - ShowerProtocol) (not (shower_reminder_enabled ?shower)) )
             (forall (?pam_location - PamLocationProtocol) (not (pam_location_reminder_enabled ?pam_location)) )
             (forall (?etr - EmptyTrashProtocol) (not (empty_trash_protocol_enabled ?etr)) )
+            (forall (?one_reminder_protocol - OneReminderProtocol) (not (one_reminder_protocol_enabled ?one_reminder_protocol)) )
           )
 )
 
@@ -559,6 +619,7 @@
                 (forall (?shower - ShowerProtocol) (not (shower_reminder_enabled ?shower)) )
                 (forall (?pam_location - PamLocationProtocol) (not (pam_location_reminder_enabled ?pam_location)) )
                 (forall (?fitness - FitnessProtocol) (not (fitness_protocol_enabled ?fitness)) )
+                (forall (?one_reminder_protocol - OneReminderProtocol) (not (one_reminder_protocol_enabled ?one_reminder_protocol)) )
           )
 )
 

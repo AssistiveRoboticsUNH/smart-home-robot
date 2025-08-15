@@ -1,0 +1,8 @@
+pactl set-default-source alsa_input.usb-SEEED_ReSpeaker_4_Mic_Array__UAC1.0_-00.multichannel-input
+pactl set-default-sink alsa_output.usb-Generic_USB2.0_Device_20121120222016-00.analog-stereo
+
+pactl get-default-source
+pactl get-default-sink
+
+pactl list short sources
+pactl list short sinks

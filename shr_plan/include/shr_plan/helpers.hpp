@@ -28,6 +28,17 @@ namespace pddl_lib {
         }
     }
 
+    std::optional<long> get_inst_index(OneReminderProtocol oner, const shr_parameters::Params &params) {
+        const auto &instances = params.pddl.OneReminderProtocol.instances;
+        auto it = std::find(instances.begin(), instances.end(), oner);
+        if (it != instances.end()) {
+            auto index = std::distance(instances.begin(), it);
+            return index;
+        } else {
+            return {};
+        }
+    }
+
     std::optional<long> get_inst_index(MedicineProtocol m, const shr_parameters::Params &params) {
         const auto &instances = params.pddl.MedicineProtocol.instances;
         auto it = std::find(instances.begin(), instances.end(), m);
@@ -110,6 +121,9 @@ namespace pddl_lib {
         }
         else if (inst.type == "MedicineProtocol") {
             return get_inst_index((MedicineProtocol) inst.name, params);
+        }
+        else if (inst.type == "OneReminderProtocol") {
+            return get_inst_index((OneReminderProtocol) inst.name, params);
         }
         else if (inst.type == "EmptyDishwasherProtocol") {
             return get_inst_index((EmptyDishwasherProtocol) inst.name, params);

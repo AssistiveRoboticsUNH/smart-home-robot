@@ -57,7 +57,6 @@ std::optional<std::string> getPlan(const std::string &domain, const std::string 
         problemFile << problem;
     }
 
-//    std::string cmd = "ros2 run plan_solver_py plan_solver -o /home/olagh48652/planner_data/plan_solver/domain.pddl -f /home/olagh48652/planner_data/plan_solver/problem.pddl > /dev/null";
     std::string cmd = "ros2 run plan_solver_py plan_solver -o ";
     cmd += homeDir;
     cmd += "/planner_data/plan_solver/domain.pddl -f ";
@@ -143,6 +142,15 @@ public:
         }
     }
 
+    TRUTH_VALUE time_for_one_reminder(TRUTH_VALUE val, OneReminderProtocol oner) const override {
+        auto params = world_state_converter->get_params();
+        if (auto index = get_inst_index(oner, params)) {
+            if (compare_time(params.pddl.OneReminderProtocol.one_reminder_times[index.value()])) {
+                return TRUTH_VALUE::TRUE;
+            }
+        }
+        return TRUTH_VALUE::FALSE;
+    }
     
     TRUTH_VALUE time_for_drinking_reminder(TRUTH_VALUE val, DrinkingProtocol d) const override {
         if (d == "drinking"){

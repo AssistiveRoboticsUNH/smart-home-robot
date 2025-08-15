@@ -89,10 +89,10 @@ class Docking_IR(Node):
 
         # detect connect / disconnect events
         if prev is not None:
-            if prev < 0 <= self.charging_current:
+            if prev < 0.1 <= self.charging_current:
                 self.get_logger().info("Charger connected.")
                 self.is_charging = True
-            elif prev >= 0 > self.charging_current:
+            elif prev >= 0.1 > self.charging_current:
                 self.get_logger().info("Charger disconnected.")
                 self.is_charging = False
 
