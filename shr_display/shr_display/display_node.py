@@ -39,9 +39,10 @@ class DisplayNode(Node):
         )
 
         self.zmq = ZmqInterface(tx_port, rx_port)
+        time.sleep(1) # Allow 1 second for zmq connection to establish
 
         # ROS topics
-        self.tx_pub = self.create_publisher(String, 'display_tx', 10)
+        self.tx_sub = self.create_subscription(String, 'display_tx', self.forward_to_app, 10)
         self.rx_pub = self.create_publisher(String, 'display_rx', 10)
 
         # Timers
@@ -54,10 +55,26 @@ class DisplayNode(Node):
         # Publish once immediately
         self.publish_protocols()
 
+        deadline = time.time() + 2
+        while time.time() < deadline:
+            try:
+                response = self.zmq.receive()
+                if response:
+                    self.display_alive = True
+                    # print(response)
+                    break
+            except self.zmq.Again:
+                time.sleep(0.05)
+        
+
         msg = "Display app is ALIVE" if self.display_alive else "Display app NOT reachable"
         self.get_logger().info(msg)
 
         self.start_flask_app(webapp_file_path)
+    
+    def forward_to_app(self, msg: String):
+        """Forward anything being published on display_tx to the ZMQ PUB socket."""
+        self.zmq.send(msg.data)
 
     def get_default_config_path(self):
         from ament_index_python.packages import get_package_share_directory
@@ -71,7 +88,6 @@ class DisplayNode(Node):
     def publish_protocols(self):
         self.protocol_manager.update_protocol_json()
         msg_string = self.protocol_manager.get_as_string()
-        self.tx_pub.publish(String(data=msg_string))
         self.zmq.send(msg_string)
 
     def poll_app_responses(self):
@@ -91,10 +107,7 @@ class DisplayNode(Node):
                 pass
 
     def periodic_alive_log(self):
-        if self.display_alive:
-            # self.get_logger().info("Display app is ALIVE")
-            pass
-        else:
+        if not self.display_alive:
             self.get_logger().warn("Display app NOT reachable")
 
     def start_flask_app(self, webapp_file_path):
