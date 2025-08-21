@@ -8,14 +8,17 @@ class ProtocolManager:
         self._load()
 
         self.name_map = {
-            "med_r1":  "Morning Medication at 7:00 AM",
-            "med_r2":  "Morning Medication at 9:00 AM",
-            "med_r3":  "Morning Medication at 11:00 AM",
-            "med_r4":  "Morning Medication at 1:00 PM",
-            "food_r1": "Food reminder at 3:00 PM",
-            "food_r2": "Food reminder at 5:00 PM",
-            "food_r3": "Food reminder at 7:00 PM",
-            "food_r4": "Food reminder at 9:00 PM"
+            # Medications
+            "med_r1": "Morning Med: Droxidopa and CARB at 7:00 AM",
+            "med_r2": "Morning Med: Medodrine at 10:00 AM",
+            "med_r3": "Afternoon Med: Droxidopa and CARB at 1:00 PM",
+            "med_r4": "Afternoon Med: Droxidopa and CARB at 5:00 PM",
+
+            # Meals
+            "food_r1": "Breakfast at 9:00 AM",
+            "food_r2": "Lunch at 12:00 PM",
+            "food_r3": "Meal at 4:00 PM",
+            "food_r4": "Dinner at 7:00 PM"
         }
 
     def _load(self):
@@ -35,6 +38,7 @@ class ProtocolManager:
         the JSON protocols.  name_map maps short IDs (e.g. 'med_r1') to
         full protocol names (e.g. 'Morning Medication at 9:00am').
         """
+        self._load()
         # 1) collect the list of short names found in the file
         found_ids = set()
         with open(self.intersection_file_path, "r") as f:

@@ -116,12 +116,12 @@ class DisplayNode(Node):
         self.flask_process = subprocess.Popen(flask_cmd)
         self.get_logger().info(f"Flask app started (PID {self.flask_process.pid})")
 
-def destroy_node(self):
-    """Override destroy_node so we can also terminate the Flask app."""
-    if hasattr(self, "flask_process"):
-        self.get_logger().info("Terminating Flask app...")
-        self.flask_process.terminate()
-    return super().destroy_node()
+    def destroy_node(self):
+        """Override destroy_node so we can also terminate the Flask app."""
+        if hasattr(self, "flask_process"):
+            self.get_logger().info("Terminating Flask app...")
+            self.flask_process.terminate()
+        return super().destroy_node()
 
 def main(args=None):
     rclpy.init(args=args)
