@@ -8,7 +8,7 @@ from .zmq_interface import ZmqInterface
 import json, yaml
 import pathlib
 import time
-import subprocess
+import subprocess, signal, os
 
 class DisplayNode(Node):
     def __init__(self):
@@ -119,8 +119,16 @@ class DisplayNode(Node):
     def destroy_node(self):
         """Override destroy_node so we can also terminate the Flask app."""
         if hasattr(self, "flask_process"):
-            self.get_logger().info("Terminating Flask app...")
-            self.flask_process.terminate()
+            try:
+                self.get_logger().info("Terminating Flask app...")
+                os.killpg(self.flask_process.pid, signal.SIGTERM)
+                try:
+                    self.flask_process.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    self.get_logger().warn("Flask didn’t exit; killing...")
+                    os.killpg(self.flask_process.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
         return super().destroy_node()
 
 def main(args=None):

@@ -3,6 +3,7 @@ import glob
 import zmq
 from ament_index_python.packages import get_package_share_directory
 from shr_msgs.action import ReadScriptRequest
+from std_msgs.msg import String
 from rclpy.action import ActionServer, ActionClient
 from rclpy.node import Node
 import rclpy
@@ -13,13 +14,14 @@ from gtts import gTTS
 
 
 class ReadScriptActionServer(Node):
-    def __init__(self, zmq_socket):
+    def __init__(self):
         super().__init__('read_script_action')
         self.declare_parameter('voice', 'voice_cmu_us_fem_cg')
         self.voice = self.get_parameter('voice').value
         self.read_script_action_server = ActionServer(self, ReadScriptRequest, 'read_script',
                                                       self.read_script_callback)
-        self.zmq_socket = zmq_socket  # Use the shared ZeroMQ socket
+        # self.zmq_socket = zmq_socket  # Use the shared ZeroMQ socket
+        self.display_pub = self.create_publisher(String, 'display_tx', 10)
         
     def read_script_callback(self, goal_handle):
         self.get_logger().info("weblog="+'Reading script...')
@@ -36,7 +38,8 @@ class ReadScriptActionServer(Node):
             return result
         
         # Send "0" to ZeroMQ before starting audio playback
-        self.zmq_socket.send_string("0")
+        # self.zmq_socket.send_string("0")
+        self.display_pub.publish(String(data="0"))
         self.get_logger().info("weblog="+'Sent ZeroMQ message: 0')
 
 
@@ -48,7 +51,8 @@ class ReadScriptActionServer(Node):
         result.status = "success"
         
         # After audio playback, send "1" to ZeroMQ
-        self.zmq_socket.send_string("1")
+        # self.zmq_socket.send_string("1")
+        self.display_pub.publish(String(data="1"))
         self.get_logger().info("weblog="+'Sent ZeroMQ message: 1')
 
         goal_handle.succeed()

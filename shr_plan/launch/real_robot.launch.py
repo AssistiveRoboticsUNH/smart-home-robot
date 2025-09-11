@@ -57,9 +57,14 @@ def generate_launch_description():
         output='screen'
     )
 
-    display_ack_node = Node(
-        package='smartthings_ros',
-        executable='display_ack',
+    # display_ack_node = Node(
+    #     package='smartthings_ros',
+    #     executable='display_ack',
+    #     output='screen'
+    # )
+    display_node = Node(
+        package='shr_display',
+        executable='display_node',
         output='screen'
     )
 
@@ -140,10 +145,10 @@ def generate_launch_description():
     ld.add_action(tf_broadcast)
     # ld.add_action(homeseer_node)
     ld.add_action(smartthings_node_plug)
-    # ld.add_action(protocol_time_node)
+    ld.add_action(protocol_time_node)
     # ld.add_action(smartthings_weather)
     ld.add_action(docking_data_manager)
     ld.add_action(discord_logger)
-    ld.add_action(display_ack_node)
+    ld.add_action(display_node)
 
     return ld

@@ -13,7 +13,7 @@ def generate_launch_description():
 
     room_file = DeclareLaunchArgument(
         "rooms_location",
-        default_value=pkg_path + "olson_rooms.yaml",
+        default_value=pkg_path + "suzan_rooms.yaml",
         description="rooms location"
     )
 
