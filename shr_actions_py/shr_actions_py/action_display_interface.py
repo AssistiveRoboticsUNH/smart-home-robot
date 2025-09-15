@@ -19,7 +19,7 @@ def main():
             ip_address = ip
 
     print("ZMQ LOCAL IP Address: ", ip_address)
-   
+
     str_ = "tcp://" + str(ip_address) + ":5556"
     zmq_socket.bind(str_)  # Shared address and port
 

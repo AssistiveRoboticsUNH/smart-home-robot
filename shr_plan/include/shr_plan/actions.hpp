@@ -859,8 +859,7 @@ namespace pddl_lib {
        
             // Move to the medicine location if not already there
             instantiate_protocol("medicine_reminder.pddl");
-        
-            
+
             ps.active_protocol = protocol;
             lock.UnLock();
             return BT::NodeStatus::SUCCESS;
