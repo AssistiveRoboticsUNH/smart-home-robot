@@ -10,7 +10,7 @@
     na1 na2 na3 - NoAction
 )
 (:init
-    ;;(person_at t1 nathan bedroom)
+    ;;(person_at t1 nathan outside)
     ;;(person_at t1 nathan living_room)
     ;;(robot_at home)
 
@@ -38,7 +38,7 @@
     ;;(traversable living_room bedroom)
 
 
-    (same_location_constraint)
+    ;;(same_location_constraint)
     ;;(not_same_location_constraint)
 
     ;;success states

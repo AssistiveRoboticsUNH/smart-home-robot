@@ -4,13 +4,8 @@ for running the script
 
 Suzan protocols 
 
+ros2 topic pub /charging std_msgs/msg/Int32 "{data: 1 }" 
 
-for med1
-ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 32600"
-ros2 topic pub -r 1 /person_location std_msgs/msg/String  "data: living_room"
-
-
-for food1
 ros2 topic pub /protocol_time builtin_interfaces/msg/Time "sec: 75800"
 ros2 topic pub -r 1 /person_location std_msgs/msg/String  "data: living_room"
 

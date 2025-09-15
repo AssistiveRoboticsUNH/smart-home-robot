@@ -3,16 +3,7 @@
   (:objects
      
      home bedroom outside living_room - Landmark
-     
-     med_r1 food_r1 - OneReminderProtocol
-     drinking - DrinkingProtocol
-     am_meds pm_meds - MedicineProtocol
-     em_trash - EmptyTrashProtocol
-     em_dishwasher - EmptyDishwasherProtocol
-     morning_wake - MorningWakeProtocol
-     shower - ShowerProtocol
-     pam_location pam_wed pam_fri - PamLocationProtocol
-     fitness - FitnessProtocol
+     med_r1 med_r2 med_r3 med_r4 food_r1 food_r2 food_r3 food_r4 - OneReminderProtocol
      nathan - Person
      t1 - Time  ;;t2 t3 t4 t5
 
@@ -25,7 +16,6 @@
   )
   (:init
 
-
       (priority_1)
       (visible_location home)
       (visible_location living_room)
@@ -34,16 +24,15 @@
       (check_location_wakeup home)
       (not_visible_location outside)
 
-
       ;;(time_for_one_reminder med_r1)
-      ;;(person_currently_at nathan living_room)
+;;(person_currently_at nathan living_room)
       ;;(person_at t1 nathan living_room)
       ;;(robot_at home)
 
 
       ;; add when you need to test the protocl 
-      (person_at t1 nathan living_room)
-      (person_currently_at nathan living_room)
+      ;;(person_at t1 nathan living_room)
+      ;;(person_currently_at nathan living_room)
       ;;(robot_at home)
       
       ;;(time_for_drinking_reminder drinking)

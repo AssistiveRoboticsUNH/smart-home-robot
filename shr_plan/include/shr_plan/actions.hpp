@@ -48,36 +48,23 @@ namespace pddl_lib {
         const std::unordered_map <InstantiatedParameter, std::unordered_map<std::string, std::pair < int, int>>> wait_times = {
             {{"med_r1","OneReminderProtocol"},{{"reminder_1_msg", {0, 1}},{"wait",{0, 0}},}},
             {{"food_r1","OneReminderProtocol"},{{"reminder_1_msg", {0, 1}},{"wait",{0, 0}},}},
-            {{"am_meds","MedicineProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
-            {{"pm_meds","MedicineProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
-            {{"gym_reminder","GymReminderProtocol"},{{"voice_msg", {0, 1}},{"wait",{0, 0}},}},
-            {{"drinking","DrinkingProtocol"},{{"reminder_1_msg", {0, 1}},{"wait",{0, 0}},}},
-            {{"em_trash","EmptyTrashProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
-            {{"em_dishwasher","EmptyDishwasherProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
-
-            {{"morning_wake","MorningWakeProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
-			{{"shower","ShowerProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
-			{{"pam_location","PamLocationProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
-            {{"pam_wed","PamLocationProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
-            {{"pam_fri","PamLocationProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
-            {{"fitness","FitnessProtocol"},{{"reminder_1_msg", {0, 1}},{"reminder_2_msg", {0, 1}},{"wait", {6, 0}},}},
+            {{"med_r2","OneReminderProtocol"},{{"reminder_1_msg", {0, 1}},{"wait",{0, 0}},}},
+            {{"food_r2","OneReminderProtocol"},{{"reminder_1_msg", {0, 1}},{"wait",{0, 0}},}},
+            {{"med_r3","OneReminderProtocol"},{{"reminder_1_msg", {0, 1}},{"wait",{0, 0}},}},
+            {{"food_r3","OneReminderProtocol"},{{"reminder_1_msg", {0, 1}},{"wait",{0, 0}},}},
+            {{"med_r4","OneReminderProtocol"},{{"reminder_1_msg", {0, 1}},{"wait",{0, 0}},}},
+            {{"food_r4","OneReminderProtocol"},{{"reminder_1_msg", {0, 1}},{"wait",{0, 0}},}},
         };
 
         const std::unordered_map <InstantiatedParameter, std::unordered_map<std::string, std::string>> automated_reminder_msgs = {
             {{"med_r1","OneReminderProtocol"},{{"reminder_1_msg", "med1_reminder.txt"},}},
             {{"food_r1","OneReminderProtocol"},{{"reminder_1_msg", "food1_reminder.txt"},}},
-            {{"am_meds","MedicineProtocol"},{{"reminder_1_msg", "am_med_reminder.txt"},{"reminder_2_msg", "am_med_reminder_2.txt"},}},
-            {{"pm_meds","MedicineProtocol"},{{"reminder_1_msg", "pm_med_reminder.txt"},{"reminder_2_msg", "pm_med_reminder_2.txt"},}},
-            {{"drinking","DrinkingProtocol"},{{"reminder_1_msg", "drinking_reminder.txt"},}},
-            {{"gym_reminder","GymReminderProtocol"},{{"reminder_1_msg", "gym_reminder1.txt"},}},
-            {{"em_trash","EmptyTrashProtocol"},{{"reminder_1_msg", "em_trash_reminder.txt"},{"reminder_2_msg", "em_trash_reminder_2.txt"},}},
-            {{"em_dishwasher","EmptyDishwasherProtocol"},{{"reminder_1_msg", "em_dishwasher_reminder.txt"},{"reminder_2_msg", "em_dishwasher_reminder_2.txt"},}},
-            {{"morning_wake","MorningWakeProtocol"},{{"reminder_1_msg", "morning_reminder_1.txt"},{"reminder_2_msg", "morning_reminder_2.txt"},}},
-			{{"shower","ShowerProtocol"},{{"reminder_1_msg", "shower_reminder_1.txt"},{"reminder_2_msg", "shower_reminder_2.txt"},}},
-			{{"pam_location","PamLocationProtocol"},{{"reminder_1_msg", "pam_reminder_1.txt"},{"reminder_2_msg", "pam_reminder_2.txt"},}},
-            {{"pam_wed","PamLocationProtocol"},{{"reminder_1_msg", "pam_reminder_non_1.txt"},{"reminder_2_msg", "pam_reminder_non_2.txt"},}},
-            {{"pam_fri","PamLocationProtocol"},{{"reminder_1_msg", "pam_reminder_fri_1.txt"},{"reminder_2_msg", "pam_reminder_fri_2.txt"},}},
-            {{"fitness","FitnessProtocol"},{{"reminder_1_msg", "fitness_1.txt"},{"reminder_2_msg", "fitness_2.txt"},}},
+            {{"med_r2","OneReminderProtocol"},{{"reminder_1_msg", "med2_reminder.txt"},}},
+            {{"food_r2","OneReminderProtocol"},{{"reminder_1_msg", "food2_reminder.txt"},}},
+            {{"med_r3","OneReminderProtocol"},{{"reminder_1_msg", "med3_reminder.txt"},}},
+            {{"food_r3","OneReminderProtocol"},{{"reminder_1_msg", "food3_reminder.txt"},}},
+            {{"med_r4","OneReminderProtocol"},{{"reminder_1_msg", "med4_reminder.txt"},}},
+            {{"food_r4","OneReminderProtocol"},{{"reminder_1_msg", "food4_reminder.txt"},}},
         };
 
         const std::unordered_map <InstantiatedParameter, std::unordered_map<std::string, std::string>> recorded_reminder_msgs = {
@@ -607,6 +594,10 @@ namespace pddl_lib {
                 
                 ps.docking_->async_cancel_all_goals();
                 std::cout << "success: " << std::endl;
+                
+                InstantiatedParameter landmark = {"home", "Landmark"};
+                InstantiatedPredicate pred_rob_at{"robot_at", {landmark}};
+                kb.insert_predicate(pred_rob_at);
 
                 std::cout << "✅ Docking goal succeeded after " << ps.docking_try << " failed attempts!" << std::endl;
                 ps.docking_try = 0;  // Reset failure count on success
@@ -663,6 +654,8 @@ namespace pddl_lib {
 
                 ps.undocking_->async_send_goal(goal_msg, send_goal_options_dock);
                 auto tmp_dock = ps.active_protocol;
+            
+              
 
                 while (*success_undock == -1) {
                     if (!(tmp_dock == ps.active_protocol)) {
@@ -750,173 +743,6 @@ namespace pddl_lib {
             lock.UnLock();
             return BT::NodeStatus::SUCCESS;
         }
-
-
-        BT::NodeStatus high_level_domain_StartDrinkingProtocol(const InstantiatedAction &action) override {
-            auto &kb = KnowledgeBase::getInstance();
-            
-            InstantiatedParameter protocol = action.parameters[0];
-            InstantiatedParameter cur = action.parameters[2];
-            InstantiatedParameter dest = action.parameters[3];
-
-            
-            auto [ps, lock] = ProtocolState::getConcurrentInstance();
-            lock.Lock();
-            std::string currentDateTime = getCurrentDateTime();
-            std::string log_message =
-                    std::string("weblog=") + currentDateTime + " high_level_domain_StartDrinkingProtocol" + " started";
-            RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
-            
-
-            instantiate_protocol("drinking_reminder.pddl");
-            
-            ps.active_protocol = protocol;
-            lock.UnLock();
-            return BT::NodeStatus::SUCCESS;
-        }
-
-        BT::NodeStatus high_level_domain_StartMedicineProtocol(const InstantiatedAction &action) override {
-            auto &kb = KnowledgeBase::getInstance();
-            InstantiatedParameter protocol = action.parameters[0];
-            InstantiatedParameter cur = action.parameters[2];
-            InstantiatedParameter dest = action.parameters[3];
-
-
-            auto [ps, lock] = ProtocolState::getConcurrentInstance();
-            lock.Lock();
-            std::string currentDateTime = getCurrentDateTime();
-            std::string log_message =
-                    std::string("weblog=") + currentDateTime + " high_level_domain_StartMedicineProtocol" + " started";
-            RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
-
-            instantiate_protocol("medicine_reminder.pddl");
-            
-            ps.active_protocol = protocol;
-            lock.UnLock();
-            return BT::NodeStatus::SUCCESS;
-        }
-
-        BT::NodeStatus high_level_domain_StartMorningWakeProtocol(const InstantiatedAction &action) override {
-            auto &kb = KnowledgeBase::getInstance();
-            InstantiatedParameter protocol = action.parameters[0];
-            InstantiatedParameter cur = action.parameters[2];
-            InstantiatedParameter dest = action.parameters[3];
-
-
-            auto [ps, lock] = ProtocolState::getConcurrentInstance();
-            lock.Lock();
-            std::string currentDateTime = getCurrentDateTime();
-            std::string log_message =
-                    std::string("weblog=") + currentDateTime + " high_level_domain_StartMorningWakeProtocol" + " started";
-            RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
-
-            instantiate_protocol("morning_wake_reminder.pddl");
-
-            ps.active_protocol = protocol;
-            lock.UnLock();
-            return BT::NodeStatus::SUCCESS;
-        }
-
-        BT::NodeStatus high_level_domain_StartEmptyTrashProtocol(const InstantiatedAction &action) override {
-            auto &kb = KnowledgeBase::getInstance();
-            InstantiatedParameter protocol = action.parameters[0];
-            InstantiatedParameter cur = action.parameters[2];
-            InstantiatedParameter dest = action.parameters[3];
-
-            auto [ps, lock] = ProtocolState::getConcurrentInstance();
-            lock.Lock();
-            std::string currentDateTime = getCurrentDateTime();
-            std::string log_message =
-                    std::string("weblog=") + currentDateTime + " high_level_domain_StartEmptyTrashProtocol" + " started";
-            RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
-
-            instantiate_protocol("empty_trash_reminder.pddl");
-            
-            ps.active_protocol = protocol;
-            lock.UnLock();
-            return BT::NodeStatus::SUCCESS;
-        }
-
-        BT::NodeStatus high_level_domain_StartEmptyDishwaserProtocol(const InstantiatedAction &action) override {
-            auto &kb = KnowledgeBase::getInstance();
-            InstantiatedParameter protocol = action.parameters[0];
-            InstantiatedParameter cur = action.parameters[2];
-            InstantiatedParameter dest = action.parameters[3];
-
-            auto [ps, lock] = ProtocolState::getConcurrentInstance();
-            lock.Lock();
-            std::string currentDateTime = getCurrentDateTime();
-            std::string log_message =
-                    std::string("weblog=") + currentDateTime + " high_level_domain_StartEmptyDishwaserProtocol" + " started";
-            RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
-
-            instantiate_protocol("empty_dishwasher_reminder.pddl");
-            
-            ps.active_protocol = protocol;
-            lock.UnLock();
-            return BT::NodeStatus::SUCCESS;
-        }
-
-		BT::NodeStatus high_level_domain_StartShowerProtocol(const InstantiatedAction &action) override {
-            auto &kb = KnowledgeBase::getInstance();
-            InstantiatedParameter protocol = action.parameters[0];
-            InstantiatedParameter cur = action.parameters[2];
-            InstantiatedParameter dest = action.parameters[3];
-
-            auto [ps, lock] = ProtocolState::getConcurrentInstance();
-            lock.Lock();
-            std::string currentDateTime = getCurrentDateTime();
-            std::string log_message =
-                    std::string("weblog=") + currentDateTime + " high_level_domain_StartShowerProtocol" + " started";
-            RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
-
-            instantiate_protocol("shower_reminder.pddl");
-
-            ps.active_protocol = protocol;
-            lock.UnLock();
-            return BT::NodeStatus::SUCCESS;
-        }
-
-		BT::NodeStatus high_level_domain_StartPamLocationProtocol(const InstantiatedAction &action) override {
-            auto &kb = KnowledgeBase::getInstance();
-            InstantiatedParameter protocol = action.parameters[0];
-            InstantiatedParameter cur = action.parameters[2];
-            InstantiatedParameter dest = action.parameters[3];
-
-            auto [ps, lock] = ProtocolState::getConcurrentInstance();
-            lock.Lock();
-            std::string currentDateTime = getCurrentDateTime();
-            std::string log_message =
-                    std::string("weblog=") + currentDateTime + " high_level_domain_StartPamLocationProtocol" + " started";
-            RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
-
-            instantiate_protocol("pam_location_reminder.pddl");
-
-            ps.active_protocol = protocol;
-            lock.UnLock();
-            return BT::NodeStatus::SUCCESS;
-        }
-
-        BT::NodeStatus high_level_domain_StartFitnessProtocol(const InstantiatedAction &action) override {
-            auto &kb = KnowledgeBase::getInstance();
-            InstantiatedParameter protocol = action.parameters[0];
-            InstantiatedParameter cur = action.parameters[2];
-            InstantiatedParameter dest = action.parameters[3];
-
-            auto [ps, lock] = ProtocolState::getConcurrentInstance();
-            lock.Lock();
-            std::string currentDateTime = getCurrentDateTime();
-            std::string log_message =
-                    std::string("weblog=") + currentDateTime + " high_level_domain_StartFitnessProtocol" + " started";
-            RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
-
-            instantiate_protocol("fitness_reminder.pddl");
-
-            ps.active_protocol = protocol;
-            lock.UnLock();
-            return BT::NodeStatus::SUCCESS;
-        }
-
         
         BT::NodeStatus high_level_domain_MoveToLandmark(const InstantiatedAction &action) override {
             std::cout << "high_level_domain_MoveToLandmark MoveToLandmark: " << std::endl;
@@ -938,37 +764,48 @@ namespace pddl_lib {
             BT::NodeStatus status = BT::NodeStatus::FAILURE;
             auto [ps, lock] = ProtocolState::getConcurrentInstance();
 
-            RCLCPP_INFO(ps.world_state_converter->get_logger(), "weblog=----Shutting Down Action----");
+            RCLCPP_INFO(ps.world_state_converter->get_logger(), "weblog= Preparing for Shutdown");
             // lock.Lock();
 
             // ✅ Ensure publisher exists, create if necessary
             if (!ps.getDisplayPublisher()) {
                 auto node = rclcpp::Node::make_shared("display_publisher_node");
-                ps.setDisplayPublisher(node->create_publisher<std_msgs::msg::String>("display_status", 10));
-                RCLCPP_INFO(rclcpp::get_logger("Shutdown"), "✅ Created publisher for display_status.");
+                ps.setDisplayPublisher(node->create_publisher<std_msgs::msg::String>("display_tx", 10));
+                RCLCPP_INFO(rclcpp::get_logger("Shutdown"), "✅ Created publisher for display_tx.");
             }
 
 
-             // ✅ Publish TURN_OFF before shutdown
+             // ✅ Publish not talking                                                before shutdown
             auto message_non_talk = std_msgs::msg::String();
             message_non_talk.data = "1";
             ps.getDisplayPublisher()->publish(message_non_talk);
             RCLCPP_INFO(rclcpp::get_logger("Shutdown"), "Published for display: %s", message_non_talk.data.c_str());
-            rclcpp::sleep_for(std::chrono::seconds(10));
+            // rclcpp::sleep_for(std::chrono::seconds(10));
 
             // ✅ Publish TURN_OFF before shutdown
+            // auto message = std_msgs::msg::String();
+            // message.data = "TURN_OFF";
+            // ps.getDisplayPublisher()->publish(message);
+            // RCLCPP_INFO(rclcpp::get_logger("Shutdown"), "Published: %s", message.data.c_str());
+
+            // rclcpp::sleep_for(std::chrono::seconds(10));
+
+            // ✅ Publish protocols before shutdown
             auto message = std_msgs::msg::String();
-            message.data = "TURN_OFF";
+            message.data = "text:I am going to dock";
+            ps.getDisplayPublisher()->publish(message);
+            rclcpp::sleep_for(std::chrono::seconds(2));
+            
+            message.data = "protocols";
             ps.getDisplayPublisher()->publish(message);
             RCLCPP_INFO(rclcpp::get_logger("Shutdown"), "Published: %s", message.data.c_str());
 
-            rclcpp::sleep_for(std::chrono::seconds(10));
 
             // dock the robot if it is not charging
             while (status !=BT::NodeStatus::SUCCESS){
                 /// TODO: IF IT RUNS FOR TOO LONG ISSUE MIGHT BE IN THE CHARGER
                 /// TODO: DISPLAY A WARNING ON THE SCREEN THAT IT NEEDS HELP
-                RCLCPP_INFO(ps.world_state_converter->get_logger(), "weblog=----Going to Charge Robot Function---");
+                RCLCPP_INFO(ps.world_state_converter->get_logger(), "weblog=Going to Charge Robot Function");
                 lock.Lock();
                 status = charge_robot(ps, action, true);
                 lock.UnLock();
@@ -989,36 +826,18 @@ namespace pddl_lib {
 
 
             const std::unordered_map<std::string, std::string> protocol_type_ = {
-                {"am_meds", "MedicineProtocol"},
-                {"pm_meds", "MedicineProtocol"},
                 {"med_r1", "OneReminderProtocol"},
                 {"food_r1", "OneReminderProtocol"},
-                {"gym_reminder", "GymReminderProtocol"},
-                {"drinking", "DrinkingProtocol"},
-                {"em_trash" , "EmptyTrashProtocol"},
-                {"em_dishwasher", "EmptyDishwasherProtocol"},
-                {"morning_wake", "MorningWakeProtocol"},
-				{"shower", "ShowerProtocol"},
-				{"pam_location", "PamLocationProtocol"},
-                {"pam_wed", "PamLocationProtocol"},
-                {"pam_fri", "PamLocationProtocol"},
-                {"fitness", "FitnessProtocol"},
-
+                {"med_r2", "OneReminderProtocol"},
+                {"food_r2", "OneReminderProtocol"},
+                {"med_r3", "OneReminderProtocol"},
+                {"food_r3", "OneReminderProtocol"},
+                {"med_r4", "OneReminderProtocol"},
+                {"food_r4", "OneReminderProtocol"},
             };
 
             const std::unordered_map<std::string, std::vector<std::string>> keyword_protocol_ = {
-                {"already_reminded_medicine", {"am_meds", "pm_meds"}},
-                {"already_reminded_one_reminder", {"med_r1", "food_r1"}},
-                {"already_called_about_medicine", {"am_meds", "pm_meds"}},
-                {"already_reminded_gym",{"gym_reminder"}},
-                {"already_reminded_drinking",{"drinking"}},
-                {"already_reminded_empty_trash", {"em_trash"}},
-                {"already_reminded_empty_dishwasher", {"em_dishwasher"}},
-                {"already_reminded_morning_wake", {"morning_wake"}},
-				{"already_reminded_shower", {"shower"}},
-                {"already_taking_shower", {"shower"}},
-				{"already_reminded_pam_location", {"pam_location", "pam_wed", "pam_fri"}},
-                {"already_reminded_fitness", {"fitness"}},
+                {"already_reminded_one_reminder", {"med_r1", "food_r1", "med_r2", "food_r2", "med_r3", "food_r3", "med_r4", "food_r4"}},
             };
 
             std::ifstream ifs(keywordsFile);
@@ -1127,12 +946,12 @@ namespace pddl_lib {
             // ✅ Ensure publisher exists, create if necessary
             if (!ps.getDisplayPublisher()) {
                 auto node = rclcpp::Node::make_shared("display_publisher_node");
-                ps.setDisplayPublisher(node->create_publisher<std_msgs::msg::String>("display_status", 10));
-                RCLCPP_INFO(rclcpp::get_logger("StartROS"), "✅ Created publisher for display_status.");
-                RCLCPP_INFO(ps.world_state_converter->get_logger(), "weblog=----getDisplayPublisher web app----");
+                ps.setDisplayPublisher(node->create_publisher<std_msgs::msg::String>("display_tx", 10));
+                RCLCPP_INFO(rclcpp::get_logger("StartROS"), "✅ Created publisher for display_tx.");
+                // RCLCPP_INFO(ps.world_state_converter->get_logger(), "weblog=----getDisplayPublisher web app----");
 
             }
-            RCLCPP_INFO(ps.world_state_converter->get_logger(), "weblog=----before TURN_ON web----");
+            // RCLCPP_INFO(ps.world_state_converter->get_logger(), "weblog=----before TURN_ON web----");
 
 
             ps.world_state_converter->reset_screen_ack();  // Optional: reset at the start
@@ -1140,13 +959,14 @@ namespace pddl_lib {
             for (int i = 0; i < 10; ++i) {
                 if (ps.world_state_converter->is_screen_ack_turn_on()) {
                     RCLCPP_INFO(rclcpp::get_logger("StartROS"), "✅ Received TURN_ON via screen_ack. Breaking loop.");
+                    RCLCPP_INFO(ps.world_state_converter->get_logger(), "weblog=Display Turned On");
                     break;
                 }
 
                 auto message = std_msgs::msg::String();
                 message.data = "TURN_ON";
                 ps.getDisplayPublisher()->publish(message);
-                RCLCPP_INFO(rclcpp::get_logger("StartROS"), "📤 Published TURN_ON (%d/200)", i + 1);
+                RCLCPP_INFO(rclcpp::get_logger("StartROS"), "📤 Published TURN_ON (%d/10)", i + 1);
                 rclcpp::sleep_for(std::chrono::seconds(1));
             }
 
@@ -1243,7 +1063,7 @@ namespace pddl_lib {
             auto &kb = KnowledgeBase::getInstance();
             
             auto [ps, lock] = ProtocolState::getConcurrentInstance();
-            std::string log_message_ = "weblog= ---shr_domain_MessageGivenSucces ---";
+            std::string log_message_ = "weblog=Message Given Succes";
             RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message_.c_str());
 
             lock.Lock();
@@ -1255,27 +1075,6 @@ namespace pddl_lib {
             } else if (active_protocol.type == "OneReminderProtocol") {
                 kb.insert_predicate({"already_reminded_one_reminder", {active_protocol}});
                 kb.erase_predicate({"one_reminder_protocol_enabled", {active_protocol}});
-            } else if (active_protocol.type == "DrinkingProtocol") {
-                kb.insert_predicate({"already_reminded_drinking", {active_protocol}});
-                kb.erase_predicate({"drinking_protocol_enabled", {active_protocol}});
-            } else if (active_protocol.type == "EmptyDishwasherProtocol") {
-                kb.insert_predicate({"already_reminded_empty_dishwasher", {active_protocol}});
-                kb.erase_predicate({"empty_dishwasher_protocol_enabled", {active_protocol}});
-            } else if (active_protocol.type == "EmptyTrashProtocol") {
-                kb.insert_predicate({"already_reminded_empty_trash", {active_protocol}});
-                kb.erase_predicate({"empty_trash_protocol_enabled", {active_protocol}});
-            }else if (active_protocol.type == "MorningWakeProtocol") {
-                kb.insert_predicate({"already_reminded_morning_wake", {active_protocol}});
-                kb.erase_predicate({"morning_wake_protocol_enabled", {active_protocol}});
-            }else if (active_protocol.type == "ShowerProtocol") {
-                kb.insert_predicate({"already_reminded_shower", {active_protocol}});
-                kb.erase_predicate({"shower_protocol_enabled", {active_protocol}});
-            }else if (active_protocol.type == "PamLocationProtocol") {
-                kb.insert_predicate({"already_reminded_pam_location", {active_protocol}});
-                kb.erase_predicate({"pam_location_reminder_enabled", {active_protocol}});
-            }else if (active_protocol.type == "FitnessProtocol") {
-                kb.insert_predicate({"already_reminded_fitness", {active_protocol}});
-                kb.erase_predicate({"fitness_protocol_enabled", {active_protocol}});
             }
             
             // RCLCPP_INFO(rclcpp::get_logger(std::string("weblog=")+"shr_domain_MessageGivenSuccess"+active_protocol.type), "user...");
@@ -1412,7 +1211,8 @@ namespace pddl_lib {
             std::cout << "location: " << location << std::endl;
             auto [ps, lock] = ProtocolState::getConcurrentInstance();
             std::cout << "ps.world_state_converter->get_world_state_msg()->robot_charging: " << ps.world_state_converter->get_world_state_msg()->robot_charging << std::endl;
-
+            auto &kb = KnowledgeBase::getInstance();
+            
             std::string log_message = std::string("weblog=") + "Move to landmark: " + location;
             
            lock.Lock();
@@ -1423,6 +1223,15 @@ namespace pddl_lib {
             
             std::cout << "log_message: " << log_message.c_str() << std::endl;
             
+            //Send notification to display
+            if (!ps.getDisplayPublisher()) {
+                auto node = rclcpp::Node::make_shared("display_publisher_node");
+                ps.setDisplayPublisher(node->create_publisher<std_msgs::msg::String>("display_tx", 10));
+                RCLCPP_INFO(rclcpp::get_logger("Shutdown"), "✅ Created publisher for display_tx.");
+            }
+            auto message = std_msgs::msg::String();
+            message.data = std::string("text:Going to ") + location;
+            ps.getDisplayPublisher()->publish(message);
 
             if (ps.world_state_converter->get_world_state_msg()->robot_charging == 1) {
                 std::cout << "Undock " << std::endl;
@@ -1447,6 +1256,10 @@ namespace pddl_lib {
 
                 ps.undocking_->async_send_goal(goal_msg, send_goal_options_dock);
                 auto tmp_dock = ps.active_protocol;
+
+                InstantiatedParameter landmark = {"living_room", "Landmark"};
+                InstantiatedPredicate pred_rob_at{"robot_at", {landmark}};
+                kb.insert_predicate(pred_rob_at);
 
                 while (*success_undock == -1) {
                     if (!(tmp_dock == ps.active_protocol)) {
@@ -1590,8 +1403,8 @@ namespace pddl_lib {
                 // ✅ Ensure publisher exists, create if necessary
                 if (!ps.getDisplayPublisher()) {
                     auto node = rclcpp::Node::make_shared("display_publisher_node");
-                    ps.setDisplayPublisher(node->create_publisher<std_msgs::msg::String>("display_status", 10));
-                    RCLCPP_INFO(rclcpp::get_logger("Shutdown"), "✅ Created publisher for display_status.");
+                    ps.setDisplayPublisher(node->create_publisher<std_msgs::msg::String>("display_tx", 10));
+                    RCLCPP_INFO(rclcpp::get_logger("Shutdown"), "✅ Created publisher for display_tx.");
                 }
 
 
@@ -1599,9 +1412,9 @@ namespace pddl_lib {
                 if (ps.active_protocol.type == "PamLocationProtocol") {
                     std_msgs::msg::String message;
                     message.data = "3";
-                    for (int i = 0; i < 10; ++i) {
+                    for (int i = 0; i < 2; ++i) {
                         ps.getDisplayPublisher()->publish(message);
-                        RCLCPP_INFO(rclcpp::get_logger("GiveReminder"), "📤 Published to display (%d/10): %s", i + 1, message.data.c_str());
+                        RCLCPP_INFO(rclcpp::get_logger("GiveReminder"), "📤 Published to display (%d/2): %s", i + 1, message.data.c_str());
                         rclcpp::sleep_for(std::chrono::seconds(1));
                     }
                 }
@@ -1642,12 +1455,14 @@ namespace pddl_lib {
             std::vector<std::string> locations = {"living_room", "bedroom"};
             std::string robot_location = "unknown";
 
-            for (const auto &loc : locations) {
-                if (ps.world_state_converter->check_robot_at_loc(loc)) {
-                    robot_location = loc;
-                    break;
-                }
-            }
+            // for (const auto &loc : locations) {
+            //     if (ps.world_state_converter->check_robot_at_loc(loc)) {
+            //         robot_location = loc;
+            //         break;
+            //     }
+            // }
+
+            robot_location = "living_room";
 
             // // ✅ Define audio devices
             // std::string USB_AUDIO = "alsa_output.usb-EMEET_EMEET_OfficeCore_M1A_21371696-00.mono-fallback";

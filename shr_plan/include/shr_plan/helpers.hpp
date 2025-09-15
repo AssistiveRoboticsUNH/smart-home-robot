@@ -17,17 +17,6 @@ namespace pddl_lib {
         return std::stoi(hour) * 60 * 60 + std::stoi(minute) * 60 + std::stoi(seconds);
     }
 
-    std::optional<long> get_inst_index(DrinkingProtocol d, const shr_parameters::Params &params) {
-        const auto &instances = params.pddl.DrinkingProtocol.instances;
-        auto it = std::find(instances.begin(), instances.end(), d);
-        if (it != instances.end()) {
-            auto index = std::distance(instances.begin(), it);
-            return index;
-        } else {
-            return {};
-        }
-    }
-
     std::optional<long> get_inst_index(OneReminderProtocol oner, const shr_parameters::Params &params) {
         const auto &instances = params.pddl.OneReminderProtocol.instances;
         auto it = std::find(instances.begin(), instances.end(), oner);
@@ -39,110 +28,11 @@ namespace pddl_lib {
         }
     }
 
-    std::optional<long> get_inst_index(MedicineProtocol m, const shr_parameters::Params &params) {
-        const auto &instances = params.pddl.MedicineProtocol.instances;
-        auto it = std::find(instances.begin(), instances.end(), m);
-        if (it != instances.end()) {
-            auto index = std::distance(instances.begin(), it);
-            return index;
-        } else {
-            return {};
-        }
-    }
-
-    std::optional<long> get_inst_index(EmptyDishwasherProtocol m, const shr_parameters::Params &params) {
-        const auto &instances = params.pddl.EmptyDishwasherProtocol.instances;
-        auto it = std::find(instances.begin(), instances.end(), m);
-        if (it != instances.end()) {
-            auto index = std::distance(instances.begin(), it);
-            return index;
-        } else {
-            return {};
-        }
-    }
-    std::optional<long> get_inst_index(EmptyTrashProtocol m, const shr_parameters::Params &params) {
-        const auto &instances = params.pddl.EmptyTrashProtocol.instances;
-        auto it = std::find(instances.begin(), instances.end(), m);
-        if (it != instances.end()) {
-            auto index = std::distance(instances.begin(), it);
-            return index;
-        } else {
-            return {};
-        }
-    }
-
-    std::optional<long> get_inst_index(MorningWakeProtocol m, const shr_parameters::Params &params) {
-        const auto &instances = params.pddl.MorningWakeProtocol.instances;
-        auto it = std::find(instances.begin(), instances.end(), m);
-        if (it != instances.end()) {
-            auto index = std::distance(instances.begin(), it);
-            return index;
-        } else {
-            return {};
-        }
-    }
-
-	std::optional<long> get_inst_index(ShowerProtocol m, const shr_parameters::Params &params) {
-        const auto &instances = params.pddl.ShowerProtocol.instances;
-        auto it = std::find(instances.begin(), instances.end(), m);
-        if (it != instances.end()) {
-            auto index = std::distance(instances.begin(), it);
-            return index;
-        } else {
-            return {};
-        }
-    }
-
-	std::optional<long> get_inst_index(PamLocationProtocol m, const shr_parameters::Params &params) {
-        const auto &instances = params.pddl.PamLocationProtocol.instances;
-        auto it = std::find(instances.begin(), instances.end(), m);
-        if (it != instances.end()) {
-            auto index = std::distance(instances.begin(), it);
-            return index;
-        } else {
-            return {};
-        }
-    }
-
-    std::optional<long> get_inst_index(FitnessProtocol m, const shr_parameters::Params &params) {
-        const auto &instances = params.pddl.FitnessProtocol.instances;
-        auto it = std::find(instances.begin(), instances.end(), m);
-        if (it != instances.end()) {
-            auto index = std::distance(instances.begin(), it);
-            return index;
-        } else {
-            return {};
-        }
-    }
 
     std::optional<long> get_inst_index(InstantiatedParameter inst, const shr_parameters::Params &params) {
-        if (inst.type == "DrinkingProtocol") {
-            return get_inst_index((DrinkingProtocol) inst.name, params);
-        }
-        else if (inst.type == "MedicineProtocol") {
-            return get_inst_index((MedicineProtocol) inst.name, params);
-        }
-        else if (inst.type == "OneReminderProtocol") {
+        if (inst.type == "OneReminderProtocol") {
             return get_inst_index((OneReminderProtocol) inst.name, params);
         }
-        else if (inst.type == "EmptyDishwasherProtocol") {
-            return get_inst_index((EmptyDishwasherProtocol) inst.name, params);
-        }
-        else if (inst.type == "EmptyTrashProtocol") {
-            return get_inst_index((EmptyTrashProtocol) inst.name, params);
-        }
-        else if (inst.type == "MorningWakeProtocol") {
-            return get_inst_index((MorningWakeProtocol) inst.name, params);
-        }
-		else if (inst.type == "ShowerProtocol") {
-            return get_inst_index((ShowerProtocol) inst.name, params);
-        }
-		else if (inst.type == "PamLocationProtocol") {
-            return get_inst_index((PamLocationProtocol) inst.name, params);
-		}
-        else if (inst.type == "FitnessProtocol") {
-		    return get_inst_index((FitnessProtocol) inst.name, params);
-		}
         return {};
     }
 

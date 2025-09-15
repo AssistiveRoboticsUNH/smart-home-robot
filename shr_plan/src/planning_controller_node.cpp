@@ -94,26 +94,48 @@ public:
         return TRUTH_VALUE::FALSE;
     }
 
-    TRUTH_VALUE robot_at(TRUTH_VALUE val, Landmark lm) const override {
-        auto &kb = KnowledgeBase::getInstance();
-        bool pred_started = kb.find_predicate({"started", {}});
+    // TRUTH_VALUE robot_at(TRUTH_VALUE val, Landmark lm) const override {
+    //     auto &kb = KnowledgeBase::getInstance();
+    //     bool pred_started = kb.find_predicate({"started", {}});
         
-        if (pred_started){
-            // RCLCPP_WARN(rclcpp::get_logger("pred_started inside AT"), "robot at true  ");
-            if (world_state_converter->check_robot_at_loc(lm)) {
-                return TRUTH_VALUE::TRUE;
-            } else {
-                return TRUTH_VALUE::FALSE;
-            }
-         } else {
-            if (lm == "home"){
-                // RCLCPP_WARN(rclcpp::get_logger("ROBOT AT"), "robot at true  ");
-                std::cout << "robot at true " << lm << std::endl;
+    //     if (pred_started){
+    //         // RCLCPP_WARN(rclcpp::get_logger("pred_started inside AT"), "robot at true  ");
+    //         if (world_state_converter->check_robot_at_loc(lm)) {
+    //             return TRUTH_VALUE::TRUE;
+    //         } else {
+    //             return TRUTH_VALUE::FALSE;
+    //         }
+    //      } else {
+    //         if (lm == "home"){
+    //             // RCLCPP_WARN(rclcpp::get_logger("ROBOT AT"), "robot at true  ");
+    //             std::cout << "robot at true " << lm << std::endl;
 
-                return TRUTH_VALUE::TRUE;
-            }
-         }
-         return TRUTH_VALUE::FALSE;
+    //             return TRUTH_VALUE::TRUE;
+    //         }
+    //      }
+    //      return TRUTH_VALUE::FALSE;
+    // }
+
+    TRUTH_VALUE robot_at(TRUTH_VALUE val, Landmark lm) const override {
+        // auto &kb = KnowledgeBase::getInstance();
+        // bool pred_started = kb.find_predicate({"started", {}});
+        
+        // if (pred_started){
+        //     // RCLCPP_WARN(rclcpp::get_logger("pred_started inside AT"), "robot at true  ");
+        //     if (world_state_converter->check_robot_at_loc(lm)) {
+        //         return TRUTH_VALUE::TRUE;
+        //     } else {
+        //         return TRUTH_VALUE::FALSE;
+        //     }
+        //  } else {
+        //     if (lm == "home"){
+        //         // RCLCPP_WARN(rclcpp::get_logger("ROBOT AT"), "robot at true  ");
+        //         std::cout << "robot at true " << lm << std::endl;
+
+        //         return TRUTH_VALUE::TRUE;
+        //     }
+        //  }
+         return val;
     }
 
 
@@ -151,56 +173,6 @@ public:
         }
         return TRUTH_VALUE::FALSE;
     }
-    
-    TRUTH_VALUE time_for_drinking_reminder(TRUTH_VALUE val, DrinkingProtocol d) const override {
-        if (d == "drinking"){
-            if (world_state_converter->get_world_state_msg()->time_for_drinking == 1){
-                return TRUTH_VALUE::TRUE;
-            }
-        }
-        return TRUTH_VALUE::FALSE;
-        
-    }
-
-    TRUTH_VALUE time_to_take_medicine(TRUTH_VALUE val, MedicineProtocol m) const override {
-        auto params = world_state_converter->get_params();
-        if (auto index = get_inst_index(m, params)) {
-            if (compare_time(params.pddl.MedicineProtocol.take_medication_times[index.value()])) {
-                return TRUTH_VALUE::TRUE;
-            }
-        }
-        return TRUTH_VALUE::FALSE;
-    }
-
-    TRUTH_VALUE time_for_empty_trash_reminder(TRUTH_VALUE val, EmptyTrashProtocol m) const override {
-        auto params = world_state_converter->get_params();
-        if (auto index = get_inst_index(m, params)) {
-            if (compare_time(params.pddl.EmptyTrashProtocol.empty_trash_reminder_times[index.value()])) {
-                return TRUTH_VALUE::TRUE;
-            }
-        }
-        return TRUTH_VALUE::FALSE;
-    }
-
-    TRUTH_VALUE time_for_empty_dishwasher_reminder(TRUTH_VALUE val, EmptyDishwasherProtocol m) const override {
-        auto params = world_state_converter->get_params();
-        if (auto index = get_inst_index(m, params)) {
-            if (compare_time(params.pddl.EmptyDishwasherProtocol.empty_dishwasher_reminder_times[index.value()])) {
-                return TRUTH_VALUE::TRUE;
-            }
-        }
-        return TRUTH_VALUE::FALSE;
-    }
-
-    TRUTH_VALUE time_for_morning_wake_reminder(TRUTH_VALUE val, MorningWakeProtocol m) const override {
-        auto params = world_state_converter->get_params();
-        if (auto index = get_inst_index(m, params)) {
-            if (compare_time(params.pddl.MorningWakeProtocol.morning_wake_reminder_times[index.value()])) {
-                return TRUTH_VALUE::TRUE;
-            }
-        }
-        return TRUTH_VALUE::FALSE;
-    }
 
 	TRUTH_VALUE person_shower(TRUTH_VALUE val, Time t) const override {
         if (val == TRUTH_VALUE::TRUE) {
@@ -210,46 +182,6 @@ public:
             return TRUTH_VALUE::TRUE;
         }
         return val;
-    }
-
-	TRUTH_VALUE time_for_shower_reminder(TRUTH_VALUE val, ShowerProtocol m) const override {
-        auto params = world_state_converter->get_params();
-        if (auto index = get_inst_index(m, params)) {
-            if (compare_time(params.pddl.ShowerProtocol.shower_reminder_times[index.value()])) {
-                return TRUTH_VALUE::TRUE;
-            }
-        }
-        return TRUTH_VALUE::FALSE;
-    }
-
-	TRUTH_VALUE time_for_pam_location_reminder(TRUTH_VALUE val, PamLocationProtocol m) const override {
-        auto params = world_state_converter->get_params();
-        if (auto index = get_inst_index(m, params)) {
-            if (compare_time(params.pddl.PamLocationProtocol.pam_location_reminder_times[index.value()])) {
-                return TRUTH_VALUE::TRUE;
-            }
-        }
-        return TRUTH_VALUE::FALSE;
-    }
-
-    TRUTH_VALUE time_for_fitness_reminder(TRUTH_VALUE val, FitnessProtocol m) const override {
-        auto params = world_state_converter->get_params();
-        if (auto index = get_inst_index(m, params)) {
-            if (compare_time(params.pddl.FitnessProtocol.fitness_reminder_times[index.value()])) {
-                return TRUTH_VALUE::TRUE;
-            }
-        }
-        return TRUTH_VALUE::FALSE;
-    }
-
-	TRUTH_VALUE pam_outside(TRUTH_VALUE val, PamLocationProtocol m) const override {
-        auto world_state_msg = world_state_converter->get_world_state_msg();
-
-        int pam_status = world_state_msg->pam_outside;
-        if (pam_status == 1) {
-            return TRUTH_VALUE::TRUE;
-        }
-        return TRUTH_VALUE::FALSE;
     }
 
 private:
@@ -428,7 +360,7 @@ int main(int argc, char **argv) {
 //            RCLCPP_INFO(rclcpp::get_logger("make_call"), "Waiting for /make_call action server...");
 //        }
 
-        // 🔴 Ensure the action client exists
+        //  Ensure the action client exists
         ps.voice_action_client_ = rclcpp_action::create_client<shr_msgs::action::QuestionResponseRequest>(
                 world_state_converter, "question_response_action");
 
@@ -509,7 +441,6 @@ int main(int argc, char **argv) {
             std::cout << "insert_predicate started !.\n";
     }
 
-    
 
     while (true) {
         rclcpp::sleep_for(std::chrono::seconds(1));

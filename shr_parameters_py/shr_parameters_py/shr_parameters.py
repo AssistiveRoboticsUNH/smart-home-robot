@@ -27,42 +27,10 @@ class shr_parameters:
             class __Instances:
                 Persons = ["nathan"]
             instances = __Instances()
-            class __Drinkingprotocol:
-                instances = ["drinking"]
-                drinking_reminder_times = ["Everyday 22h00m0s/23h00m0s"]
-            DrinkingProtocol = __Drinkingprotocol()
-            class __Medicineprotocol:
-                instances = ["am_meds", "pm_meds"]
-                take_medication_times = ["Everyday 22h00m0s/23h00m0s", "Everyday 22h00m0s/23h00m0s"]
-            MedicineProtocol = __Medicineprotocol()
             class __Onereminderprotocol:
-                instances = ["med_r1", "food_r1"]
-                one_reminder_times = ["Everyday 09h00m0s/10h00m0s", "Everyday 21h00m0s/22h00m0s"]
+                instances = ["med_r1", "med_r2", "med_r3", "med_r4", "food_r1", "food_r2", "food_r3", "food_r4"]
+                one_reminder_times = ["Everyday 07h00m0s/08h00m0s", "Everyday 10h00m0s/11h00m0s", "Everyday 13h00m0s/14h00m0s", "Everyday 17h00m0s/17h50m0s", "Everyday 09h00m0s/09h50m0s", "Everyday 12h00m0s/12h55m0s", "Everyday 16h00m0s/16h50m0s", "Everyday 19h00m0s/19h50m0s"]
             OneReminderProtocol = __Onereminderprotocol()
-            class __Emptydishwasherprotocol:
-                instances = ["em_dishwasher"]
-                empty_dishwasher_reminder_times = ["Everyday 22h00m0s/23h00m0s"]
-            EmptyDishwasherProtocol = __Emptydishwasherprotocol()
-            class __Emptytrashprotocol:
-                instances = ["em_trash"]
-                empty_trash_reminder_times = ["Everyday 22h00m0s/23h00m0s"]
-            EmptyTrashProtocol = __Emptytrashprotocol()
-            class __Morningwakeprotocol:
-                instances = ["morning_wake"]
-                morning_wake_reminder_times = ["Everyday 22h00m0s/23h00m0s"]
-            MorningWakeProtocol = __Morningwakeprotocol()
-            class __Showerprotocol:
-                instances = ["shower"]
-                shower_reminder_times = ["Everyday 22h00m0s/23h00m0s"]
-            ShowerProtocol = __Showerprotocol()
-            class __Pamlocationprotocol:
-                instances = ["pam_location", "pam_wed", "pam_fri"]
-                pam_location_reminder_times = ["Everyday 22h00m0s/23h00m0s", "Everyday 22h00m0s/23h00m0s", "Everyday 22h00m0s/23h00m0s"]
-            PamLocationProtocol = __Pamlocationprotocol()
-            class __Fitnessprotocol:
-                instances = ["fitness"]
-                fitness_reminder_times = ["Everyday 22h00m0s/23h00m0s"]
-            FitnessProtocol = __Fitnessprotocol()
         pddl = __Pddl()
         class __Topics:
             time = "/protocol_time"
@@ -73,7 +41,7 @@ class shr_parameters:
             robot_charging = "/charging"
             good_weather = "/good_weather"
             pam_outside = "/pam_outside"
-            display_ack = "/screen_ack"
+            display_ack = "/display_rx"
             time_for_drinking = "/time_for_drinking"
         topics = __Topics()
 
@@ -149,76 +117,12 @@ class shr_parameters:
                     updated_params.pddl.instances.Persons = param.value
                     self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
 
-                if param.name == self.prefix_ + "pddl.DrinkingProtocol.instances":
-                    updated_params.pddl.DrinkingProtocol.instances = param.value
-                    self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-
-                if param.name == self.prefix_ + "pddl.DrinkingProtocol.drinking_reminder_times":
-                    updated_params.pddl.DrinkingProtocol.drinking_reminder_times = param.value
-                    self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-
-                if param.name == self.prefix_ + "pddl.MedicineProtocol.instances":
-                    updated_params.pddl.MedicineProtocol.instances = param.value
-                    self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-
-                if param.name == self.prefix_ + "pddl.MedicineProtocol.take_medication_times":
-                    updated_params.pddl.MedicineProtocol.take_medication_times = param.value
-                    self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-
                 if param.name == self.prefix_ + "pddl.OneReminderProtocol.instances":
                     updated_params.pddl.OneReminderProtocol.instances = param.value
                     self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
 
                 if param.name == self.prefix_ + "pddl.OneReminderProtocol.one_reminder_times":
                     updated_params.pddl.OneReminderProtocol.one_reminder_times = param.value
-                    self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-
-                if param.name == self.prefix_ + "pddl.EmptyDishwasherProtocol.instances":
-                    updated_params.pddl.EmptyDishwasherProtocol.instances = param.value
-                    self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-
-                if param.name == self.prefix_ + "pddl.EmptyDishwasherProtocol.empty_dishwasher_reminder_times":
-                    updated_params.pddl.EmptyDishwasherProtocol.empty_dishwasher_reminder_times = param.value
-                    self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-
-                if param.name == self.prefix_ + "pddl.EmptyTrashProtocol.instances":
-                    updated_params.pddl.EmptyTrashProtocol.instances = param.value
-                    self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-
-                if param.name == self.prefix_ + "pddl.EmptyTrashProtocol.empty_trash_reminder_times":
-                    updated_params.pddl.EmptyTrashProtocol.empty_trash_reminder_times = param.value
-                    self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-
-                if param.name == self.prefix_ + "pddl.MorningWakeProtocol.instances":
-                    updated_params.pddl.MorningWakeProtocol.instances = param.value
-                    self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-
-                if param.name == self.prefix_ + "pddl.MorningWakeProtocol.morning_wake_reminder_times":
-                    updated_params.pddl.MorningWakeProtocol.morning_wake_reminder_times = param.value
-                    self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-
-                if param.name == self.prefix_ + "pddl.ShowerProtocol.instances":
-                    updated_params.pddl.ShowerProtocol.instances = param.value
-                    self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-
-                if param.name == self.prefix_ + "pddl.ShowerProtocol.shower_reminder_times":
-                    updated_params.pddl.ShowerProtocol.shower_reminder_times = param.value
-                    self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-
-                if param.name == self.prefix_ + "pddl.PamLocationProtocol.instances":
-                    updated_params.pddl.PamLocationProtocol.instances = param.value
-                    self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-
-                if param.name == self.prefix_ + "pddl.PamLocationProtocol.pam_location_reminder_times":
-                    updated_params.pddl.PamLocationProtocol.pam_location_reminder_times = param.value
-                    self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-
-                if param.name == self.prefix_ + "pddl.FitnessProtocol.instances":
-                    updated_params.pddl.FitnessProtocol.instances = param.value
-                    self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-
-                if param.name == self.prefix_ + "pddl.FitnessProtocol.fitness_reminder_times":
-                    updated_params.pddl.FitnessProtocol.fitness_reminder_times = param.value
                     self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
 
                 if param.name == self.prefix_ + "topics.time":
@@ -288,26 +192,6 @@ class shr_parameters:
                 parameter = updated_params.pddl.instances.Persons
                 self.node_.declare_parameter(self.prefix_ + "pddl.instances.Persons", parameter, descriptor)
 
-            if not self.node_.has_parameter(self.prefix_ + "pddl.DrinkingProtocol.instances"):
-                descriptor = ParameterDescriptor(description="drinking reminder protocols", read_only = False)
-                parameter = updated_params.pddl.DrinkingProtocol.instances
-                self.node_.declare_parameter(self.prefix_ + "pddl.DrinkingProtocol.instances", parameter, descriptor)
-
-            if not self.node_.has_parameter(self.prefix_ + "pddl.DrinkingProtocol.drinking_reminder_times"):
-                descriptor = ParameterDescriptor(description="time that each protocol is triggered", read_only = False)
-                parameter = updated_params.pddl.DrinkingProtocol.drinking_reminder_times
-                self.node_.declare_parameter(self.prefix_ + "pddl.DrinkingProtocol.drinking_reminder_times", parameter, descriptor)
-
-            if not self.node_.has_parameter(self.prefix_ + "pddl.MedicineProtocol.instances"):
-                descriptor = ParameterDescriptor(description="medicine protocols", read_only = False)
-                parameter = updated_params.pddl.MedicineProtocol.instances
-                self.node_.declare_parameter(self.prefix_ + "pddl.MedicineProtocol.instances", parameter, descriptor)
-
-            if not self.node_.has_parameter(self.prefix_ + "pddl.MedicineProtocol.take_medication_times"):
-                descriptor = ParameterDescriptor(description="time that each protocol is triggered", read_only = False)
-                parameter = updated_params.pddl.MedicineProtocol.take_medication_times
-                self.node_.declare_parameter(self.prefix_ + "pddl.MedicineProtocol.take_medication_times", parameter, descriptor)
-
             if not self.node_.has_parameter(self.prefix_ + "pddl.OneReminderProtocol.instances"):
                 descriptor = ParameterDescriptor(description="one_reminder protocols", read_only = False)
                 parameter = updated_params.pddl.OneReminderProtocol.instances
@@ -317,66 +201,6 @@ class shr_parameters:
                 descriptor = ParameterDescriptor(description="time that each protocol is triggered", read_only = False)
                 parameter = updated_params.pddl.OneReminderProtocol.one_reminder_times
                 self.node_.declare_parameter(self.prefix_ + "pddl.OneReminderProtocol.one_reminder_times", parameter, descriptor)
-
-            if not self.node_.has_parameter(self.prefix_ + "pddl.EmptyDishwasherProtocol.instances"):
-                descriptor = ParameterDescriptor(description="Empty Dishwasher protocols", read_only = False)
-                parameter = updated_params.pddl.EmptyDishwasherProtocol.instances
-                self.node_.declare_parameter(self.prefix_ + "pddl.EmptyDishwasherProtocol.instances", parameter, descriptor)
-
-            if not self.node_.has_parameter(self.prefix_ + "pddl.EmptyDishwasherProtocol.empty_dishwasher_reminder_times"):
-                descriptor = ParameterDescriptor(description="time that each protocol is triggered", read_only = False)
-                parameter = updated_params.pddl.EmptyDishwasherProtocol.empty_dishwasher_reminder_times
-                self.node_.declare_parameter(self.prefix_ + "pddl.EmptyDishwasherProtocol.empty_dishwasher_reminder_times", parameter, descriptor)
-
-            if not self.node_.has_parameter(self.prefix_ + "pddl.EmptyTrashProtocol.instances"):
-                descriptor = ParameterDescriptor(description="Empty Trash protocols", read_only = False)
-                parameter = updated_params.pddl.EmptyTrashProtocol.instances
-                self.node_.declare_parameter(self.prefix_ + "pddl.EmptyTrashProtocol.instances", parameter, descriptor)
-
-            if not self.node_.has_parameter(self.prefix_ + "pddl.EmptyTrashProtocol.empty_trash_reminder_times"):
-                descriptor = ParameterDescriptor(description="time that each protocol is triggered", read_only = False)
-                parameter = updated_params.pddl.EmptyTrashProtocol.empty_trash_reminder_times
-                self.node_.declare_parameter(self.prefix_ + "pddl.EmptyTrashProtocol.empty_trash_reminder_times", parameter, descriptor)
-
-            if not self.node_.has_parameter(self.prefix_ + "pddl.MorningWakeProtocol.instances"):
-                descriptor = ParameterDescriptor(description="Empty Trash protocols", read_only = False)
-                parameter = updated_params.pddl.MorningWakeProtocol.instances
-                self.node_.declare_parameter(self.prefix_ + "pddl.MorningWakeProtocol.instances", parameter, descriptor)
-
-            if not self.node_.has_parameter(self.prefix_ + "pddl.MorningWakeProtocol.morning_wake_reminder_times"):
-                descriptor = ParameterDescriptor(description="time that each protocol is triggered", read_only = False)
-                parameter = updated_params.pddl.MorningWakeProtocol.morning_wake_reminder_times
-                self.node_.declare_parameter(self.prefix_ + "pddl.MorningWakeProtocol.morning_wake_reminder_times", parameter, descriptor)
-
-            if not self.node_.has_parameter(self.prefix_ + "pddl.ShowerProtocol.instances"):
-                descriptor = ParameterDescriptor(description="Empty Trash protocols", read_only = False)
-                parameter = updated_params.pddl.ShowerProtocol.instances
-                self.node_.declare_parameter(self.prefix_ + "pddl.ShowerProtocol.instances", parameter, descriptor)
-
-            if not self.node_.has_parameter(self.prefix_ + "pddl.ShowerProtocol.shower_reminder_times"):
-                descriptor = ParameterDescriptor(description="time that each protocol is triggered", read_only = False)
-                parameter = updated_params.pddl.ShowerProtocol.shower_reminder_times
-                self.node_.declare_parameter(self.prefix_ + "pddl.ShowerProtocol.shower_reminder_times", parameter, descriptor)
-
-            if not self.node_.has_parameter(self.prefix_ + "pddl.PamLocationProtocol.instances"):
-                descriptor = ParameterDescriptor(description="Empty Trash protocols", read_only = False)
-                parameter = updated_params.pddl.PamLocationProtocol.instances
-                self.node_.declare_parameter(self.prefix_ + "pddl.PamLocationProtocol.instances", parameter, descriptor)
-
-            if not self.node_.has_parameter(self.prefix_ + "pddl.PamLocationProtocol.pam_location_reminder_times"):
-                descriptor = ParameterDescriptor(description="time that each protocol is triggered", read_only = False)
-                parameter = updated_params.pddl.PamLocationProtocol.pam_location_reminder_times
-                self.node_.declare_parameter(self.prefix_ + "pddl.PamLocationProtocol.pam_location_reminder_times", parameter, descriptor)
-
-            if not self.node_.has_parameter(self.prefix_ + "pddl.FitnessProtocol.instances"):
-                descriptor = ParameterDescriptor(description="Fitness protocols", read_only = False)
-                parameter = updated_params.pddl.FitnessProtocol.instances
-                self.node_.declare_parameter(self.prefix_ + "pddl.FitnessProtocol.instances", parameter, descriptor)
-
-            if not self.node_.has_parameter(self.prefix_ + "pddl.FitnessProtocol.fitness_reminder_times"):
-                descriptor = ParameterDescriptor(description="time that each protocol is triggered", read_only = False)
-                parameter = updated_params.pddl.FitnessProtocol.fitness_reminder_times
-                self.node_.declare_parameter(self.prefix_ + "pddl.FitnessProtocol.fitness_reminder_times", parameter, descriptor)
 
             if not self.node_.has_parameter(self.prefix_ + "topics.time"):
                 descriptor = ParameterDescriptor(description="topic for protocol clock time", read_only = False)
@@ -443,60 +267,12 @@ class shr_parameters:
             param = self.node_.get_parameter(self.prefix_ + "pddl.instances.Persons")
             self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
             updated_params.pddl.instances.Persons = param.value
-            param = self.node_.get_parameter(self.prefix_ + "pddl.DrinkingProtocol.instances")
-            self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-            updated_params.pddl.DrinkingProtocol.instances = param.value
-            param = self.node_.get_parameter(self.prefix_ + "pddl.DrinkingProtocol.drinking_reminder_times")
-            self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-            updated_params.pddl.DrinkingProtocol.drinking_reminder_times = param.value
-            param = self.node_.get_parameter(self.prefix_ + "pddl.MedicineProtocol.instances")
-            self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-            updated_params.pddl.MedicineProtocol.instances = param.value
-            param = self.node_.get_parameter(self.prefix_ + "pddl.MedicineProtocol.take_medication_times")
-            self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-            updated_params.pddl.MedicineProtocol.take_medication_times = param.value
             param = self.node_.get_parameter(self.prefix_ + "pddl.OneReminderProtocol.instances")
             self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
             updated_params.pddl.OneReminderProtocol.instances = param.value
             param = self.node_.get_parameter(self.prefix_ + "pddl.OneReminderProtocol.one_reminder_times")
             self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
             updated_params.pddl.OneReminderProtocol.one_reminder_times = param.value
-            param = self.node_.get_parameter(self.prefix_ + "pddl.EmptyDishwasherProtocol.instances")
-            self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-            updated_params.pddl.EmptyDishwasherProtocol.instances = param.value
-            param = self.node_.get_parameter(self.prefix_ + "pddl.EmptyDishwasherProtocol.empty_dishwasher_reminder_times")
-            self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-            updated_params.pddl.EmptyDishwasherProtocol.empty_dishwasher_reminder_times = param.value
-            param = self.node_.get_parameter(self.prefix_ + "pddl.EmptyTrashProtocol.instances")
-            self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-            updated_params.pddl.EmptyTrashProtocol.instances = param.value
-            param = self.node_.get_parameter(self.prefix_ + "pddl.EmptyTrashProtocol.empty_trash_reminder_times")
-            self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-            updated_params.pddl.EmptyTrashProtocol.empty_trash_reminder_times = param.value
-            param = self.node_.get_parameter(self.prefix_ + "pddl.MorningWakeProtocol.instances")
-            self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-            updated_params.pddl.MorningWakeProtocol.instances = param.value
-            param = self.node_.get_parameter(self.prefix_ + "pddl.MorningWakeProtocol.morning_wake_reminder_times")
-            self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-            updated_params.pddl.MorningWakeProtocol.morning_wake_reminder_times = param.value
-            param = self.node_.get_parameter(self.prefix_ + "pddl.ShowerProtocol.instances")
-            self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-            updated_params.pddl.ShowerProtocol.instances = param.value
-            param = self.node_.get_parameter(self.prefix_ + "pddl.ShowerProtocol.shower_reminder_times")
-            self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-            updated_params.pddl.ShowerProtocol.shower_reminder_times = param.value
-            param = self.node_.get_parameter(self.prefix_ + "pddl.PamLocationProtocol.instances")
-            self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-            updated_params.pddl.PamLocationProtocol.instances = param.value
-            param = self.node_.get_parameter(self.prefix_ + "pddl.PamLocationProtocol.pam_location_reminder_times")
-            self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-            updated_params.pddl.PamLocationProtocol.pam_location_reminder_times = param.value
-            param = self.node_.get_parameter(self.prefix_ + "pddl.FitnessProtocol.instances")
-            self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-            updated_params.pddl.FitnessProtocol.instances = param.value
-            param = self.node_.get_parameter(self.prefix_ + "pddl.FitnessProtocol.fitness_reminder_times")
-            self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
-            updated_params.pddl.FitnessProtocol.fitness_reminder_times = param.value
             param = self.node_.get_parameter(self.prefix_ + "topics.time")
             self.logger_.debug(param.name + ": " + param.type_.name + " = " + str(param.value))
             updated_params.topics.time = param.value

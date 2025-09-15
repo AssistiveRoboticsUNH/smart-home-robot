@@ -6,109 +6,19 @@ shr_parameters:
         default_value: [ "nathan" ],
         description: "all people in protocols",
       }
-  
-    DrinkingProtocol:
-      instances: {
-        type: string_array,
-        default_value: [ "drinking" ],
-        description: "drinking reminder protocols",
-      }
-      drinking_reminder_times: {
-        type: string_array,
-        default_value: [ "Everyday 22h00m0s/23h00m0s"],
-        description: "time that each protocol is triggered",
-      }
-    
-    MedicineProtocol:
-      instances: {
-        type: string_array,
-        default_value: [ "am_meds" , "pm_meds" ],
-        description: "medicine protocols",
-      }
-      take_medication_times: {
-        type: string_array,
-        default_value: [ "Everyday 22h00m0s/23h00m0s", "Everyday 22h00m0s/23h00m0s" ],
-        description: "time that each protocol is triggered",
-      }
     OneReminderProtocol:
       instances: {
         type: string_array,
-        default_value: [ "med_r1" , "food_r1" ],
+        default_value: [ "med_r1" ,"med_r2","med_r3","med_r4", "food_r1", "food_r2", "food_r3","food_r4" ],
         description: "one_reminder protocols",
       }
       one_reminder_times: {
         type: string_array,
-        default_value: [ "Everyday 09h00m0s/10h00m0s", "Everyday 21h00m0s/22h00m0s" ],
+        default_value: ["Everyday 07h00m0s/08h00m0s" , "Everyday 10h00m0s/11h00m0s", "Everyday 13h00m0s/14h00m0s","Everyday 17h00m0s/17h50m0s",
+        "Everyday 09h00m0s/09h50m0s","Everyday 12h00m0s/12h55m0s","Everyday 16h00m0s/16h50m0s","Everyday 19h00m0s/19h50m0s"],
         description: "time that each protocol is triggered",
       }
-    EmptyDishwasherProtocol:
-      instances: {
-        type: string_array,
-        default_value: [ "em_dishwasher"],
-        description: "Empty Dishwasher protocols",
-      }
-      empty_dishwasher_reminder_times: {
-        type: string_array,
-        default_value: [ "Everyday 22h00m0s/23h00m0s"],
-        description: "time that each protocol is triggered",
-      }
-    EmptyTrashProtocol:
-      instances: {
-        type: string_array,
-        default_value: [ "em_trash"  ],
-        description: "Empty Trash protocols",
-      }
-      empty_trash_reminder_times: {
-        type: string_array,
-        default_value: [ "Everyday 22h00m0s/23h00m0s"],
-        description: "time that each protocol is triggered",
-      }
-    MorningWakeProtocol:
-      instances: {
-        type: string_array,
-        default_value: [ "morning_wake" ],
-        description: "Empty Trash protocols",
-      }
-      morning_wake_reminder_times: {
-        type: string_array,
-        default_value: [ "Everyday 22h00m0s/23h00m0s" ],
-        description: "time that each protocol is triggered",
-      }
-    ShowerProtocol:
-      instances: {
-        type: string_array,
-        default_value: [ "shower" ],
-        description: "Empty Trash protocols",
-      }
-      shower_reminder_times: {
-        type: string_array,
-        default_value: [ "Everyday 22h00m0s/23h00m0s"],
-        description: "time that each protocol is triggered",
-      }
-    PamLocationProtocol:
-      instances: {
-        type: string_array,
-        default_value: [ "pam_location",  "pam_wed", "pam_fri" ],
-        description: "Empty Trash protocols",
-      }
-      pam_location_reminder_times: {
-        type: string_array,
-        default_value: [ "Everyday 22h00m0s/23h00m0s", "Everyday 22h00m0s/23h00m0s", "Everyday 22h00m0s/23h00m0s" ],
-        description: "time that each protocol is triggered",
-      }
-
-    FitnessProtocol:
-      instances: {
-        type: string_array,
-        default_value: [ "fitness" ],
-        description: "Fitness protocols",
-      }
-      fitness_reminder_times: {
-        type: string_array,
-        default_value: [ "Everyday 22h00m0s/23h00m0s" ],
-        description: "time that each protocol is triggered",
-      }
-
+    
   topics:
     time: {
       type: string,
@@ -155,7 +65,7 @@ shr_parameters:
 
     display_ack: {
       type: string,
-      default_value: "/screen_ack",
+      default_value: "/display_rx",
       description: "topic for display ack",
     }
 

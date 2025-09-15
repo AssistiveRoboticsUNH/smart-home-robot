@@ -248,15 +248,15 @@
             ;; !(a || b) is equivalent to !a && !b
             ;; !!(a || b) = (a || b)  is equivalent to ! (!a && !b)
 
-            (same_location_constraint)
+            ;;(same_location_constraint)
 
             ;; the robot and person must be at the same location
             ;; gives true when robot and person are at the same location
-            (not
-                (forall (?loc - Landmark)
-                    (not (and (person_at ?t ?p ?loc) (robot_at ?loc)) )
-                )
-            )
+            ;;(not
+            ;;    (forall (?loc - Landmark)
+            ;;        (not (and (person_at ?t ?p ?loc) (robot_at ?loc)) )
+            ;;    )
+            ;;)
 
 
             ;; this condition enforces that the person is not at the location specified in not_person_location_constraint
@@ -291,14 +291,14 @@
               (not (and (voice_blocks_voice ?vi ?v) (not (executed_voice ?vi)) ) )
             )
 
-            (same_location_constraint)
+            ;;(same_location_constraint)
 
             ;; Ensure the robot and person are at the same location
-            (not
-                (forall (?loc - Landmark)
-                    (not (and (person_at ?t ?p ?loc) (robot_at ?loc)) )
-                )
-            )
+            ;;(not
+            ;;    (forall (?loc - Landmark)
+            ;;        (not (and (person_at ?t ?p ?loc) (robot_at ?loc)) )
+            ;;    )
+            ;;)
 
             (not (abort))
         )

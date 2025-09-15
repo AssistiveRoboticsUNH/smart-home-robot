@@ -1,2 +1,4 @@
 already_reminded_one_reminder med_r1 OneReminderProtocol
 already_reminded_one_reminder food_r1 OneReminderProtocol
+already_reminded_one_reminder med_r2 OneReminderProtocol
+already_reminded_one_reminder food_r2 OneReminderProtocol

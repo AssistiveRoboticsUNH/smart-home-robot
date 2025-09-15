@@ -14,7 +14,7 @@ srv_gen/
 msg/_*.py
 build_isolated/
 devel_isolated/
-
+convBot/*
 # Ignore generated docs
 *.dox
 *.wikidoc
