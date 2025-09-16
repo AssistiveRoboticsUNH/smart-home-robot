@@ -993,6 +993,50 @@ namespace pddl_lib {
             return BT::NodeStatus::SUCCESS;
         }
 
+        // Helper: simulate playing video
+    
+        int  playVideo(const std::string& video, ProtocolState &ps, const InstantiatedAction &action) {
+            std::cout << "[Playing] " << video << std::endl;
+            // Example: using ffplay (silent, auto close after video ends)
+            // std::string cmd = "ffplay -autoexit -nodisp \"" + video + "\" > /dev/null 2>&1";
+            // system(cmd.c_str());
+            
+            return result;
+
+        }
+
+        BT::NodeStatus high_level_domain_StartNightVideo(const InstantiatedAction &action) override {
+            auto &kb = KnowledgeBase::getInstance();
+
+            InstantiatedParameter protocol = action.parameters[0];
+            
+            auto [ps, lock] = ProtocolState::getConcurrentInstance();
+            lock.Lock();
+            ps.active_protocol = protocol;
+            std::string currentDateTime = getCurrentDateTime();
+            std::string log_message = std::string("weblog=") + currentDateTime + " high_level_domain_StartNightVideo" + " started";
+            RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
+            
+            int rep = 5;
+            int wait_time = 10; // seconds
+            for (int i = 0; i < rep; i++) {
+
+                std::string full_path= "file:///storage/emulated/0/Download/Exercise_Videos/Cardio_Final/cardio_punches_low.mp4";
+                std::cout << "[Playing] " << full_path << std::endl;
+                shr_msgs::action::PlayVideoRequest::Goal goal;
+                goal.file_name = full_path;
+
+                int result = send_goal_blocking(goal, action, ps);
+
+                if (i < rep - 1) {
+                    std::cout << "Waiting " << wait_time << " seconds...\n";
+                    std::this_thread::sleep_for(std::chrono::seconds(wait_time));
+                }
+            }
+            lock.UnLock();
+            return BT::NodeStatus::SUCCESS;
+        }
+
 		BT::NodeStatus shr_domain_ShowerSuccess(const InstantiatedAction &action) override {
             auto &kb = KnowledgeBase::getInstance();
             auto [ps, lock] = ProtocolState::getConcurrentInstance();

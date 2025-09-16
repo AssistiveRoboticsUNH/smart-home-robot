@@ -174,6 +174,14 @@ public:
         return TRUTH_VALUE::FALSE;
     }
 
+    TRUTH_VALUE time_for_night_video(TRUTH_VALUE val, ExerciseProtocol m) const override {
+        if (world_state_converter->get_world_state_msg()->night_video == 1){
+            return TRUTH_VALUE::TRUE;
+        }
+        
+        return TRUTH_VALUE::FALSE;
+    }
+
 	TRUTH_VALUE person_shower(TRUTH_VALUE val, Time t) const override {
         if (val == TRUTH_VALUE::TRUE) {
             return TRUTH_VALUE::TRUE;

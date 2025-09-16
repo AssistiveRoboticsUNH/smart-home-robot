@@ -19,6 +19,7 @@
     ReminderAction
     CallAction
     VoiceAction
+    NightVideo
 )
 
 (:predicates
@@ -49,6 +50,9 @@
   (priority_5)
   (priority_6)
  
+  ;; night video protocol
+  (time_for_night_video ?ex - ExerciseProtocol)
+  ;;(already_done_ex_protocol ?ex - ExerciseProtocol)
 
   (dont_use_shutdown)
   (success)
@@ -110,6 +114,25 @@
 	    (priority_5)
 		)
 	:effect (and (priority_6) (not (priority_5)))
+)
+
+(:action StartNightVideo
+	:parameters (?nv - NightVideo)
+	:precondition (and
+	    (priority_4) 
+        ;; same as shutdown priority
+        (time_for_night_video ?nv)
+
+	)
+	:effect (and
+	        (success)
+            (not (priority_4))
+            (not (time_for_night_video ?nv))
+            (not (low_level_failed))
+            (forall (?medicine_pharmacy - MedicineRefillPharmacyReminderProtocol) (not (medicine_pharmacy_reminder_enabled ?medicine_pharmacy)) )
+            (forall (?mdrf - MedicineRefillReminderProtocol) (not (medicine_refill_reminder_enabled ?mdrf)) )
+            (forall (?w - WalkingProtocol) (not (walking_reminder_enabled ?w)) )
+        )
 )
 
 ;; to start ros and navigation before the protocol

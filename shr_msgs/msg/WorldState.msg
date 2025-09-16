@@ -10,3 +10,4 @@ int32 time_for_drinking
 string screen_ack
 string person_location
 builtin_interfaces/Time time
+bool night_video

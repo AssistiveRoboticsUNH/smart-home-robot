@@ -1,49 +1,108 @@
-import os
-import os
-
-from ament_index_python.packages import get_package_share_directory
-from shr_msgs.action import PlayVideoRequest
-from rclpy.action import ActionServer, ActionClient
-from rclpy.node import Node
 import rclpy
+from rclpy.node import Node
+from rclpy.action import ActionServer
+from shr_msgs.action import PlayVideoRequest  # Replace with your actual action import
+from std_msgs.msg import String
+import time
+from rclpy.executors import MultiThreadedExecutor
+from rclpy.callback_groups import MutuallyExclusiveCallbackGroup, ReentrantCallbackGroup
 
 
-class PlayVideoActionServer(Node):
+class SimpleZmqSenderAction(Node):
     def __init__(self):
-        super().__init__('play_video_action')
-        self.play_video_action_server = ActionServer(self, PlayVideoRequest, 'play_video',
-                                                      self.play_audio_callback)
+        super().__init__('video_action')
+        self.display_cb_group = MutuallyExclusiveCallbackGroup()
 
-    def play_audio_callback(self, goal_handle):
-        self.get_logger().info("weblog="+'Playing video...')
-        result = PlayVideoRequest.Result()
+        self.display_pub = self.create_publisher(String, 'display_tx', 10)
+        self.display_sub = self.create_subscription(String, 'display_rx', self.display_callback, 10, callback_group=self.display_cb_group)
 
-        file_name = goal_handle.request.file_name
-        file_path = os.path.join(get_package_share_directory('shr_resources'), 'resources', file_name)
-        self.get_logger().info("weblog="+"video_file"+file_path)
-        if not os.path.isfile(file_path):
-            result.status = "file '" + file_path + "' does not exist"
-            self.get_logger().info("weblog="+'Playing video was aborted')
-            goal_handle.abort()
-            return result
+        self._action_server = ActionServer(
+            self,
+            PlayVideoRequest,
+            'play_video',
+            execute_callback=self.execute_callback,  # sync version
+        )
 
-        command = 'vlc ' + file_path + ' --fullscreen vlc://quit'
-        os.system(command)
-        self.get_logger().info("weblog="+'Playing video was successful')
-        result.status = "success"
+        self.get_logger().info(" SimpleZmqSenderAction is ready.")
+
+    def display_callback(self, msg):
+       
+        # print(f"[Received] {msg.data}")  # print the message content
+        if "RES:Video finished" in msg.data:
+            self.video_finished = True
+            print("callback self.video_finished", self.video_finished)
+            self.get_logger().info("Video finished received!")
+
+
+    def execute_callback(self, goal_handle):
+        video_path = goal_handle.request.file_name
+        self.get_logger().info(f"Received video goal: {video_path}")
+        
+        # Optional feedback
+        feedback = PlayVideoRequest.Feedback()
+        feedback.running = True
+        goal_handle.publish_feedback(feedback)
+
+        # Send video path 
+        self.display_pub.publish(String(data=video_path))
+
+        ## set to false whenever a video is recieved
+        self.video_finished = False
+        # Wait for 3 minutes or when video returns finished
+        # self.get_logger().info("⏳ Waiting for seconds before returning success...")
+        # time.sleep(55)
+
+        ## todo check what to do when video fails, if the rx takes that then we are all good.
+        # Wait for up to 5 minutes for video to finish, check every second
+        start_time = self.get_clock().now()
+        timeout = rclpy.time.Duration(seconds=3*60)  # 3 minutes
+        while not self.video_finished:
+            # print("In while")
+            # print(" self.video_finished", self.video_finished)
+
+            # rclpy.spin_once(self, timeout_sec=1.0)  # allow callbacks to run
+            time.sleep(1)
+            if self.get_clock().now() - start_time > timeout:
+                self.get_logger().warn(" Video did not finish in 5 minutes, aborting")
+                goal_handle.abort()
+                result = PlayVideoRequest.Result()
+                result.status = "video failed or timeout"
+                return result
+
+        
+        self.get_logger().info("Video finish, success")
+
         goal_handle.succeed()
-
+        result = PlayVideoRequest.Result()
+        result.status = "video sent"
         return result
 
 
 def main(args=None):
     rclpy.init(args=args)
+    node =  SimpleZmqSenderAction()
 
-    play_video_action_server = PlayVideoActionServer()
+    executor = MultiThreadedExecutor()
+    executor.add_node(node)
+    # node = SimpleZmqSenderAction()
 
-    while True:
-        rclpy.spin_once(play_video_action_server, timeout_sec=5.0)
-
+    # try:
+    #     rclpy.spin(node)
+    # except KeyboardInterrupt:
+    #     node.get_logger().info(" Shutting down...")
+    # finally:
+    #     node.destroy_node()
+    #     rclpy.shutdown()
+    
+    try:
+        
+        node.get_logger().info('Beginning server, shut down with CTRL-C')
+        executor.spin()
+    except (KeyboardInterrupt):
+        node.get_logger().info('Keyboard interrupt, shutting down.\n')
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
 
 if __name__ == '__main__':
     main()

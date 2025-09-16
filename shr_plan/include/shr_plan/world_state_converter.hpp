@@ -22,6 +22,8 @@ private:
     rclcpp::Subscription<std_msgs::msg::Int32>::SharedPtr good_weather_sub_;
     rclcpp::Subscription<std_msgs::msg::String>::SharedPtr screen_ack_sub_;
     rclcpp::Subscription<std_msgs::msg::String>::SharedPtr person_location_sub_;
+    rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr night_video_sub_;
+
 
     std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
     std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
@@ -100,6 +102,11 @@ public:
                 params.topics.pam_outside, 10, [this](const std_msgs::msg::Int32::SharedPtr msg) {
                     std::lock_guard<std::mutex> lock(world_state_mtx);
                     world_state_->pam_outside = msg->data;
+                });
+        night_video_sub_ = create_subscription<std_msgs::msg::Bool>(
+                "night_video", 10, [this](const std_msgs::msg::Bool::SharedPtr msg) {
+                    std::lock_guard<std::mutex> lock(world_state_mtx);
+                    world_state_->night_video = msg->data;
                 });
 
         time_for_drinking_ = create_subscription<std_msgs::msg::Int32>(
