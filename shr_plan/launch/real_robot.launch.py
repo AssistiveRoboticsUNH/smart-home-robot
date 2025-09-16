@@ -11,31 +11,9 @@ def generate_launch_description():
 
     ld = LaunchDescription()
 
-    homeseer_node = Node(
-        package='smartthings_ros',
-        executable='homeseer_node',
-        output='screen'
-    )
-    smartthings_node_bump = Node(
-        package='smartthings_ros',
-        executable='bump_sensor',
-        output='screen'
-    )
-
-    smartthings_weather = Node(
-        package='smartthings_ros',
-        executable='weather_node',
-        output='screen'
-    )
-
     smartthings_node_plug = Node(
         package='smartthings_ros',
         executable='smartplug_node',
-        output='screen'
-    )
-    smartthings_initial_pose = Node(
-        package='smartthings_ros',
-        executable='initial_pose',
         output='screen'
     )
 
@@ -45,21 +23,9 @@ def generate_launch_description():
         output='screen'
     )
 
-    logger_node = Node(
-        package='simple_logger',
-        executable='simple_logger_web',
-        output='screen'
-    )
-
     docking_data_manager = Node(
         package='shr_docking',
         executable='docking_data_manager',
-        output='screen'
-    )
-
-    display_ack_node = Node(
-        package='smartthings_ros',
-        executable='display_ack',
         output='screen'
     )
 
@@ -68,20 +34,6 @@ def generate_launch_description():
         executable='simple_logger_discord',
         output='screen'
     )
-    # nav_cmd = IncludeLaunchDescription(
-    #     PythonLaunchDescriptionSource(PathJoinSubstitution([
-    #         get_package_share_directory('jackal_navigation'), 'launch', 'navigation2_jackal.launch.py']))
-    # )
-
-    # realsense_cam = IncludeLaunchDescription(
-    #     PythonLaunchDescriptionSource(PathJoinSubstitution([
-    #         get_package_share_directory('realsense2_camera'), 'launch', 'rs_launch.py']))
-    # )
-
-    # jackal_navigation = IncludeLaunchDescription(
-    #     PythonLaunchDescriptionSource(PathJoinSubstitution([
-    #         get_package_share_directory('jackal_navigation'), 'launch', 'navigation2_jackal.launch.py']))
-    # )
 
     apriltags_realsense_loc = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(PathJoinSubstitution([
@@ -100,50 +52,20 @@ def generate_launch_description():
             get_package_share_directory('charger_description'), 'launch', 'view_charger.launch.py']))
     )
 
-    #     package='shr_plan
-    #
-    #     # planner_cmd = Node(',
-    #     executable='planning_controller_node',
-    #     output='screen'
-    # )
-    gpu = False
-    if gpu:
-        apriltags_zed = IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(PathJoinSubstitution([
-                get_package_share_directory('apriltag_ros'), 'launch', 'tag_zed.launch.py']))
-        )
-        ld.add_action(apriltags_zed)
 
-        ## zed wrapper
-        zed_wrapper = IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(PathJoinSubstitution([
-                get_package_share_directory('zed_wrapper'), 'launch', 'zed2i.launch.py']))
-        )
-        ld.add_action(zed_wrapper)
+    display_node = Node(
+        package='shr_display',
+        executable='display_node',
+        output='screen'
+    )
 
-        ## particle filter
-        # particle_filter = Node(
-        #     package='particle_filter',
-        #     executable='particle_filter_node',
-        #     output='screen'
-        # )
-        # ld.add_action(particle_filter)
-
-    # ld.add_action(planner_cmd)
-    #     ld.add_action(nav_cmd)
-    # ld.add_action(logger_node)
-    # ld.add_action(jackal_navigation)
-    # ld.add_action(realsense_cam)
-    # ld.add_action(apriltags_realsense_docking)
     ld.add_action(charger)
     ld.add_action(apriltags_realsense_loc)
     ld.add_action(tf_broadcast)
-    # ld.add_action(homeseer_node)
     ld.add_action(smartthings_node_plug)
     ld.add_action(protocol_time_node)
-    # ld.add_action(smartthings_weather)
     ld.add_action(docking_data_manager)
     ld.add_action(discord_logger)
-    ld.add_action(display_ack_node)
+    ld.add_action(display_node)
 
     return ld

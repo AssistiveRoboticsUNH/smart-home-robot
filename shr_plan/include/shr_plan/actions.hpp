@@ -17,7 +17,12 @@
 #include <shr_plan/intersection_helpers.hpp>
 #include "std_msgs/msg/string.hpp"
 #include "std_srvs/srv/set_bool.hpp"
+#include <nlohmann/json.hpp>
+#include <unistd.h>  // for mkstemp, close
+#include <cstdio> 
 
+using json = nlohmann::json;
+// sudo apt-get install nlohmann-json3-dev
 
 
 namespace pddl_lib {
@@ -843,6 +848,135 @@ namespace pddl_lib {
             //RCLCPP_INFO(rclcpp::get_logger(currentDateTime+std::string("user=")+"aborted"+"higher priority protocol detected"), "user...");
             auto &kb = KnowledgeBase::getInstance();
             kb.insert_predicate({"abort", {}});
+        }
+
+
+        // Helper: simulate playing video
+        // can be merged
+        int  playVideo(const std::string& video, ProtocolState &ps, const InstantiatedAction &action) {
+            std::cout << "[Playing] " << video << std::endl;
+            // Example: using ffplay (silent, auto close after video ends)
+            // std::string cmd = "ffplay -autoexit -nodisp \"" + video + "\" > /dev/null 2>&1";
+            // system(cmd.c_str());
+            std::string full_path= "file:///storage/emulated/0/Download/Exercise_Videos/";
+            shr_msgs::action::PlayVideoRequest::Goal goal;
+            goal.file_name = full_path + video;
+            std::cout << "[Script Name] Full path: " << goal.file_name << std::endl;
+
+            int result = send_goal_blocking(goal, action, ps);
+            return result;
+
+        }
+
+        int ReadScript(const std::string& script, ProtocolState &ps, const InstantiatedAction &action) {
+            std::cout << "[Reading] " << script << std::endl;
+            // Example: using ffplay (silent, auto close after video ends)
+            // std::string cmd = "ffplay -autoexit -nodisp \"" + video + "\" > /dev/null 2>&1";
+            // system(cmd.c_str());
+
+            // create txt file
+            char tempPath[] = "/home/hello-robot/smarthome_ws/src/smart-home-robot/shr_resources/resources/scriptXXXXXX";
+            int fd = mkstemp(tempPath);
+            if (fd == -1) {
+                perror("mkstemp failed");
+                std::cerr << "Failed to create temp file" << std::endl;
+            }
+            close(fd);
+
+            std::string filePath(tempPath);
+
+            // Write script to the file
+            std::ofstream out(filePath);
+            out << script;
+            out.close();
+            int ret = 0 ;  // if it is true it will be overwritten
+            // pass txt file to action server
+            if (!filePath.empty()) {
+                // Here you would call your ReadScript action server with `filePath`
+                std::cout << "Sending file path to action server: " << filePath << std::endl;
+
+                shr_msgs::action::ReadScriptRequest::Goal read_goal_;
+                read_goal_.script_name = filePath;
+                std::string script_name_str = std::string(read_goal_.script_name.begin(), read_goal_.script_name.end());
+                
+                
+                ret = send_goal_blocking(read_goal_, action, ps) ;
+                
+
+                // delete txt file
+                if (remove(filePath.c_str()) != 0) {
+                    std::cerr << "Warning: failed to delete " << filePath << std::endl;
+                }
+            }
+
+            return ret;
+
+        }
+
+        BT::NodeStatus high_level_domain_StartExerciseProtocol(const InstantiatedAction &action) override {
+            auto &kb = KnowledgeBase::getInstance();
+
+            InstantiatedParameter protocol = action.parameters[0];
+            
+            auto [ps, lock] = ProtocolState::getConcurrentInstance();
+            lock.Lock();
+            ps.active_protocol = protocol;
+            std::string currentDateTime = getCurrentDateTime();
+            std::string log_message = std::string("weblog=") + currentDateTime + " high_level_domain_StartExerciseProtocol" + " started";
+            RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
+            
+
+            std::ifstream file("/home/hello-robot/smarthome_ws/src/smart-home-robot/shr_plan/include/shr_plan/exercise.json");
+            if (!file.is_open()) {
+                std::cerr << "Error: could not open exercises.json" << std::endl;
+                return BT::NodeStatus::FAILURE;
+            }
+
+            json j;
+            file >> j;
+
+            // std::cout << j["introduction"] << "\n\n";
+            ReadScript(j["introduction"], ps, action);
+            
+            // Iterate through series
+            for (auto& [series_key, series_value] : j.items()) {
+                if (series_key.rfind("series_", 0) == 0) {
+                    std::cout << "---- " << series_key << " ----\n";
+                    // std::cout << series_value["introduction"] << "\n";
+                    ReadScript(series_value["introduction"], ps,action);
+
+                    std::string type_ = series_value["type"];
+
+                    // Iterate through exercises in the series
+                    for (auto& [ex_key, ex_value] : series_value.items()) {
+                        if (ex_key.rfind("ex", 0) == 0) {
+                            // std::cout << "\n" << ex_value["text"] << "\n";
+                            
+                            std::string text = ex_value["text"];
+                            ReadScript(text, ps, action);
+                            int rep = ex_value["rep"];
+                            int wait_time = ex_value["time_between_rep_in_sec"];
+                            std::string video = ex_value["video_name"];
+
+                            // Play the video rep times with wait
+                            for (int i = 0; i < rep; i++) {
+                                playVideo(type_+"/"+video, ps, action);
+
+                                if (i < rep - 1) {
+                                    std::cout << "Waiting " << wait_time << " seconds...\n";
+                                    // std::this_thread::sleep_for(std::chrono::seconds(wait_time));
+                                    std::this_thread::sleep_for(std::chrono::seconds(5));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            ReadScript(j["ending"], ps,action);
+
+            lock.UnLock();
+            return BT::NodeStatus::SUCCESS;
         }
 
         // medicine_protocol

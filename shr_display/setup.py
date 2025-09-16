@@ -1,20 +1,22 @@
-from setuptools import setup
+from setuptools import find_packages, setup
 
-package_name = 'simple_logger'
+package_name = 'shr_display'
 
 setup(
     name=package_name,
     version='0.0.0',
-    packages=[package_name],
+    packages=find_packages(exclude=['test']),
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        ('share/shr_display/config', ['config/protocol_routines.json',
+                                      'config/params.yaml']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='ns',
-    maintainer_email='noushad.sust@gmail.com',
+    maintainer='hello-robot',
+    maintainer_email='mostafa.hussein@unh.edu',
     description='TODO: Package description',
     license='TODO: License declaration',
     extras_require={
@@ -22,10 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'simple_logger=simple_logger.log_rosout:main',
-            'simple_logger_web=simple_logger.logweb_rosout:main',
-
-            'simple_logger_discord=simple_logger.log_discord:main',
+            'display_node = shr_display.display_node:main'
         ],
     },
 )

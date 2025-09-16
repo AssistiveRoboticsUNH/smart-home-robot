@@ -17,7 +17,9 @@ setup(
     maintainer_email='pac48@wildcats.unh.edu',
     description='TODO: Package description',
     license='TODO: License declaration',
-    tests_require=['pytest'],
+    extras_require={
+    'test': ['pytest'],
+    },
     entry_points={
         'console_scripts': ['world_state_node = shr_world_state.world_state_node:main',
                             'detect_eating_node = shr_world_state.detect_eating_node:main',

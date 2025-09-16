@@ -20,7 +20,9 @@ setup(
     maintainer_email='moniruzzaman.akash@unh.edu',
     description='This package is built for the docking management',
     license='GPL-3.0 license',
-    tests_require=['pytest'],
+    extras_require={
+    'test': ['pytest'],
+    },
     entry_points={
         'console_scripts': [
             #Docking server with camera only

@@ -145,6 +145,14 @@ public:
         }
     }
 
+    TRUTH_VALUE time_for_ex_protocol(TRUTH_VALUE val, ExerciseProtocol m) const override {
+        if (world_state_converter->get_world_state_msg()->exercise == 1){
+            return TRUTH_VALUE::TRUE;
+        }
+        
+        return TRUTH_VALUE::FALSE;
+    }
+
     TRUTH_VALUE time_to_take_medicine(TRUTH_VALUE val, MedicineProtocol m) const override {
         auto params = world_state_converter->get_params();
         if (auto index = get_inst_index(m, params)) {
@@ -157,7 +165,6 @@ public:
 
         return TRUTH_VALUE::FALSE;
     }
-
 
     TRUTH_VALUE time_for_video(TRUTH_VALUE val, VideoReminderProtocol m) const override {
         if (m == "coffee_reminder"){
@@ -501,8 +508,8 @@ int main(int argc, char **argv) {
 
         std::string active_domain;
         auto protocol = ProtocolState::getActiveProtocol();
-
-        if (!protocol.name.empty() && !ProtocolState::isRobotInUse()) {
+        std::cout << "protocol.name " << protocol.name << std::endl;
+        if (!protocol.name.empty() &&  protocol.name != "exercise" && !ProtocolState::isRobotInUse()) {
             active_domain = "low_level_domain.pddl";
             updater.concurrent_update();
             auto domain = load_domain(active_domain);

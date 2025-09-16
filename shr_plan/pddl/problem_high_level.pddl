@@ -6,6 +6,7 @@
      am_meds pm_meds - MedicineProtocol
      coffee_reminder microwave_reminder - VideoReminderProtocol
      trash - OneReminderProtocol
+     exercise - ExerciseProtocol
 
      nathan - Person
      t1 - Time ;;t2 t3 t4 t5
@@ -18,6 +19,9 @@
 
   )
   (:init
+      ;;(time_for_ex_protocol exercise)
+      ;;(already_done_ex_protocol exercise)
+      
       (priority_1)
       (visible_location home)
       (visible_location living_room)

@@ -45,12 +45,6 @@ def generate_launch_description():
         name='make_call_action',
         output='screen')
 
-    send_text_node_cmd = Node(
-        package='shr_actions_py',
-        executable='send_text_action',
-        name='send_text_action',
-        output='screen')
-
     localize_cmd = Node(
         package='shr_actions_py',
         executable='localize',
@@ -69,19 +63,26 @@ def generate_launch_description():
         name='action_display_interface',
         output='screen')
 
+    question_response_action_cmd = Node(
+        package='convros_bot',
+        executable='question_response_action',
+        name='question_response_action',
+        output='screen'
+    )
     
 
     ld = LaunchDescription()
-    #ld.add_action(read_script_node_cmd)
-    #ld.add_action(play_audio_node_cmd)
-    # ld.add_action(play_video_node_cmd)
+
+    ld.add_action(read_script_node_cmd)
+    ld.add_action(play_audio_node_cmd)
+    ld.add_action(play_video_node_cmd)
     ld.add_action(make_call_node_cmd)
-    #ld.add_action(send_text_node_cmd)
     ld.add_action(localize_cmd)
     ld.add_action(undock_cmd)
-    ld.add_action(action_display_interface_cmd)
-    #ld.add_action(waypoint_cmd)
+
+    ## no need for this
+    # ld.add_action(action_display_interface_cmd)
+    ld.add_action(question_response_action_cmd)
     ld.add_action(docking_launch_cmd)
-    # ld.add_action(ask_question_cmd)
 
     return ld

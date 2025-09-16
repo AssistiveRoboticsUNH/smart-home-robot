@@ -26,7 +26,7 @@ class PlayVideoActionServer(Node):
             self.get_logger().info("weblog="+'Playing video was aborted')
             goal_handle.abort()
             return result
-
+        
         command = 'vlc ' + file_path + ' --fullscreen vlc://quit'
         os.system(command)
         self.get_logger().info("weblog="+'Playing video was successful')

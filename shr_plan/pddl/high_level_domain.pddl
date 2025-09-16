@@ -6,6 +6,7 @@
 )
 
 (:types
+  ExerciseProtocol
   VideoReminderProtocol
   MedicineProtocol
   OneReminderProtocol
@@ -49,6 +50,11 @@
   ;; one reminders
   (time_for_one_reminder ?o - OneReminderProtocol)
   (already_gave_one_reminder ?o - OneReminderProtocol)
+
+  ;; exercise protocol
+  (time_for_ex_protocol ?ex - ExerciseProtocol)
+  (already_done_ex_protocol ?ex - ExerciseProtocol)
+
 
   (low_level_failed)
 
@@ -125,6 +131,27 @@
           )
 )
 
+(:action StartExerciseProtocol
+	:parameters (?ex - ExerciseProtocol)
+	:precondition (and
+	    (priority_4) 
+        ;; same as shutdown priority
+        (time_for_ex_protocol ?ex)
+        (not (already_done_ex_protocol ?ex))
+
+	)
+	:effect (and
+	        (success)
+            (not (priority_4))
+            (already_done_ex_protocol ?ex)
+            (not (low_level_failed))
+            (forall (?vid - VideoReminderProtocol) (not (video_reminder_enabled ?vid)) )
+            (forall (?one - OneReminderProtocol) (not (one_reminder_enabled ?one)) )
+            (forall (?med - MedicineProtocol) (not (medicine_protocol_enabled ?med)) )
+          )
+)
+
+
 (:action StartMedicineProtocol
 	:parameters (?m - MedicineProtocol ?p - Person ?cur - Landmark ?dest - Landmark)
 	:precondition (and
@@ -146,12 +173,14 @@
       (started)
 	)
 	:effect (and
-	          (success)
+	        ;;(success)
             (not (priority_2))
             (medicine_protocol_enabled ?m)
             (not (low_level_failed))
             (forall (?vid - VideoReminderProtocol) (not (video_reminder_enabled ?vid)) )
             (forall (?one - OneReminderProtocol) (not (one_reminder_enabled ?one)) )
+        
+
           )
 )
 

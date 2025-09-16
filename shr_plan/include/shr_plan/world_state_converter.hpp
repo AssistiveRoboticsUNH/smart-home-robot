@@ -25,6 +25,7 @@ private:
     rclcpp::Subscription<std_msgs::msg::String>::SharedPtr screen_ack_sub_;
     rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr coffee_sub_;
     rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr heating_food_sub_;
+    rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr exercise_sub_;
 
     std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
     std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
@@ -109,6 +110,12 @@ public:
                 params.pddl.VideoReminderProtocols.video_reminder_topics[0], 10, [this](const std_msgs::msg::Bool::SharedPtr msg) {
                     std::lock_guard<std::mutex> lock(world_state_mtx);
                     world_state_->coffee = msg->data;
+                });
+
+        exercise_sub_ = create_subscription<std_msgs::msg::Bool>(
+               "exercise", 10, [this](const std_msgs::msg::Bool::SharedPtr msg) {
+                    std::lock_guard<std::mutex> lock(world_state_mtx);
+                    world_state_->exercise = msg->data;
                 });
 
 

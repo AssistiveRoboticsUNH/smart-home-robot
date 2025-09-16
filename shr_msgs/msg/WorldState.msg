@@ -8,3 +8,4 @@ int32 person_intervene
 builtin_interfaces/Time time
 bool coffee
 bool heating_food
+bool exercise
