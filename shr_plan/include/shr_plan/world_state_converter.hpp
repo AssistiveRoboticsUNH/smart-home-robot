@@ -6,7 +6,7 @@
 #include <std_msgs/msg/int32.hpp>
 #include <tf2_ros/transform_listener.h>
 #include "std_msgs/msg/string.hpp"
-
+#include "std_msgs/msg/bool.hpp"
 
 #pragma once
 

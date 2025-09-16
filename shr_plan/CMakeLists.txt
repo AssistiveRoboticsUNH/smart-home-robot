@@ -9,6 +9,9 @@ endif ()
 #  add_compile_options(-Wall -Wextra -Wpedantic)
 #endif ()
 
+
+add_compile_options(-g)
+
 find_package(ament_cmake REQUIRED)
 find_package(ament_index_cpp REQUIRED)
 find_package(behaviortree_cpp_v3 REQUIRED)

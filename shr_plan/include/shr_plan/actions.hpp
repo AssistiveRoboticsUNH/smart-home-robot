@@ -7,6 +7,7 @@
 #include "nav2_msgs/action/navigate_to_pose.hpp"
 #include "shr_msgs/action/read_script_request.hpp"
 #include "shr_msgs/action/play_audio_request.hpp"
+#include "shr_msgs/action/play_video_request.hpp"
 #include "shr_msgs/action/docking_request.hpp"
 #include "shr_msgs/action/localize_request.hpp"
 #include "shr_msgs/action/waypoint_request.hpp"
@@ -88,6 +89,7 @@ namespace pddl_lib {
         rclcpp_action::Client<shr_msgs::action::PlayAudioRequest>::SharedPtr audio_action_client_ = {};
         rclcpp_action::Client<shr_msgs::action::CallRequest>::SharedPtr call_client_ = {};
         rclcpp_action::Client<shr_msgs::action::QuestionResponseRequest>::SharedPtr voice_action_client_ = {};
+        rclcpp_action::Client<shr_msgs::action::PlayVideoRequest>::SharedPtr play_video_client_ = {};
 
 
 
@@ -347,6 +349,39 @@ namespace pddl_lib {
             }
             rclcpp::sleep_for(std::chrono::seconds(1));
         }
+        return *success;
+    }
+
+
+    int send_goal_blocking(const shr_msgs::action::PlayVideoRequest::Goal &goal,
+                        const InstantiatedAction &action,
+                        ProtocolState &ps) {
+        auto success = std::make_shared<std::atomic<int>>(-1);
+        RCLCPP_INFO(rclcpp::get_logger("PlayVideoClient"), " SENDING VIDEO ");
+
+        rclcpp_action::Client<shr_msgs::action::PlayVideoRequest>::SendGoalOptions options;
+        options.result_callback =
+            [success](const rclcpp_action::ClientGoalHandle<shr_msgs::action::PlayVideoRequest>::WrappedResult &result) {
+                if (result.code == rclcpp_action::ResultCode::SUCCEEDED) {
+                    RCLCPP_INFO(rclcpp::get_logger("PlayVideoClient"), "✅ Video result: %s", result.result->status.c_str());
+                    *success = 1;
+                } else {
+                    RCLCPP_ERROR(rclcpp::get_logger("PlayVideoClient"), "❌ Video playback failed with code: %d", static_cast<int>(result.code));
+                    *success = 0;
+                }
+            };
+
+        ps.play_video_client_->async_send_goal(goal, options);
+
+        auto tmp = ps.active_protocol;
+        while (*success == -1) {
+            if (!(tmp == ps.active_protocol)) {
+                ps.play_video_client_->async_cancel_all_goals();
+                return 0;
+            }
+            rclcpp::sleep_for(std::chrono::seconds(1));
+        }
+
         return *success;
     }
 
@@ -993,17 +1028,6 @@ namespace pddl_lib {
             return BT::NodeStatus::SUCCESS;
         }
 
-        // Helper: simulate playing video
-    
-        int  playVideo(const std::string& video, ProtocolState &ps, const InstantiatedAction &action) {
-            std::cout << "[Playing] " << video << std::endl;
-            // Example: using ffplay (silent, auto close after video ends)
-            // std::string cmd = "ffplay -autoexit -nodisp \"" + video + "\" > /dev/null 2>&1";
-            // system(cmd.c_str());
-            
-            return result;
-
-        }
 
         BT::NodeStatus high_level_domain_StartNightVideo(const InstantiatedAction &action) override {
             auto &kb = KnowledgeBase::getInstance();
@@ -1017,7 +1041,7 @@ namespace pddl_lib {
             std::string log_message = std::string("weblog=") + currentDateTime + " high_level_domain_StartNightVideo" + " started";
             RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
             
-            int rep = 5;
+            int rep = 2;
             int wait_time = 10; // seconds
             for (int i = 0; i < rep; i++) {
 

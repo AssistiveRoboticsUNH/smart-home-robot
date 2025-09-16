@@ -7,6 +7,7 @@
 
 (:types
   OneReminderProtocol
+  NightVideo
   Landmark
   Time
   Person
@@ -19,15 +20,15 @@
     ReminderAction
     CallAction
     VoiceAction
-    NightVideo
+    
 )
 
 (:predicates
   (started)
 
   (robot_at ?lmr - Landmark)
-  (person_at ?t - Time ?p - Person ?lmp - Landmark)
-  (person_currently_at ?p - Person ?lmp - Landmark)
+  ;;(person_at ?t - Time ?p - Person ?lmp - Landmark)
+  ;;(person_currently_at ?p - Person ?lmp - Landmark)
 
   (visible_location ?lmp - Landmark)
   (not_visible_location ?lmp - Landmark)
@@ -51,8 +52,8 @@
   (priority_6)
  
   ;; night video protocol
-  (time_for_night_video ?ex - ExerciseProtocol)
-  ;;(already_done_ex_protocol ?ex - ExerciseProtocol)
+  (time_for_night_video ?nv - NightVideo)
+  ;;(already_done_night_video ?nv - NightVideo)
 
   (dont_use_shutdown)
   (success)
@@ -129,9 +130,6 @@
             (not (priority_4))
             (not (time_for_night_video ?nv))
             (not (low_level_failed))
-            (forall (?medicine_pharmacy - MedicineRefillPharmacyReminderProtocol) (not (medicine_pharmacy_reminder_enabled ?medicine_pharmacy)) )
-            (forall (?mdrf - MedicineRefillReminderProtocol) (not (medicine_refill_reminder_enabled ?mdrf)) )
-            (forall (?w - WalkingProtocol) (not (walking_reminder_enabled ?w)) )
         )
 )
 
@@ -158,7 +156,7 @@
       (visible_location ?dest)
       (visible_location ?cur)
 
-      (person_currently_at ?p ?cur)
+      ;;(person_currently_at ?p ?cur)
       ;;(robot_at ?cur)
 
       (not (already_reminded_one_reminder ?o))

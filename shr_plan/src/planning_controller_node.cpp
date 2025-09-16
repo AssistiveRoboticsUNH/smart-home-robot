@@ -174,7 +174,7 @@ public:
         return TRUTH_VALUE::FALSE;
     }
 
-    TRUTH_VALUE time_for_night_video(TRUTH_VALUE val, ExerciseProtocol m) const override {
+    TRUTH_VALUE time_for_night_video(TRUTH_VALUE val, NightVideo m) const override {
         if (world_state_converter->get_world_state_msg()->night_video == 1){
             return TRUTH_VALUE::TRUE;
         }
@@ -371,6 +371,9 @@ int main(int argc, char **argv) {
         //  Ensure the action client exists
         ps.voice_action_client_ = rclcpp_action::create_client<shr_msgs::action::QuestionResponseRequest>(
                 world_state_converter, "question_response_action");
+        
+        ps.play_video_client_ = rclcpp_action::create_client<shr_msgs::action::PlayVideoRequest>(
+                world_state_converter, "/play_video");
 
         // while (!ps.voice_action_client_->wait_for_action_server(std::chrono::seconds(5))) {
         //     RCLCPP_INFO(rclcpp::get_logger("voice"), "Waiting for /question_response_action server...");
@@ -455,8 +458,8 @@ int main(int argc, char **argv) {
 
         std::string active_domain;
         auto protocol = ProtocolState::getActiveProtocol();
-
-        if (!protocol.name.empty() && !ProtocolState::isRobotInUse()) {
+        
+        if (!protocol.name.empty() && protocol.name!="night_video" && !ProtocolState::isRobotInUse()) {
             active_domain = "low_level_domain.pddl";
             updater.concurrent_update();
             auto domain = load_domain(active_domain);
