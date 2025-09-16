@@ -21,7 +21,8 @@
   (:init
       ;;(time_for_ex_protocol exercise)
       ;;(already_done_ex_protocol exercise)
-      
+      ;;(started)
+
       (priority_1)
       (visible_location home)
       (visible_location living_room)

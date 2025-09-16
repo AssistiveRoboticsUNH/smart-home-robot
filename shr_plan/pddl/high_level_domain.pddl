@@ -134,15 +134,16 @@
 (:action StartExerciseProtocol
 	:parameters (?ex - ExerciseProtocol)
 	:precondition (and
-	    (priority_4) 
+	    (priority_3) 
         ;; same as shutdown priority
         (time_for_ex_protocol ?ex)
         (not (already_done_ex_protocol ?ex))
+        (started)
 
 	)
 	:effect (and
 	        (success)
-            (not (priority_4))
+            (not (priority_3))
             (already_done_ex_protocol ?ex)
             (not (low_level_failed))
             (forall (?vid - VideoReminderProtocol) (not (video_reminder_enabled ?vid)) )
@@ -179,8 +180,6 @@
             (not (low_level_failed))
             (forall (?vid - VideoReminderProtocol) (not (video_reminder_enabled ?vid)) )
             (forall (?one - OneReminderProtocol) (not (one_reminder_enabled ?one)) )
-        
-
           )
 )
 
@@ -348,6 +347,16 @@
                     )
                 )
             )
+
+            (forall (?ex - ExerciseProtocol)
+                (not
+                    (and
+                        (time_for_ex_protocol ?ex)
+                        (not (already_done_ex_protocol ?ex))
+                    )
+                )
+            )
+            
 	    )
 	:effect (and (success)
 	            (not (priority_4))

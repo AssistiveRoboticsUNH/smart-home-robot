@@ -915,7 +915,7 @@ namespace pddl_lib {
 
         BT::NodeStatus high_level_domain_StartExerciseProtocol(const InstantiatedAction &action) override {
             auto &kb = KnowledgeBase::getInstance();
-
+                
             InstantiatedParameter protocol = action.parameters[0];
             
             auto [ps, lock] = ProtocolState::getConcurrentInstance();
@@ -1446,7 +1446,11 @@ namespace pddl_lib {
             return BT::NodeStatus::SUCCESS;
         }
 
-        BT::NodeStatus MoveToLandmark_generic(const InstantiatedAction &action) {
+        // BT::NodeStatus MoveToLandmark_generic(const InstantiatedAction &action) {
+        BT::NodeStatus MoveToLandmark_generic(const InstantiatedAction &action,
+                                      const std::string &predefined_location = "") {
+
+            
             std::cout << "MoveToLandmark: " << std::endl;
             auto &kb = KnowledgeBase::getInstance();
 
@@ -1459,27 +1463,34 @@ namespace pddl_lib {
 
             std::string log_message = std::string("weblog=") + "Move to landmark: " + location;
 
-            InstantiatedPredicate microwave_pred;
-            microwave_pred.name = "time_for_video";
-            microwave_pred.parameters.push_back({"microwave_reminder", "VideoReminderProtocol"});
-
-            InstantiatedPredicate coffee_pred;
-            coffee_pred.name = "time_for_video";
-            coffee_pred.parameters.push_back({"coffee_reminder", "VideoReminderProtocol"});
-
-            if (kb.find_predicate(microwave_pred)) {
-                std::cout << "🍱 Protocol: microwave_reminder is active (time_for_video)\n";
-                std::cout << "➡️  Going to kitchen\n";
-                location = "heating";
-            } else if (kb.find_predicate(coffee_pred)) {
-                std::cout << "☕ Protocol: coffee_reminder is active (time_for_video)\n";
-                std::cout << "➡️  Going to dining\n";
-                location = "coffee";
+            if (!predefined_location.empty()) {
+                // use predefined_location
+                location = predefined_location;
             } else {
-                std::cout << "❓ No matching video protocol active. Staying at current location: " << location << "\n";
-                // location remains unchanged
-            }
+                // fallback to action
+                InstantiatedPredicate microwave_pred;
+                microwave_pred.name = "time_for_video";
+                microwave_pred.parameters.push_back({"microwave_reminder", "VideoReminderProtocol"});
 
+                InstantiatedPredicate coffee_pred;
+                coffee_pred.name = "time_for_video";
+                coffee_pred.parameters.push_back({"coffee_reminder", "VideoReminderProtocol"});
+
+                if (kb.find_predicate(microwave_pred)) {
+                    std::cout << "🍱 Protocol: microwave_reminder is active (time_for_video)\n";
+                    std::cout << "➡️  Going to kitchen\n";
+                    location = "heating";
+                } else if (kb.find_predicate(coffee_pred)) {
+                    std::cout << "☕ Protocol: coffee_reminder is active (time_for_video)\n";
+                    std::cout << "➡️  Going to dining\n";
+                    location = "coffee";
+                } else {
+                    std::cout << "❓ No matching video protocol active. Staying at current location: " << location << "\n";
+                    // location remains unchanged
+                }
+
+            }
+            
 
             lock.Lock();
                         
