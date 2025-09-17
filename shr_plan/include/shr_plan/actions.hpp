@@ -1052,9 +1052,6 @@ namespace pddl_lib {
                 kb.erase_predicate(executed_voice_pred);
                 RCLCPP_INFO(ps.world_state_converter->get_logger(), "✅ erased (executed_voice voice_command)");
             }
-
-
-            
             
             // Just proceed with the protocol without moving
             instantiate_protocol("video_reminder.pddl");
@@ -1077,7 +1074,6 @@ namespace pddl_lib {
         
         BT::NodeStatus high_level_domain_Shutdown(const InstantiatedAction &action) override {
             std::cout << " ------ Shutdown  ----" << std::endl;
-           
             
             auto &kb = KnowledgeBase::getInstance();
 
@@ -1233,7 +1229,7 @@ namespace pddl_lib {
 
             const char* homeDir = std::getenv("HOME");
 
-            std::string cmd_startros = "/home/hello-robot/smarthome_ws/src/smart-home-robot/external/helper_script/start_nav.sh";
+            std::string cmd_startros = "/home/hello-robot/smarthome_ws/src/smart-home-robot/external/helper_scripts/start_nav.sh";
 
 //            std::string cmd_startros = std::string(homeDir);
 //            cmd_startros += "/start_nav.sh";

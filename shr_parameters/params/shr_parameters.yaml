@@ -33,7 +33,7 @@ shr_parameters:
         for smart plug that detect if robot is charging"}
     person_intervene: {type: string, default_value: "/person_intervene", description: "topic
         for checking good weather"}
-    display_ack: {type: string, default_value: "/screen_ack", description: "topic
+    display_ack: {type: string, default_value: "/display_rx", description: "topic
         for display ack"}
 
   person_tf: {type: string, default_value: "nathan", description: "person tf frame

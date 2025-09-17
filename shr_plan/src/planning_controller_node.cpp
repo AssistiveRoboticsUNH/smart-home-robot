@@ -146,6 +146,7 @@ public:
     }
 
     TRUTH_VALUE time_for_ex_protocol(TRUTH_VALUE val, ExerciseProtocol m) const override {
+        // if (world_state_converter->get_world_state_msg()->exercise == 1){
         if (world_state_converter->get_world_state_msg()->exercise == 1){
             return TRUTH_VALUE::TRUE;
         }
@@ -179,22 +180,6 @@ public:
         }
         return TRUTH_VALUE::FALSE;
     
-
-        // auto params = world_state_converter->get_params();
-        // std::cout << "m " << m << std::endl;
-       
-        // std::cout << "Type: " << typeid(m).name() << std::endl;
-        // std::cout << "-- : " << (m == "coffee_reminder") << std::endl;
-        // // std::cout << "time_for_video " << m << std::endl;
-
-        // if (auto index = get_inst_index(m, params)) {
-        //     std::string time_range = params.pddl.VideoReminderProtocols.video_reminder_times[index.value()];
-        //     // std::cout << "time_range: " << time_range << std::endl;
-        //     if (compare_time(time_range)) {
-        //         return TRUTH_VALUE::TRUE;
-        //     }
-        // }
-        // return TRUTH_VALUE::FALSE;
     }
 
     TRUTH_VALUE time_for_one_reminder(TRUTH_VALUE val, OneReminderProtocol m) const override {
@@ -264,8 +249,6 @@ private:
     
         return days;
     }
-
-    
 
         // ✅ Compares time and day to trigger protocols
     bool compare_time(std::string param_time) const {
@@ -497,14 +480,11 @@ int main(int argc, char **argv) {
 
     // if navigation is on set the started predicate to true
     if (ps.nav_client_->wait_for_action_server(std::chrono::seconds(10))) {
-            // kb.insert_predicate({"started", {}});
-            // std::cout << "insert_predicate started !.\n";
-              std::cout << "shuld insert_predicate started !.\n";
-
+            kb.insert_predicate({"started", {}});
+            std::cout << "insert_predicate started !.\n";
     }
 
-    kb.insert_predicate({"started", {}});
-    std::cout << "insert_predicate started !.\n";
+    
 
     while (true) {
         rclcpp::sleep_for(std::chrono::seconds(1));

@@ -102,7 +102,14 @@ public:
         screen_ack_sub_ = create_subscription<std_msgs::msg::String>(
                 params.topics.display_ack, 10, [this](const std_msgs::msg::String::SharedPtr msg) {
                     std::lock_guard<std::mutex> lock(world_state_mtx);
-                    world_state_->screen_ack = msg->data;
+
+                    std::string web_data = msg->data;
+                    world_state_->screen_ack = web_data;
+
+                    if (web_data.find("exercise_requested") != std::string::npos) {
+                        world_state_->exercise = true;
+                    }
+
                 });
                 
 
@@ -112,11 +119,11 @@ public:
                     world_state_->coffee = msg->data;
                 });
 
-        exercise_sub_ = create_subscription<std_msgs::msg::Bool>(
-               "exercise", 10, [this](const std_msgs::msg::Bool::SharedPtr msg) {
-                    std::lock_guard<std::mutex> lock(world_state_mtx);
-                    world_state_->exercise = msg->data;
-                });
+        // exercise_sub_ = create_subscription<std_msgs::msg::Bool>(
+        //        "exercise", 10, [this](const std_msgs::msg::Bool::SharedPtr msg) {
+        //             std::lock_guard<std::mutex> lock(world_state_mtx);
+        //             world_state_->exercise = msg->data;
+        //         });
 
 
         heating_food_sub_ = create_subscription<std_msgs::msg::Bool>(
