@@ -111,35 +111,8 @@ def generate_launch_description():
     #     executable='planning_controller_node',
     #     output='screen'
     # )
-    gpu = False
-    if gpu:
-        apriltags_zed = IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(PathJoinSubstitution([
-                get_package_share_directory('apriltag_ros'), 'launch', 'tag_zed.launch.py']))
-        )
-        ld.add_action(apriltags_zed)
 
-        ## zed wrapper
-        zed_wrapper = IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(PathJoinSubstitution([
-                get_package_share_directory('zed_wrapper'), 'launch', 'zed2i.launch.py']))
-        )
-        ld.add_action(zed_wrapper)
 
-        ## particle filter
-        # particle_filter = Node(
-        #     package='particle_filter',
-        #     executable='particle_filter_node',
-        #     output='screen'
-        # )
-        # ld.add_action(particle_filter)
-
-    # ld.add_action(planner_cmd)
-    #     ld.add_action(nav_cmd)
-    # ld.add_action(logger_node)
-    # ld.add_action(jackal_navigation)
-    # ld.add_action(realsense_cam)
-    # ld.add_action(apriltags_realsense_docking)
     ld.add_action(charger)
     ld.add_action(apriltags_realsense_loc)
     ld.add_action(tf_broadcast)

@@ -28,7 +28,9 @@ class SimpleZmqSenderAction(Node):
     def display_callback(self, msg):
        
         # print(f"[Received] {msg.data}")  # print the message content
-        if "RES:Video finished" in msg.data:
+        
+        # print(f"RES:video_finished" , {"RES:video_finished" in msg.data}) 
+        if "RES:video_finished" in msg.data:
             self.video_finished = True
             print("callback self.video_finished", self.video_finished)
             self.get_logger().info("Video finished received!")

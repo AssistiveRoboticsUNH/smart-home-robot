@@ -123,6 +123,7 @@
 	    (priority_4) 
         ;; same as shutdown priority
         (time_for_night_video ?nv)
+        (started)
 
 	)
 	:effect (and

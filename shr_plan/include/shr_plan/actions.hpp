@@ -653,7 +653,7 @@ namespace pddl_lib {
                 if (!pred_started){
 
                     RCLCPP_INFO(rclcpp::get_logger("########## STARTT #################"), "Your message here");
-
+                    RCLCPP_INFO(rclcpp::get_logger(std::string("weblog=") + "starting ros in idle"), "user...");
                     // const char* homeDir = std::getenv("HOME");
                     // std::string cmd_startros = std::string(homeDir);
                     // cmd_startros += "/start_nav.sh";
@@ -662,7 +662,7 @@ namespace pddl_lib {
                     std::string cmd_startros = "/home/hello-robot/smarthome_ws/src/smart-home-robot/external/helper_scripts/start_nav.sh";
                     std::system(cmd_startros.c_str());
 
-        
+                    
                     std::cout << " ------ finish start ----" << std::endl;
                     kb.insert_predicate({"started", {}});
 
@@ -690,8 +690,6 @@ namespace pddl_lib {
                 ps.undocking_->async_send_goal(goal_msg, send_goal_options_dock);
                 auto tmp_dock = ps.active_protocol;
             
-              
-
                 while (*success_undock == -1) {
                     if (!(tmp_dock == ps.active_protocol)) {
                         ps.undocking_->async_cancel_all_goals();
@@ -1041,7 +1039,7 @@ namespace pddl_lib {
             std::string log_message = std::string("weblog=") + currentDateTime + " high_level_domain_StartNightVideo" + " started";
             RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
             
-            int rep = 2;
+            int rep = 5;
             int wait_time = 10; // seconds
             for (int i = 0; i < rep; i++) {
 
