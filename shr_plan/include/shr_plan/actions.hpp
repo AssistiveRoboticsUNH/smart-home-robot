@@ -919,12 +919,18 @@ namespace pddl_lib {
             InstantiatedParameter protocol = action.parameters[0];
             
             auto [ps, lock] = ProtocolState::getConcurrentInstance();
-            lock.Lock();
+            
             ps.active_protocol = protocol;
             std::string currentDateTime = getCurrentDateTime();
             std::string log_message = std::string("weblog=") + currentDateTime + " high_level_domain_StartExerciseProtocol" + " started";
             RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
             
+
+            // move to location
+             std::cout << "Move to landmark generic " << std::endl;
+            MoveToLandmark_generic(action, "exercise");
+            
+            lock.Lock();
 
             std::ifstream file("/home/hello-robot/smarthome_ws/src/smart-home-robot/shr_plan/include/shr_plan/exercise.json");
             if (!file.is_open()) {
@@ -1455,8 +1461,8 @@ namespace pddl_lib {
             auto &kb = KnowledgeBase::getInstance();
 
             /// move robot to location
-            std::string location = action.parameters[2].name;
-            std::cout << "MoveToLandmark: location = " << location << std::endl;
+            std::string location; 
+            std::cout << "MoveToLandmark location:  " << predefined_location << std::endl;
 
             auto [ps, lock] = ProtocolState::getConcurrentInstance();
             std::cout << "ps.world_state_converter->get_world_state_msg()->robot_charging: " << ps.world_state_converter->get_world_state_msg()->robot_charging << std::endl;
@@ -1466,8 +1472,13 @@ namespace pddl_lib {
             if (!predefined_location.empty()) {
                 // use predefined_location
                 location = predefined_location;
+                std::cout << "location is not empty " << predefined_location << std::endl;
             } else {
+                
                 // fallback to action
+                location = action.parameters[2].name;
+
+                // if there is a need to overwrite
                 InstantiatedPredicate microwave_pred;
                 microwave_pred.name = "time_for_video";
                 microwave_pred.parameters.push_back({"microwave_reminder", "VideoReminderProtocol"});

@@ -497,18 +497,21 @@ int main(int argc, char **argv) {
 
     // if navigation is on set the started predicate to true
     if (ps.nav_client_->wait_for_action_server(std::chrono::seconds(10))) {
-            kb.insert_predicate({"started", {}});
-            std::cout << "insert_predicate started !.\n";
+            // kb.insert_predicate({"started", {}});
+            // std::cout << "insert_predicate started !.\n";
+              std::cout << "shuld insert_predicate started !.\n";
+
     }
 
-    
+    kb.insert_predicate({"started", {}});
+    std::cout << "insert_predicate started !.\n";
 
     while (true) {
         rclcpp::sleep_for(std::chrono::seconds(1));
 
         std::string active_domain;
         auto protocol = ProtocolState::getActiveProtocol();
-        std::cout << "protocol.name " << protocol.name << std::endl;
+        // std::cout << "protocol.name " << protocol.name << std::endl;
         if (!protocol.name.empty() &&  protocol.name != "exercise" && !ProtocolState::isRobotInUse()) {
             active_domain = "low_level_domain.pddl";
             updater.concurrent_update();
