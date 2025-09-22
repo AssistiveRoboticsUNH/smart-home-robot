@@ -195,12 +195,12 @@ class LocalizationActionServer(Node):
                 self.transform_cam_in_aptag_dict = {}
                 try:
                     for at in msg.detections:
-                        print('self.msg.detections id' , at.id)
+                        # print('self.msg.detections id' , at.id)
                         if at.id == 203:
                             continue
                         self.aptags_detected = True
-                        print('self.aptags_detected' , self.aptags_detected)
-                        print('self.aptags_detected' , self.aptags_detected)
+                        # print('self.aptags_detected' , self.aptags_detected)
+                        # print('self.aptags_detected' , self.aptags_detected)
                         source_frame = "tag_" + str(at.id)  # from
                         print("source frame", source_frame)
                         transformation = self.tf_buffer.lookup_transform(source_frame, frame, rclpy.time.Time(),

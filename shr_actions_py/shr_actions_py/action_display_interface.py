@@ -8,6 +8,7 @@ import os
 
 def main():
     # Initialize ZeroMQ context and shared socket
+    
     try:
         ip_list = os.popen('hostname -I').read().strip().split()
         ip_address = next(ip for ip in ip_list if ip.startswith('192.'))
@@ -17,6 +18,7 @@ def main():
         print("⚠️ Could not detect 192.* IP. Falling back to default:", ip_address)
     else:
         print("✅ ZMQ LOCAL IP Address detected:", ip_address)
+
 
     # Initialize ROS 2
     rclpy.init()

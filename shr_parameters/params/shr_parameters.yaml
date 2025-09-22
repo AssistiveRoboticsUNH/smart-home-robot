@@ -7,7 +7,7 @@ shr_parameters:
       instances: {type: string_array, default_value: ["am_meds", "pm_meds"], description: "medicine
           protocols"}
       take_medication_times: {type: string_array, default_value: ["Everyday 12h00m0s/13h00m0s",
-          "Everyday 16h00m0s/17h30m0s"], description: "time that each protocol is
+          "Everyday 21h00m0s/22h30m0s"], description: "time that each protocol is
           triggered"}
     VideoReminderProtocols:
       instances: {type: string_array, default_value: ["coffee_reminder", "microwave_reminder"],

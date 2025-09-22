@@ -41,11 +41,9 @@ class ReadScriptActionServer(Node):
         self.display_pub.publish(String(data="0"))
         self.get_logger().info("weblog="+'Sent ZeroMQ message: 0')
 
-
         wavfilename = self.create_mp4_from_text(file_path)
         os.system('mpg321 ' + wavfilename)
-        
-        
+
         self.get_logger().info("weblog="+'Reading script was successful')
         result.status = "success"
         
