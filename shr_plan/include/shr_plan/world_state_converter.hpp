@@ -132,7 +132,7 @@ public:
             world_state_->heating_food = msg->data;
         });
 
-        bool olson = true;
+        bool olson = false;
         std::filesystem::path pkg_dir = ament_index_cpp::get_package_share_directory("shr_resources");
         std::string mesh_file_robot;
         std::string mesh_file_person;
