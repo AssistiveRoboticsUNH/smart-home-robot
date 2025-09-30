@@ -174,7 +174,7 @@
       (started)
 	)
 	:effect (and
-	        ;;(success)
+	        (success)
             (not (priority_2))
             (medicine_protocol_enabled ?m)
             (not (low_level_failed))
