@@ -25,7 +25,7 @@ private:
     rclcpp::Subscription<std_msgs::msg::String>::SharedPtr screen_ack_sub_;
     rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr coffee_sub_;
     rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr heating_food_sub_;
-    rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr exercise_sub_;
+    // rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr exercise_sub_;
 
     std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
     std::shared_ptr<tf2_ros::TransformListener> tf_listener_;

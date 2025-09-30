@@ -148,6 +148,8 @@ public:
     TRUTH_VALUE time_for_ex_protocol(TRUTH_VALUE val, ExerciseProtocol m) const override {
         // if (world_state_converter->get_world_state_msg()->exercise == 1){
         if (world_state_converter->get_world_state_msg()->exercise == 1){
+            std::cout << "Exercise is set to true " << std::endl;
+
             return TRUTH_VALUE::TRUE;
         }
         
@@ -491,7 +493,9 @@ int main(int argc, char **argv) {
 
         std::string active_domain;
         auto protocol = ProtocolState::getActiveProtocol();
+
         // std::cout << "protocol.name " << protocol.name << std::endl;
+        
         if (!protocol.name.empty() &&  protocol.name != "exercise" && !ProtocolState::isRobotInUse()) {
             active_domain = "low_level_domain.pddl";
             updater.concurrent_update();

@@ -678,7 +678,7 @@ namespace pddl_lib {
 //                std::string cmd_startros = std::string(homeDir);
 //                cmd_startros += "/start_nav.sh";
 
-                std::string cmd_startros = "/home/hello-robot/smarthome_ws/src/smart-home-robot/external/helper_script/start_nav.sh";
+                std::string cmd_startros = "/home/hello-robot/smarthome_ws/src/smart-home-robot/external/helper_scripts/start_nav.sh";
 
                 std::system(cmd_startros.c_str());
 
@@ -1629,7 +1629,7 @@ namespace pddl_lib {
                     std::string end_str = format_time(end);
                     std::cout << "end time: " << end_str << "\n";
 
-                    std::string params_cmd = "python3 /home/hello-robot/smarthome_ws/src/smart-home-robot/external/helper_script/parameter_change.py MedicineProtocols am_meds " + start_str + " " + end_str;
+                    std::string params_cmd = "python3 /home/hello-robot/smarthome_ws/src/smart-home-robot/external/helper_scripts/parameter_change.py MedicineProtocols am_meds " + start_str + " " + end_str;
                     std::cout << "params_cmd : " << params_cmd << "\n";
                     std::string build_cmd = "cd /home/hello-robot/smarthome_ws && colcon build --symlink-install";
 

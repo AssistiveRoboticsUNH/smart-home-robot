@@ -29,7 +29,7 @@
     }
   },
   "series_2": {
-    "introduction": "Alright Dad, now we are going to do some balance exercises. It is important that you have a chair nearby to grab onto if you lose your balance. If an exercise is too challenging for you it’s OK to skip it.",
+    "introduction": "Alright Bill, now we are going to do some balance exercises. It is important that you have a chair nearby to grab onto if you lose your balance. If an exercise is too challenging for you it’s OK to skip it.",
     "type": "Balance_Final",
     "ex1": {
       "text": "We’ll start with an easy exercise that just requires you to stand quietly with your feet close together.",
@@ -136,5 +136,5 @@
       "video_name": "FINAL_neck_stretch.mp4"
     }
   },
-  "ending": "Great job Dad you’ve completed all the exercises!  We’ll do them again in a few days"
+  "ending": "Great job Bill you’ve completed all the exercises!  We’ll do them again in a few days"
 }
