@@ -9,3 +9,4 @@ builtin_interfaces/Time time
 bool coffee
 bool heating_food
 bool exercise
+bool exercise_stop

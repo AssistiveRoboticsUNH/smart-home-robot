@@ -19,9 +19,7 @@ setup(
     maintainer_email='mostafa.hussein@unh.edu',
     description='TODO: Package description',
     license='TODO: License declaration',
-    extras_require={
-    'test': ['pytest'],
-    },
+    tests_require=['pytest'],
     entry_points={
         'console_scripts': [
             'display_node = shr_display.display_node:main'

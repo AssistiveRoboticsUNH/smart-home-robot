@@ -17,9 +17,7 @@ setup(
     maintainer_email='noushad.sust@gmail.com',
     description='TODO: Package description',
     license='TODO: License declaration',
-    extras_require={
-    'test': ['pytest'],
-    },
+    tests_require=['pytest'],
     entry_points={
         'console_scripts': [
             'simple_logger=simple_logger.log_rosout:main',

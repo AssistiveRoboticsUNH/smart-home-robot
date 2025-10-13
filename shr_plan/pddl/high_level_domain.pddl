@@ -54,6 +54,7 @@
   ;; exercise protocol
   (time_for_ex_protocol ?ex - ExerciseProtocol)
   (already_done_ex_protocol ?ex - ExerciseProtocol)
+  (stop_exercise ?ex - ExerciseProtocol)
 
 
   (low_level_failed)
@@ -139,6 +140,7 @@
         (time_for_ex_protocol ?ex)
         (not (already_done_ex_protocol ?ex))
         (started)
+        (not (stop_exercise ?ex))
 
 	)
 	:effect (and
@@ -353,6 +355,7 @@
                     (and
                         (time_for_ex_protocol ?ex)
                         (not (already_done_ex_protocol ?ex))
+                        (not (stop_exercise ?ex))
                     )
                 )
             )

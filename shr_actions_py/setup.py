@@ -17,9 +17,7 @@ setup(
     maintainer_email='pac48@wildcats.unh.edu',
     description='TODO: Package description',
     license='TODO: License declaration',
-    extras_require={
-    'test': ['pytest'],
-    },
+    tests_require=['pytest'],
     entry_points={
         'console_scripts': [
                             'read_script_action = shr_actions_py.read_script_action:main',

@@ -47,7 +47,7 @@ class shr_parameters:
             person_eating = "/person_eating"
             robot_charging = "/charging"
             person_intervene = "/person_intervene"
-            display_ack = "/screen_ack"
+            display_ack = "/display_rx"
         topics = __Topics()
 
 
@@ -62,6 +62,7 @@ class shr_parameters:
             self.declare_params()
 
             self.node_.add_on_set_parameters_callback(self.update)
+            self.user_callback = None
             self.clock_ = Clock()
 
         def get_params(self):
@@ -99,6 +100,12 @@ class shr_parameters:
         def set_params_from_dict(self, param_dict):
             params_to_set = self.unpack_parameter_dict('', param_dict)
             self.update(params_to_set)
+
+        def set_user_callback(self, callback):
+            self.user_callback = callback
+
+        def clear_user_callback(self):
+            self.user_callback = None
 
         def refresh_dynamic_parameters(self):
             updated_params = self.get_params()
@@ -179,6 +186,8 @@ class shr_parameters:
 
             updated_params.stamp_ = self.clock_.now()
             self.update_internal_params(updated_params)
+            if self.user_callback:
+                self.user_callback(self.get_params())
             return SetParametersResult(successful=True)
 
         def update_internal_params(self, updated_params):
@@ -253,7 +262,7 @@ class shr_parameters:
                 self.node_.declare_parameter(self.prefix_ + "topics.person_intervene", parameter, descriptor)
 
             if not self.node_.has_parameter(self.prefix_ + "topics.display_ack"):
-                descriptor = ParameterDescriptor(description="topic for display ack", read_only = False)
+                descriptor = ParameterDescriptor(description="topic for display rx", read_only = False)
                 parameter = updated_params.topics.display_ack
                 self.node_.declare_parameter(self.prefix_ + "topics.display_ack", parameter, descriptor)
 

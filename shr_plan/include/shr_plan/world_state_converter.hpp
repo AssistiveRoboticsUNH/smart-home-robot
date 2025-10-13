@@ -39,6 +39,7 @@ private:
     std::unordered_map<std::string, Eigen::MatrixXd> mesh_vert_map_person;
     double patient_x;
     double patient_y;
+    bool exercise_started = false;
 public:
 
     WorldStateListener(const std::string &node_name, std::shared_ptr<shr_parameters::ParamListener> param_listener)
@@ -108,6 +109,12 @@ public:
 
                     if (web_data.find("exercise_requested") != std::string::npos) {
                         world_state_->exercise = true;
+                        exercise_started = true;
+                    }
+
+                    if (web_data.find("exercise_stop") != std::string::npos) {
+                        if (exercise_started) {
+                            world_state_->exercise_stop = true;}
                     }
 
                 });
@@ -132,6 +139,7 @@ public:
             world_state_->heating_food = msg->data;
         });
 
+        
         bool olson = false;
         std::filesystem::path pkg_dir = ament_index_cpp::get_package_share_directory("shr_resources");
         std::string mesh_file_robot;

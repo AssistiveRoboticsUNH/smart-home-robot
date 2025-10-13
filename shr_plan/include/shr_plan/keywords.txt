@@ -3,3 +3,4 @@ already_reminded_medicine
 already_called_about_medicine
 already_showed_video
 already_gave_one_reminder
+stop_exercise

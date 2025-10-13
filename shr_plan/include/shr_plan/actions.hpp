@@ -1019,78 +1019,179 @@ namespace pddl_lib {
             return ret;
 
         }
+        // checks stopping mutliple times;
 
         BT::NodeStatus high_level_domain_StartExerciseProtocol(const InstantiatedAction &action) override {
             auto &kb = KnowledgeBase::getInstance();
-                
-            InstantiatedParameter protocol = action.parameters[0];
-            
-            auto [ps, lock] = ProtocolState::getConcurrentInstance();
-            
-            ps.active_protocol = protocol;
-            std::string currentDateTime = getCurrentDateTime();
-            std::string log_message = std::string("weblog=") + currentDateTime + " high_level_domain_StartExerciseProtocol" + " started";
-            RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
-            
 
-            // move to location
-             std::cout << "Move to landmark generic " << std::endl;
+            InstantiatedParameter protocol = action.parameters[0];
+            auto [ps, lock] = ProtocolState::getConcurrentInstance();
+            ps.active_protocol = protocol;
+
+            std::string currentDateTime = getCurrentDateTime();
+            std::string log_message = std::string("weblog=") + currentDateTime + 
+                " high_level_domain_StartExerciseProtocol started";
+            RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
+
+            // Move to exercise location
+            std::cout << "Move to landmark generic\n";
             MoveToLandmark_generic(action, "exercise");
-            
+
+            InstantiatedParameter exercise_param{"exercise", "ExerciseProtocol"};
+            InstantiatedPredicate stop_ex{"stop_exercise", {exercise_param}};
+
             lock.Lock();
 
             std::ifstream file("/home/hello-robot/smarthome_ws/src/smart-home-robot/shr_plan/include/shr_plan/exercise.json");
             if (!file.is_open()) {
-                std::cerr << "Error: could not open exercises.json" << std::endl;
+                std::cerr << "Error: could not open exercise.json\n";
                 return BT::NodeStatus::FAILURE;
             }
 
             json j;
             file >> j;
 
-            // std::cout << j["introduction"] << "\n\n";
+            // --- Helper lambda to check stop condition ---
+            auto should_stop = [&]() -> bool {
+                auto msg = ps.world_state_converter->get_world_state_msg();
+                if (msg && msg->exercise_stop) {
+                    std::cout << " Exercise stop detected — stopping exercise protocol.\n";
+                    kb.insert_predicate(stop_ex);
+                    return true;
+                }
+                return false;
+            };
+
             ReadScript(j["introduction"], ps, action);
-            
-            // Iterate through series
-            for (auto& [series_key, series_value] : j.items()) {
-                if (series_key.rfind("series_", 0) == 0) {
-                    std::cout << "---- " << series_key << " ----\n";
-                    // std::cout << series_value["introduction"] << "\n";
-                    ReadScript(series_value["introduction"], ps,action);
 
-                    std::string type_ = series_value["type"];
+            // --- Loop through series ---
+            for (auto &[series_key, series_value] : j.items()) {
+                if (series_key.rfind("series_", 0) != 0) continue;
 
-                    // Iterate through exercises in the series
-                    for (auto& [ex_key, ex_value] : series_value.items()) {
-                        if (ex_key.rfind("ex", 0) == 0) {
-                            // std::cout << "\n" << ex_value["text"] << "\n";
-                            
-                            std::string text = ex_value["text"];
-                            ReadScript(text, ps, action);
-                            int rep = ex_value["rep"];
-                            int wait_time = ex_value["time_between_rep_in_sec"];
-                            std::string video = ex_value["video_name"];
+                if (should_stop()) { lock.UnLock(); return BT::NodeStatus::SUCCESS; }
 
-                            // Play the video rep times with wait
-                            for (int i = 0; i < rep; i++) {
-                                playVideo(type_+"/"+video, ps, action);
+                std::cout << "---- " << series_key << " ----\n";
+                ReadScript(series_value["introduction"], ps, action);
 
-                                if (i < rep - 1) {
-                                    std::cout << "Waiting " << wait_time << " seconds...\n";
-                                    // std::this_thread::sleep_for(std::chrono::seconds(wait_time));
-                                    std::this_thread::sleep_for(std::chrono::seconds(5));
-                                }
-                            }
+                std::string type_ = series_value["type"];
+
+                // Loop through exercises in the series
+                for (auto &[ex_key, ex_value] : series_value.items()) {
+                    if (ex_key.rfind("ex", 0) != 0) continue;
+
+                    if (should_stop()) { lock.UnLock(); return BT::NodeStatus::SUCCESS; }
+
+                    std::string text = ex_value["text"];
+                    ReadScript(text, ps, action);
+
+                    int rep = ex_value["rep"];
+                    int wait_time = ex_value["time_between_rep_in_sec"];
+                    std::string video = ex_value["video_name"];
+
+                    for (int i = 0; i < rep; i++) {
+                        // Allow video to finish, then check for stop
+                        playVideo(type_ + "/" + video, ps, action);
+
+                        if (should_stop()) { lock.UnLock(); return BT::NodeStatus::SUCCESS; }
+
+                        if (i < rep - 1) {
+                            std::cout << "Waiting " << wait_time << " seconds...\n";
+                            std::this_thread::sleep_for(std::chrono::seconds(wait_time));
                         }
                     }
                 }
             }
 
-            ReadScript(j["ending"], ps,action);
+            ReadScript(j["ending"], ps, action);
 
             lock.UnLock();
             return BT::NodeStatus::SUCCESS;
         }
+
+        // BT::NodeStatus high_level_domain_StartExerciseProtocol(const InstantiatedAction &action) override {
+        //     auto &kb = KnowledgeBase::getInstance();
+                
+        //     InstantiatedParameter protocol = action.parameters[0];
+            
+        //     auto [ps, lock] = ProtocolState::getConcurrentInstance();
+            
+        //     ps.active_protocol = protocol;
+        //     std::string currentDateTime = getCurrentDateTime();
+        //     std::string log_message = std::string("weblog=") + currentDateTime + " high_level_domain_StartExerciseProtocol" + " started";
+        //     RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
+            
+
+        //     // move to location
+        //      std::cout << "Move to landmark generic " << std::endl;
+        //     MoveToLandmark_generic(action, "exercise");
+
+        //     InstantiatedParameter exercise_param { "exercise", "ExerciseProtocol" };
+        //     InstantiatedPredicate stop_ex = {"stop_exercise", {exercise_param}};
+            
+
+        //     lock.Lock();
+
+        //     std::ifstream file("/home/hello-robot/smarthome_ws/src/smart-home-robot/shr_plan/include/shr_plan/exercise.json");
+        //     if (!file.is_open()) {
+        //         std::cerr << "Error: could not open exercises.json" << std::endl;
+        //         return BT::NodeStatus::FAILURE;
+        //     }
+
+        //     json j;
+        //     file >> j;
+
+        //     // std::cout << j["introduction"] << "\n\n";
+        //     ReadScript(j["introduction"], ps, action);
+            
+        //     // Iterate through series
+        //     for (auto& [series_key, series_value] : j.items()) {
+        //         if (series_key.rfind("series_", 0) == 0) {
+        //             std::cout << "---- " << series_key << " ----\n";
+        //             // std::cout << series_value["introduction"] << "\n";
+        //             ReadScript(series_value["introduction"], ps,action);
+
+        //             std::string type_ = series_value["type"];
+
+        //             // Iterate through exercises in the series
+        //             for (auto& [ex_key, ex_value] : series_value.items()) {
+        //                 if (ex_key.rfind("ex", 0) == 0) {
+        //                     // std::cout << "\n" << ex_value["text"] << "\n";
+                            
+        //                     std::string text = ex_value["text"];
+        //                     ReadScript(text, ps, action);
+        //                     int rep = ex_value["rep"];
+        //                     int wait_time = ex_value["time_between_rep_in_sec"];
+        //                     std::string video = ex_value["video_name"];
+
+        //                     // Play the video rep times with wait
+        //                     for (int i = 0; i < rep; i++) {
+
+        //                         auto msg = ps.world_state_converter->get_world_state_msg();
+        //                         if (msg && msg->exercise_stop) {
+        //                             std::cout << " Exercise stop detected — stopping exercise protocol." << std::endl;
+        //                             kb.insert_predicate(stop_ex);
+        //                             lock.UnLock();
+        //                             return BT::NodeStatus::SUCCESS;
+        //                         }
+
+        //                         playVideo(type_+"/"+video, ps, action);
+
+        //                         if (i < rep - 1) {
+        //                             std::cout << "Waiting " << wait_time << " seconds...\n";
+        //                             // std::this_thread::sleep_for(std::chrono::seconds(wait_time));
+        //                             std::this_thread::sleep_for(std::chrono::seconds(5));
+        //                         }
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+
+        //     ReadScript(j["ending"], ps,action);
+
+        //     lock.UnLock();
+        //     return BT::NodeStatus::SUCCESS;
+        // }
 
         // medicine_protocol
         BT::NodeStatus high_level_domain_StartMedicineProtocol(const InstantiatedAction &action) override {
@@ -1114,10 +1215,10 @@ namespace pddl_lib {
 
             char buffer[100];
             std::strftime(buffer, sizeof(buffer), "%A, %B %d - %I:%M %p", timeInfo);
-            std::string currentDateTime(buffer);
+            std::string currentDateTime_2(buffer);
 
             // --- Build the spoken or printed message ---
-            std::string script = "The current day and time is " + currentDateTime + ".";
+            std::string script = "The current day and time is " + currentDateTime_2 + ".";
 
             // --- Use your existing ReadScript() to handle it ---
             std::cout << "[Info] Sending time to ReadScript(): " << script << std::endl;
@@ -1572,6 +1673,64 @@ namespace pddl_lib {
             return BT::NodeStatus::SUCCESS;
         }
 
+        bool wordExistsInFileDebug(const std::string &filePath, const std::string &word) {
+            std::ifstream file(filePath);
+            if (!file.is_open()) {
+                std::cerr << "⚠️ Could not open file: " << filePath << std::endl;
+                return false;
+            }
+
+            std::string line;
+            bool found = false;
+
+            std::cout << "📄 File contents of " << filePath << ":\n";
+            std::cout << "------------------------------------\n";
+
+            while (std::getline(file, line)) {
+                // Remove possible carriage return
+                if (!line.empty() && line.back() == '\r')
+                    line.pop_back();
+
+                // Print each line
+                std::cout << line << std::endl;
+
+                // Check for word existence
+                if (line.find(word) != std::string::npos) {
+                    found = true;
+                }
+            }
+
+            std::cout << "------------------------------------\n";
+
+            file.close();
+            return found;
+        }
+
+        bool wordExistsInFile(const std::string &filePath, const std::string &word) {
+            std::ifstream file(filePath);
+            if (!file.is_open()) {
+                std::cerr << " Could not open file: " << filePath << std::endl;
+                return false;
+            }
+
+            std::string line;
+            while (std::getline(file, line)) {
+                // Remove possible carriage return
+                if (!line.empty() && line.back() == '\r') line.pop_back();
+
+                if (line.find(word) != std::string::npos) {
+                    file.close();
+                    return true;
+                }
+            }
+
+            file.close();
+            return false;
+        }
+        // coffee VideoReminderProtocol2
+        // microwave VideoReminderProtocol1
+
+
         // BT::NodeStatus MoveToLandmark_generic(const InstantiatedAction &action) {
         BT::NodeStatus MoveToLandmark_generic(const InstantiatedAction &action,
                                       const std::string &predefined_location = "") {
@@ -1594,34 +1753,26 @@ namespace pddl_lib {
                 location = predefined_location;
                 std::cout << "location is not empty " << predefined_location << std::endl;
             } else {
-                
                 // fallback to action
                 location = action.parameters[2].name;
 
-                // if there is a need to overwrite
-                InstantiatedPredicate microwave_pred;
-                microwave_pred.name = "time_for_video";
-                microwave_pred.parameters.push_back({"microwave_reminder", "VideoReminderProtocol"});
-
-                InstantiatedPredicate coffee_pred;
-                coffee_pred.name = "time_for_video";
-                coffee_pred.parameters.push_back({"coffee_reminder", "VideoReminderProtocol"});
-
-                if (kb.find_predicate(microwave_pred)) {
-                    std::cout << "🍱 Protocol: microwave_reminder is active (time_for_video)\n";
-                    std::cout << "➡️  Going to kitchen\n";
-                    location = "heating";
-                } else if (kb.find_predicate(coffee_pred)) {
-                    std::cout << "☕ Protocol: coffee_reminder is active (time_for_video)\n";
-                    std::cout << "➡️  Going to dining\n";
+                std::string planFilePath = "/home/hello-robot/planner_data/plan_solver/plan.txt";
+                
+                // coffee VideoReminderProtocol1
+                if (wordExistsInFileDebug(planFilePath, "VideoReminderProtocol2")){
+                    std::cout << " Protocol: coffee_reminder is active (time_for_video)\n";
+                    std::cout << " Going to dining\n";
                     location = "coffee";
+                } else if (wordExistsInFileDebug(planFilePath, "VideoReminderProtocol1")){
+                    // microwave VideoReminderProtocol2
+                    std::cout << "Protocol: microwave_reminder is active (time_for_video)\n";
+                    std::cout << "Going to kitchen\n";
+                    location = "heating";
                 } else {
-                    std::cout << "❓ No matching video protocol active. Staying at current location: " << location << "\n";
+                    std::cout << "No matching video protocol active. Staying at current location: " << location << "\n";
                     // location remains unchanged
                 }
-
             }
-            
 
             lock.Lock();
                         
@@ -1648,7 +1799,7 @@ namespace pddl_lib {
             navigation_goal_.pose.header.frame_id = "map";
             navigation_goal_.pose.header.stamp = ps.world_state_converter->now();
             if (auto transform = ps.world_state_converter->get_tf("map", location)) {
-                std::cout << "degug location moveto landmark" << location << std::endl;
+                std::cout << "debug location moveto landmark" << location << std::endl;
                 navigation_goal_.pose.pose.orientation = transform.value().transform.rotation;
                 navigation_goal_.pose.pose.position.x = transform.value().transform.translation.x;
                 navigation_goal_.pose.pose.position.y = transform.value().transform.translation.y;
@@ -1670,24 +1821,6 @@ namespace pddl_lib {
         }
 
         BT::NodeStatus shr_domain_MoveToLandmark(const InstantiatedAction &action) override {
-            
-            // auto &kb = KnowledgeBase::getInstance();
-           
-            // // if low level and the person is outside then abort plan
-            // InstantiatedParameter current_time = action.parameters[0];
-            // InstantiatedParameter landmark = {"outside", "Landmark"};
-            // InstantiatedParameter person_param = {"nathan", "Person"};
-            // InstantiatedPredicate pred_per_at{"person_at", {current_time, person_param, landmark}};
-            
-            // if (kb.find_predicate(pred_per_at)){
-            //     RCLCPP_WARN(rclcpp::get_logger("Low level MOVETO LANDMARK"),
-            //                                 " PERSON OUTSIDE. ");
-
-            //     abort(action);
-            //     return BT::NodeStatus::FAILURE;
-            // }
-
-              
             return MoveToLandmark_generic(action);
         }
 

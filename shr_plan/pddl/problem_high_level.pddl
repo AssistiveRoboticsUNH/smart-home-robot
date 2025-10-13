@@ -19,8 +19,13 @@
 
   )
   (:init
+      ;;(time_to_take_medicine am_meds)
+      ;;(time_for_video coffee_reminder)
+      ;;(time_for_video microwave_reminder)
+
       ;;(time_for_ex_protocol exercise)
       ;;(already_done_ex_protocol exercise)
+      ;;(stop_exercise exercise)
       ;;(started)
 
       (priority_1)
@@ -36,7 +41,6 @@
       ;;(time_for_one_reminder trash)
       ;;(one_reminder_enabled trash)
 
-      ;;(medicine_location living_room)
       ;;(gym_location living_room)
       ;;(medicine_refill_location living_room)
       ;;(medicine_pharmacy_location living_room)

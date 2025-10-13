@@ -9,25 +9,18 @@
 #include <sstream>
 #include <algorithm>
 #include <cmath>
-
 #include "ament_index_cpp/get_package_share_directory.hpp"
-
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_action/rclcpp_action.hpp"
-
 #include <rclcpp_action/client.hpp>
 #include "nav2_msgs/action/navigate_to_pose.hpp"
 #include <ament_index_cpp/get_package_share_directory.hpp>
-
-
 #include "shr_utils/geometry.hpp"
 #include <shr_parameters/shr_parameters.hpp>
 #include <shr_plan/actions.hpp>
-
 #include <shr_plan/world_state_converter.hpp>
 #include <shr_plan/intersection_helpers.hpp>
 #include <cstdlib>  // for getenv
-
 #include <typeinfo>
 
 using namespace pddl_lib;
@@ -50,7 +43,6 @@ std::optional<std::string> getPlan(const std::string &domain, const std::string 
     std::lock_guard<std::mutex> lock(mutex);
     // std::string path = homeDir + "/planner_data";
     std::string homeDir = std::getenv("HOME");
-//    std::cout << "homeDir: " << homeDir << std::endl;
     std::string path = homeDir + "/planner_data";
     {
         std::ofstream domainFile(path + "/plan_solver/domain.pddl");
@@ -59,7 +51,6 @@ std::optional<std::string> getPlan(const std::string &domain, const std::string 
         problemFile << problem;
     }
 
-//    std::string cmd = "ros2 run plan_solver_py plan_solver -o /home/olagh48652/planner_data/plan_solver/domain.pddl -f /home/olagh48652/planner_data/plan_solver/problem.pddl > /dev/null";
     std::string cmd = "ros2 run plan_solver_py plan_solver -o ";
     cmd += homeDir;
     cmd += "/planner_data/plan_solver/domain.pddl -f ";
@@ -104,6 +95,7 @@ public:
         if (pred_started){
             // RCLCPP_WARN(rclcpp::get_logger("pred_started inside AT"), "robot at true  ");
             if (world_state_converter->check_robot_at_loc(lm)) {
+                std::cout << "robot at true " << lm << std::endl;
                 return TRUTH_VALUE::TRUE;
             } else {
                 return TRUTH_VALUE::FALSE;
@@ -155,6 +147,16 @@ public:
         
         return TRUTH_VALUE::FALSE;
     }
+
+    // TRUTH_VALUE stop_exercise(TRUTH_VALUE val, ExerciseProtocol m) const override {
+    //     if (world_state_converter->get_world_state_msg()->exercise_stop == 1){
+    //         std::cout << "Exercise  Stop is set to true " << std::endl;
+
+    //         return TRUTH_VALUE::TRUE;
+    //     }
+        
+    //     return TRUTH_VALUE::FALSE;
+    // }
 
     TRUTH_VALUE time_to_take_medicine(TRUTH_VALUE val, MedicineProtocol m) const override {
         auto params = world_state_converter->get_params();
@@ -479,6 +481,7 @@ int main(int argc, char **argv) {
     kb.insert_predicate(pred_rob_at);
 
     std::cout << "insert_predicate robot_at at home !.\n";
+
 
     // if navigation is on set the started predicate to true
     if (ps.nav_client_->wait_for_action_server(std::chrono::seconds(10))) {
