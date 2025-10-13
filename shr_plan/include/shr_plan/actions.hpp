@@ -1107,6 +1107,23 @@ namespace pddl_lib {
             // Move to the medicine location if not already there
             instantiate_protocol("medicine_reminder.pddl");
 
+            // read time
+             auto now = std::chrono::system_clock::now();
+            std::time_t currentTime = std::chrono::system_clock::to_time_t(now);
+            std::tm *timeInfo = std::localtime(&currentTime);
+
+            char buffer[100];
+            std::strftime(buffer, sizeof(buffer), "%A, %B %d - %I:%M %p", timeInfo);
+            std::string currentDateTime(buffer);
+
+            // --- Build the spoken or printed message ---
+            std::string script = "The current day and time is " + currentDateTime + ".";
+
+            // --- Use your existing ReadScript() to handle it ---
+            std::cout << "[Info] Sending time to ReadScript(): " << script << std::endl;
+            ReadScript(script, ps, action);
+
+
             ps.active_protocol = protocol;
             lock.UnLock();
             return BT::NodeStatus::SUCCESS;
