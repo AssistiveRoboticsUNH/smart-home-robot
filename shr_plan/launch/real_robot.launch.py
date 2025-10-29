@@ -40,7 +40,7 @@ def generate_launch_description():
             get_package_share_directory('apriltag_ros'), 'launch', 'tag_realsense_loc.launch.py']))
     )
 
-    olson = False
+    olson = True
     if olson:
         tf_broadcast = IncludeLaunchDescription(
                     PythonLaunchDescriptionSource(PathJoinSubstitution([
