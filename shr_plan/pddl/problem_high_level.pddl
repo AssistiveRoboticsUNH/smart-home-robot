@@ -7,6 +7,7 @@
      coffee_reminder microwave_reminder - VideoReminderProtocol
      trash - OneReminderProtocol
      exercise - ExerciseProtocol
+     night_video - NightVideo
 
      nathan - Person
      t1 - Time ;;t2 t3 t4 t5
@@ -23,15 +24,27 @@
       ;;(already_done_ex_protocol exercise)
       ;;(started)
 
+      ;;(time_for_night_video night_video)
+      ;;(already_done_night_video night_video)
+      ;;(started)
+
+      ;;(time_for_video coffee_reminder)
+      ;;(already_showed_video coffee_reminder)
+
+      ;;(time_to_take_medicine am_meds)
+      ;;(already_took_medicine am_meds)
+      ;;(already_reminded_medicine am_meds)
+      ;;(shutdown_done)
+
       (priority_1)
       (visible_location home)
       (visible_location living_room)
       (not_visible_location bedroom)
       (not_visible_location outside)
      
-      ;;(person_currently_at nathan living_room)
-      ;;(person_at t1 nathan living_room)
-      ;;(robot_at home)
+      (person_currently_at nathan living_room)
+      (person_at t1 nathan living_room)
+      (robot_at home)
 
       ;;(time_for_one_reminder trash)
       ;;(one_reminder_enabled trash)

@@ -145,6 +145,14 @@ public:
         }
     }
 
+    TRUTH_VALUE time_for_night_video(TRUTH_VALUE val, NightVideo m) const override {
+        if (world_state_converter->get_world_state_msg()->night_video == 1){
+            return TRUTH_VALUE::TRUE;
+        }
+        
+        return TRUTH_VALUE::FALSE;
+    }
+
     TRUTH_VALUE time_for_ex_protocol(TRUTH_VALUE val, ExerciseProtocol m) const override {
         // if (world_state_converter->get_world_state_msg()->exercise == 1){
         if (world_state_converter->get_world_state_msg()->exercise == 1){
@@ -402,7 +410,7 @@ int main(int argc, char **argv) {
 //            RCLCPP_INFO(rclcpp::get_logger("make_call"), "Waiting for /make_call action server...");
 //        }
 
-        // 🔴 Ensure the action client exists
+        //  Ensure the action client exists
         ps.voice_action_client_ = rclcpp_action::create_client<shr_msgs::action::QuestionResponseRequest>(
                 world_state_converter, "question_response_action");
 
@@ -486,8 +494,6 @@ int main(int argc, char **argv) {
             std::cout << "insert_predicate started !.\n";
     }
 
-    
-
     while (true) {
         rclcpp::sleep_for(std::chrono::seconds(1));
 
@@ -495,8 +501,8 @@ int main(int argc, char **argv) {
         auto protocol = ProtocolState::getActiveProtocol();
 
         // std::cout << "protocol.name " << protocol.name << std::endl;
-        
-        if (!protocol.name.empty() &&  protocol.name != "exercise" && !ProtocolState::isRobotInUse()) {
+
+        if (!protocol.name.empty() &&  protocol.name != "exercise" &&  protocol.name != "night_video" && !ProtocolState::isRobotInUse()) {
             active_domain = "low_level_domain.pddl";
             updater.concurrent_update();
             auto domain = load_domain(active_domain);

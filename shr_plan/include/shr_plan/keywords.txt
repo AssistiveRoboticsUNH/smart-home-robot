@@ -3,3 +3,5 @@ already_reminded_medicine
 already_called_about_medicine
 already_showed_video
 already_gave_one_reminder
+already_done_night_video
+already_done_ex_protocol

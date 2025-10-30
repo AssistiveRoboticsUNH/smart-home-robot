@@ -10,6 +10,7 @@
   VideoReminderProtocol
   MedicineProtocol
   OneReminderProtocol
+  NightVideo
   Landmark
   Time
   Person
@@ -24,6 +25,8 @@
 (:predicates
   (started)
   (dont_shutdown)
+
+  (shutdown_done)
 
   (robot_at ?lmr - Landmark)
   (person_at ?t - Time ?p - Person ?lmp - Landmark)
@@ -55,6 +58,9 @@
   (time_for_ex_protocol ?ex - ExerciseProtocol)
   (already_done_ex_protocol ?ex - ExerciseProtocol)
 
+  ;; night video protocol
+  (time_for_night_video ?nv - NightVideo)
+  (already_done_night_video ?nv - NightVideo)
 
   (low_level_failed)
 
@@ -143,6 +149,7 @@
 	)
 	:effect (and
 	        (success)
+            (not (shutdown_done))
             (not (priority_3))
             (already_done_ex_protocol ?ex)
             (not (low_level_failed))
@@ -150,6 +157,29 @@
             (forall (?one - OneReminderProtocol) (not (one_reminder_enabled ?one)) )
             (forall (?med - MedicineProtocol) (not (medicine_protocol_enabled ?med)) )
           )
+)
+
+(:action StartNightVideo
+	:parameters (?nv - NightVideo)
+	:precondition (and
+	    (priority_3) 
+        ;; same as shutdown priority
+        (time_for_night_video ?nv)
+        (not (already_done_night_video ?nv))
+        (started)
+
+	)
+	:effect (and
+	        (success)
+            (not (shutdown_done))
+            (not (priority_3))
+            (not (time_for_night_video ?nv))
+            (already_done_night_video ?nv)
+            (not (low_level_failed))
+            (forall (?vid - VideoReminderProtocol) (not (video_reminder_enabled ?vid)) )
+            (forall (?one - OneReminderProtocol) (not (one_reminder_enabled ?one)) )
+            (forall (?med - MedicineProtocol) (not (medicine_protocol_enabled ?med)) )
+        )
 )
 
 
@@ -175,6 +205,7 @@
 	)
 	:effect (and
 	        (success)
+            (not (shutdown_done))
             (not (priority_2))
             (medicine_protocol_enabled ?m)
             (not (low_level_failed))
@@ -219,6 +250,7 @@
     )
 	:effect (and
 	          (success)
+              (not (shutdown_done))
 	          (not (priority_2))
 	          (video_reminder_enabled ?vid)
 	          (not (low_level_failed))
@@ -261,6 +293,7 @@
     )
 	:effect (and
 	          (success)
+              (not (shutdown_done))
 	          (not (priority_2))
 	          (one_reminder_enabled ?o)
 	          (not (low_level_failed))
@@ -311,6 +344,7 @@
 	        ;; has to be higher priority than idle
             (priority_4)
             ;;(dont_shutdown)
+            (not (shutdown_done))
 
             ;; CANT SHUTDOWN IF time to do something is true and
             ;; all predicates indicating that they it is done are false
@@ -359,6 +393,7 @@
             
 	    )
 	:effect (and (success)
+                (shutdown_done)
 	            (not (priority_4))
                 (not (low_level_failed))
                 (not started)

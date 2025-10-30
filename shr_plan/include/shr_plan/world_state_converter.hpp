@@ -26,6 +26,7 @@ private:
     rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr coffee_sub_;
     rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr heating_food_sub_;
     // rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr exercise_sub_;
+    rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr night_video_sub_;
 
     std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
     std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
@@ -76,7 +77,12 @@ public:
                     // 🔍 Debugging: Print received time
                     // RCLCPP_INFO(rclcpp::get_logger(std::string("user=") + "high_level_domain_Idle" + "started"), "⏳ Received protocol time update: sec = %d, nanosec = %d", msg->sec, msg->nanosec);
                 });
-                
+        
+        night_video_sub_ = create_subscription<std_msgs::msg::Bool>(
+                "night_video", 10, [this](const std_msgs::msg::Bool::SharedPtr msg) {
+                    std::lock_guard<std::mutex> lock(world_state_mtx);
+                    world_state_->night_video = msg->data;
+                });
 
         charging_sub_ = create_subscription<std_msgs::msg::Int32>(
                 params.topics.robot_charging, 10, [this](const std_msgs::msg::Int32::SharedPtr msg) {

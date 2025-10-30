@@ -20,6 +20,11 @@
 #include <nlohmann/json.hpp>
 #include <unistd.h>  // for mkstemp, close
 #include <cstdio> 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <regex>
+#include <vector>
 
 using json = nlohmann::json;
 // sudo apt-get install nlohmann-json3-dev
@@ -29,6 +34,7 @@ namespace pddl_lib {
 
     class ProtocolState {
     public:
+        std::string protocol_name = "";
         InstantiatedParameter active_protocol;
         std::shared_ptr <WorldStateListener> world_state_converter;
 
@@ -56,9 +62,9 @@ namespace pddl_lib {
         // name field should be the same as the name of the protocol in the high_level_problem
         // mak sure the txt files and mp3 are in shr_resources
         const std::unordered_map <InstantiatedParameter, std::unordered_map<std::string, std::pair < int, int>>> wait_times = {
-                {{"am_meds",                           "MedicineProtocol"},                       {{"wait", {900, 0}},
+                {{"am_meds",                           "MedicineProtocol"},                       {{"wait", {60, 0}},
                                                                                                   }},
-                {{"pm_meds",                           "MedicineProtocol"},                       { {"wait", {900, 0}},
+                {{"pm_meds",                           "MedicineProtocol"},                       { {"wait", {60, 0}},
                                                                                                   }},
                 {{"coffee_reminder",                   "VideoReminderProtocol"},                 { {"wait", {9, 0}},
                                                                                                   }},
@@ -877,7 +883,7 @@ namespace pddl_lib {
 
             // sleep for 30 seconds to deal with the delay from charging topic for safety so it away form the dock when nav2 takes over
             std::cout << " waiting  " << std::endl;
-            rclcpp::sleep_for(std::chrono::seconds(30));
+            rclcpp::sleep_for(std::chrono::seconds(15));
 
             //check if it actually docked if not undock so for safety so it away form the dock when nav2 takes over
             // can be removed
@@ -1092,6 +1098,46 @@ namespace pddl_lib {
             return BT::NodeStatus::SUCCESS;
         }
 
+        BT::NodeStatus high_level_domain_StartNightVideo(const InstantiatedAction &action) override {
+            auto &kb = KnowledgeBase::getInstance();
+
+            InstantiatedParameter protocol = action.parameters[0];
+            
+            auto [ps, lock] = ProtocolState::getConcurrentInstance();
+
+            //  move to bedroom first
+            ps.active_protocol = protocol;
+            std::string currentDateTime = getCurrentDateTime();
+            std::string log_message = std::string("weblog=") + currentDateTime + " high_level_domain_StartNightVideo" + " started";
+            RCLCPP_INFO(ps.world_state_converter->get_logger(), log_message.c_str());
+            
+
+            // move to location
+            std::cout << "Move to landmark generic " << std::endl;
+            MoveToLandmark_generic(action, "bedroom");
+
+            lock.Lock();
+            
+            int rep = 5;
+            int wait_time = 10; // seconds
+            for (int i = 0; i < rep; i++) {
+
+                std::string full_path= "file:///storage/emulated/0/Download/night_video.mp4";
+                std::cout << "[Playing] " << full_path << std::endl;
+                shr_msgs::action::PlayVideoRequest::Goal goal;
+                goal.file_name = full_path;
+
+                int result = send_goal_blocking(goal, action, ps);
+
+                if (i < rep - 1) {
+                    std::cout << "Waiting " << wait_time << " seconds...\n";
+                    std::this_thread::sleep_for(std::chrono::seconds(wait_time));
+                }
+            }
+            lock.UnLock();
+            return BT::NodeStatus::SUCCESS;
+        }
+
         // medicine_protocol
         BT::NodeStatus high_level_domain_StartMedicineProtocol(const InstantiatedAction &action) override {
             auto &kb = KnowledgeBase::getInstance();
@@ -1106,6 +1152,7 @@ namespace pddl_lib {
        
             // Move to the medicine location if not already there
             instantiate_protocol("medicine_reminder.pddl");
+            ps.protocol_name = "medicine_reminder.pddl";
 
             ps.active_protocol = protocol;
             lock.UnLock();
@@ -1125,6 +1172,7 @@ namespace pddl_lib {
 
             // Move to the medicine location if not already there
             instantiate_protocol("one_reminder.pddl");
+            ps.protocol_name = "one_reminder.pddl";
 
 
             ps.active_protocol = protocol;
@@ -1161,6 +1209,7 @@ namespace pddl_lib {
             
             // Just proceed with the protocol without moving
             instantiate_protocol("video_reminder.pddl");
+            ps.protocol_name = "video_reminder.pddl";
 
             ps.active_protocol = inst;
             lock.UnLock();
@@ -1189,14 +1238,14 @@ namespace pddl_lib {
             RCLCPP_INFO(ps.world_state_converter->get_logger(), "weblog=----Shutting Down Action----");
             // lock.Lock();
 
-            // ✅ Ensure publisher exists, create if necessary
+            // Ensure publisher exists, create if necessary
             if (!ps.getDisplayPublisher()) {
                 auto node = rclcpp::Node::make_shared("display_publisher_node");
                 ps.setDisplayPublisher(node->create_publisher<std_msgs::msg::String>("display_status", 10));
                 RCLCPP_INFO(rclcpp::get_logger("Shutdown"), "✅ Created publisher for display_status.");
             }
 
-            // ✅ Publish TURN_OFF before shutdown
+            // Publish TURN_OFF before shutdown
             auto message = std_msgs::msg::String();
             message.data = "TURN_OFF";
             ps.getDisplayPublisher()->publish(message);
@@ -1235,7 +1284,9 @@ namespace pddl_lib {
                     {"gym_reminder", "GymReminderProtocol"},
                     {"trash", "OneReminderProtocol"},
                     {"coffee_reminder", "VideoReminderProtocol"},
-                    {"microwave_reminder", "VideoReminderProtocol"}
+                    {"microwave_reminder", "VideoReminderProtocol"},
+                    {"night_video", "NightVideo"},
+                    {"exercise", "ExerciseProtocol"}
             };
 
             const std::unordered_map<std::string, std::vector<std::string>> keyword_protocol_ = {
@@ -1243,8 +1294,9 @@ namespace pddl_lib {
                     {"already_reminded_medicine", {"am_meds", "pm_meds"}},
                     {"already_called_about_medicine", {"am_meds", "pm_meds"}},
                     {"already_showed_video",{"coffee_reminder", "microwave_reminder"}},
-                    {"already_gave_one_reminder", {"trash"}}
-                  
+                    {"already_gave_one_reminder", {"trash"}},
+                    {"already_done_night_video", {"night_video"}},
+                    {"already_done_ex_protocol",{"exercise"}}
             };
 
             std::ifstream ifs(keywordsFile);
@@ -1296,27 +1348,105 @@ namespace pddl_lib {
 
             write_to_intersection(outputFile.c_str(), keyword_protocol_list);
 
+            // erase the non unique items in low level for not shutting down to work
+            // if (ps.active_protocol.name != "exercise" &&  ps.active_protocol.name != "night_video" && ps.protocol_name !=""){
+            //     // only needed for protocols that use low level
+            //     kb.clear();
+    
+            //     // auto high_level_domain_content = get_file_content("high_level_domain.pddl");
+            //     // auto high_level_domain = parse_domain(high_level_domain_content).value();
+            //     // auto current_high_level = parse_problem(kb.convert_to_problem(high_level_domain),
+            //     //                                         high_level_domain_content).value();
+
+            //     // auto protocol_content = get_file_content("problem_" + ps.protocol_name);
+            //     // auto domain_content = get_file_content("low_level_domain.pddl");
+            
+            //     // auto prob = parse_problem(protocol_content, domain_content).value();
+
+
+            //     // --- Load and Parse High-Level Domain ---
+            //     auto high_level_domain_content = get_file_content("high_level_domain.pddl");
+            //     std::cout << "\n==================== HIGH-LEVEL DOMAIN ====================\n";
+            //     std::cout << high_level_domain_content.substr(0, 500) << "\n";  // print first 500 chars for sanity check
+            //     if (high_level_domain_content.size() > 500)
+            //         std::cout << "... (truncated)\n";
+            //     std::cout << "============================================================\n";
+
+            //     auto high_level_domain = parse_domain(high_level_domain_content).value();
+
+            //     // --- Load and Parse High-Level Problem (converted from KB) ---
+            //     auto high_level_problem_str = kb.convert_to_problem(high_level_domain);
+            //     std::cout << "\n==================== HIGH-LEVEL PROBLEM (Generated) ====================\n";
+            //     std::cout << high_level_problem_str.substr(0, 500) << "\n";
+            //     if (high_level_problem_str.size() > 500)
+            //         std::cout << "... (truncated)\n";
+            //     std::cout << "=======================================================================\n";
+
+            //     auto current_high_level = parse_problem(high_level_problem_str, high_level_domain_content).value();
+
+            //     // --- Load Low-Level Domain and Problem ---
+            //     auto domain_content = get_file_content("low_level_domain.pddl");
+            //     std::cout << "\n==================== LOW-LEVEL DOMAIN ====================\n";
+            //     std::cout << domain_content.substr(0, 500) << "\n";
+            //     if (domain_content.size() > 500)
+            //         std::cout << "... (truncated)\n";
+            //     std::cout << "===========================================================\n";
+
+            //     auto protocol_content = get_file_content("problem_" + ps.protocol_name);
+            //     std::cout << "\n==================== LOW-LEVEL PROBLEM (" << ps.protocol_name << ") ====================\n";
+            //     std::cout << protocol_content.substr(0, 500) << "\n";
+            //     if (protocol_content.size() > 500)
+            //         std::cout << "... (truncated)\n";
+            //     std::cout << "=============================================================================\n";
+
+            //     auto prob = parse_problem(protocol_content, domain_content).value();
+
+            //     // --- Load into Knowledge Base ---
+            //     std::cout << "\n[INFO] Loading knowledge base with high-level and low-level problems...\n";
+
+            //     kb.load_kb(current_high_level);
+            //     kb.load_kb(prob);
+            //     kb.insert_predicate({"started", {}});
+
+            //     // insert predicates in itersection:
+            //     std::filesystem::path pkg_dir = ament_index_cpp::get_package_share_directory("shr_plan");
+            //     std::filesystem::path outputFile = pkg_dir / "include" / "shr_plan" / "intersection.txt";
+
+            //     std::cout << "outputFile: "  << outputFile.c_str() << std::endl;
+            //     auto predicates = read_predicates_from_file(outputFile.c_str());
+
+            //     // Print the predicates
+            //     for (const auto& [first, second, third] : predicates) {
+            //         std::cout << "Keyword: " << first << ", ProtocolName: " << second << ", ProtocolType: " << third << std::endl;
+            //         InstantiatedParameter active_protocol = {second, third};
+            //         InstantiatedPredicate pred{first, {active_protocol}};
+            //         kb.insert_predicate(pred);
+            //     }
+            // }
+
+            
+            // stop rebooting
             // KILING ROS2 
 
-            std::system("python3 /home/hello-robot/kill_ros.py");
+            // std::system("python3 /home/hello-robot/kill_ros.py");
             
-            rclcpp::sleep_for(std::chrono::seconds(120));
+        //     rclcpp::sleep_for(std::chrono::seconds(120));
         
-            // reboot
-            std::cout << " RUNNING REBOOT " << std::endl;
-            RCLCPP_INFO(ps.world_state_converter->get_logger(), "weblog=--- RUNNING REBOOT ---");
+        //     // reboot
+        //     std::cout << " RUNNING REBOOT " << std::endl;
+        //     RCLCPP_INFO(ps.world_state_converter->get_logger(), "weblog=--- RUNNING REBOOT ---");
 
-           const char* password = std::getenv("robot_pass");
+        //    const char* password = std::getenv("robot_pass");
 
-           if (!password) {
-               std::cerr << "Environment variable 'robot_pass' not set!" << std::endl;
-               BT::NodeStatus::FAILURE;
-           }
+        //    if (!password) {
+        //        std::cerr << "Environment variable 'robot_pass' not set!" << std::endl;
+        //        BT::NodeStatus::FAILURE;
+        //    }
 
            
 
-           std::string cmd_reboot = "echo '" + std::string(password) + "' | sudo -S reboot";
-           std::system(cmd_reboot.c_str());
+        //    std::string cmd_reboot = "echo '" + std::string(password) + "' | sudo -S reboot";
+        //    std::system(cmd_reboot.c_str());
 
 
 
@@ -1555,6 +1685,61 @@ namespace pddl_lib {
             return BT::NodeStatus::SUCCESS;
         }
 
+        bool wordExistsInFileDebug(const std::string &filePath, const std::string &word) {
+            std::ifstream file(filePath);
+            if (!file.is_open()) {
+                std::cerr << " Could not open file: " << filePath << std::endl;
+                return false;
+            }
+
+            std::string line;
+            bool found = false;
+
+            std::cout << " File contents of " << filePath << ":\n";
+            std::cout << "------------------------------------\n";
+
+            while (std::getline(file, line)) {
+                // Remove possible carriage return
+                if (!line.empty() && line.back() == '\r')
+                    line.pop_back();
+
+                // Print each line
+                std::cout << line << std::endl;
+
+                // Check for word existence
+                if (line.find(word) != std::string::npos) {
+                    found = true;
+                }
+            }
+
+            std::cout << "------------------------------------\n";
+
+            file.close();
+            return found;
+        }
+
+        bool wordExistsInFile(const std::string &filePath, const std::string &word) {
+            std::ifstream file(filePath);
+            if (!file.is_open()) {
+                std::cerr << " Could not open file: " << filePath << std::endl;
+                return false;
+            }
+
+            std::string line;
+            while (std::getline(file, line)) {
+                // Remove possible carriage return
+                if (!line.empty() && line.back() == '\r') line.pop_back();
+
+                if (line.find(word) != std::string::npos) {
+                    file.close();
+                    return true;
+                }
+            }
+
+            file.close();
+            return false;
+        }
+
         // BT::NodeStatus MoveToLandmark_generic(const InstantiatedAction &action) {
         BT::NodeStatus MoveToLandmark_generic(const InstantiatedAction &action,
                                       const std::string &predefined_location = "") {
@@ -1577,32 +1762,25 @@ namespace pddl_lib {
                 location = predefined_location;
                 std::cout << "location is not empty " << predefined_location << std::endl;
             } else {
-                
                 // fallback to action
                 location = action.parameters[2].name;
 
-                // if there is a need to overwrite
-                InstantiatedPredicate microwave_pred;
-                microwave_pred.name = "time_for_video";
-                microwave_pred.parameters.push_back({"microwave_reminder", "VideoReminderProtocol"});
-
-                InstantiatedPredicate coffee_pred;
-                coffee_pred.name = "time_for_video";
-                coffee_pred.parameters.push_back({"coffee_reminder", "VideoReminderProtocol"});
-
-                if (kb.find_predicate(microwave_pred)) {
-                    std::cout << "🍱 Protocol: microwave_reminder is active (time_for_video)\n";
-                    std::cout << "➡️  Going to kitchen\n";
-                    location = "heating";
-                } else if (kb.find_predicate(coffee_pred)) {
-                    std::cout << "☕ Protocol: coffee_reminder is active (time_for_video)\n";
-                    std::cout << "➡️  Going to dining\n";
+                std::string planFilePath = "/home/hello-robot/planner_data/plan_solver/plan.txt";
+                
+                // coffee VideoReminderProtocol1
+                if (wordExistsInFileDebug(planFilePath, "VideoReminderProtocol")){
+                    std::cout << " Protocol: coffee_reminder is active (time_for_video)\n";
+                    std::cout << " Going to dining\n";
                     location = "coffee";
+                // } else if (wordExistsInFileDebug(planFilePath, "VideoReminderProtocol1")){
+                //     // microwave VideoReminderProtocol2
+                //     std::cout << "Protocol: microwave_reminder is active (time_for_video)\n";
+                //     std::cout << "Going to kitchen\n";
+                //     location = "heating";
                 } else {
-                    std::cout << "❓ No matching video protocol active. Staying at current location: " << location << "\n";
+                    std::cout << "No matching video protocol active. Staying at current location: " << location << "\n";
                     // location remains unchanged
                 }
-
             }
             
 
@@ -1716,35 +1894,35 @@ namespace pddl_lib {
                 int result = send_goal_blocking(goal, action, ps);
                 ret = (result == 1) ? BT::NodeStatus::SUCCESS : BT::NodeStatus::FAILURE;
 
-                if(ps.active_protocol.name == "coffee_reminder"){
-                    // get current time and add 30 minsutes to it 
-                    auto now = std::chrono::system_clock::now();
+                // if(ps.active_protocol.name == "coffee_reminder"){
+                //     // get current time and add 30 minsutes to it 
+                //     auto now = std::chrono::system_clock::now();
 
-                    auto start = now +  std::chrono::minutes(30);
-                    auto end = start +  std::chrono::minutes(60);
+                //     auto start = now +  std::chrono::minutes(30);
+                //     auto end = start +  std::chrono::minutes(60);
 
-                    auto format_time = [](std::chrono::system_clock::time_point tp) {
-                        std::time_t t = std::chrono::system_clock::to_time_t(tp);
-                        std::tm tm = *std::localtime(&t);
-                        std::ostringstream oss;
-                        oss << std::put_time(&tm, "%H:%M");
-                        return oss.str();
-                    };
+                //     auto format_time = [](std::chrono::system_clock::time_point tp) {
+                //         std::time_t t = std::chrono::system_clock::to_time_t(tp);
+                //         std::tm tm = *std::localtime(&t);
+                //         std::ostringstream oss;
+                //         oss << std::put_time(&tm, "%H:%M");
+                //         return oss.str();
+                //     };
                     
-                    std::string start_str = format_time(start);
-                    std::cout << "Start time: " << start_str << "\n";
+                    // std::string start_str = format_time(start);
+                    // std::cout << "Start time: " << start_str << "\n";
 
-                    std::string end_str = format_time(end);
-                    std::cout << "end time: " << end_str << "\n";
+                    // std::string end_str = format_time(end);
+                    // std::cout << "end time: " << end_str << "\n";
 
-                    std::string params_cmd = "python3 /home/hello-robot/smarthome_ws/src/smart-home-robot/external/helper_scripts/parameter_change.py MedicineProtocols am_meds " + start_str + " " + end_str;
-                    std::cout << "params_cmd : " << params_cmd << "\n";
-                    std::string build_cmd = "cd /home/hello-robot/smarthome_ws && colcon build --symlink-install";
+                    // std::string params_cmd = "python3 /home/hello-robot/smarthome_ws/src/smart-home-robot/external/helper_scripts/parameter_change.py MedicineProtocols am_meds " + start_str + " " + end_str;
+                    // std::cout << "params_cmd : " << params_cmd << "\n";
+                    // std::string build_cmd = "cd /home/hello-robot/smarthome_ws && colcon build --symlink-install";
 
 
-                    std::system(params_cmd.c_str());
-                    std::system(build_cmd.c_str());
-                }
+                    // std::system(params_cmd.c_str());
+                    // std::system(build_cmd.c_str());
+                // }
 
 
             } else {
@@ -1791,7 +1969,7 @@ namespace pddl_lib {
             
             std::cout << "active_protocol: " << ps.active_protocol << std::endl;
 
-            std::cout << "\n🧾 DEBUG: Contents of ps.voice_msgs\n";
+            std::cout << "\n DEBUG: Contents of ps.voice_msgs\n";
             for (const auto& [inst_param, inner_map] : ps.voice_msgs) {
                 std::cout << "  Protocol: (" << inst_param.name << ", " << inst_param.type << ")\n";
                 for (const auto& [key, vec] : inner_map) {
@@ -1801,9 +1979,9 @@ namespace pddl_lib {
                     }
                 }
             }
-            std::cout << "🔚 End of ps.voice_msgs\n\n";
+            std::cout << "🔚End of ps.voice_msgs\n\n";
 
-            // 🔴 Retrieve voice message details
+            // Retrieve voice message details
             auto voice_data = ps.voice_msgs.at(ps.active_protocol).at("voice_msg");
             std::cout << "voice_data 0 : " << voice_data[0]<< std::endl;
             std::cout << "voice_data 1 : " << voice_data[1]<< std::endl;

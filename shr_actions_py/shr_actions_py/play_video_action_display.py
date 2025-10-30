@@ -23,7 +23,6 @@ class SimpleZmqSenderAction(Node):
             execute_callback=self.execute_callback,  # sync version
         )
 
-        self.get_logger().info("✅SimpleZmqSenderAction is ready.")
 
     def display_callback(self, msg):
        
@@ -38,36 +37,36 @@ class SimpleZmqSenderAction(Node):
         video_path = goal_handle.request.file_name
         self.get_logger().info(f"Received video goal: {video_path}")
         
-        # Optional feedback
-        feedback = PlayVideoRequest.Feedback()
-        feedback.running = True
-        goal_handle.publish_feedback(feedback)
+        # # Optional feedback
+        # feedback = PlayVideoRequest.Feedback()
+        # feedback.running = True
+        # goal_handle.publish_feedback(feedback)
 
-        # Send video path 
-        self.display_pub.publish(String(data=video_path))
+        # # Send video path 
+        # self.display_pub.publish(String(data=video_path))
 
-        ## set to false whenever a video is recieved
-        self.video_finished = False
-        # Wait for 3 minutes or when video returns finished
-        # self.get_logger().info("⏳ Waiting for seconds before returning success...")
-        # time.sleep(55)
+        # ## set to false whenever a video is recieved
+        # self.video_finished = False
+        # # Wait for 3 minutes or when video returns finished
+        # # self.get_logger().info("⏳ Waiting for seconds before returning success...")
+        # # time.sleep(55)
 
-        ## todo check what to do when video fails, if the rx takes that then we are all good.
-        # Wait for up to 5 minutes for video to finish, check every second
-        start_time = self.get_clock().now()
-        timeout = rclpy.time.Duration(seconds=3*60)  # 3 minutes
-        while not self.video_finished:
-            # print("In while")
-            # print(" self.video_finished", self.video_finished)
+        # ## todo check what to do when video fails, if the rx takes that then we are all good.
+        # # Wait for up to 5 minutes for video to finish, check every second
+        # start_time = self.get_clock().now()
+        # timeout = rclpy.time.Duration(seconds=3*60)  # 3 minutes
+        # while not self.video_finished:
+        #     # print("In while")
+        #     # print(" self.video_finished", self.video_finished)
 
-            # rclpy.spin_once(self, timeout_sec=1.0)  # allow callbacks to run
-            time.sleep(1)
-            if self.get_clock().now() - start_time > timeout:
-                self.get_logger().warn(" Video did not finish in 5 minutes, aborting")
-                goal_handle.abort()
-                result = PlayVideoRequest.Result()
-                result.status = "video failed or timeout"
-                return result
+        #     # rclpy.spin_once(self, timeout_sec=1.0)  # allow callbacks to run
+        #     time.sleep(1)
+        #     if self.get_clock().now() - start_time > timeout:
+        #         self.get_logger().warn(" Video did not finish in 5 minutes, aborting")
+        #         goal_handle.abort()
+        #         result = PlayVideoRequest.Result()
+        #         result.status = "video failed or timeout"
+        #         return result
 
         
         self.get_logger().info("Video finish, success")
