@@ -21,6 +21,7 @@ class DockingMainActionServer(Node):
         #self.goal_cancel = False
         self.rate = self.docking_camera.create_rate(10)
         
+        self.use_IR = True
         
         self.action_server = ActionServer(
             self,
@@ -58,7 +59,10 @@ class DockingMainActionServer(Node):
         self.docking_camera.bumped = False
         self.docking_ir.bumped = False
         self.failed_count = 0
-        
+
+        if not self.docking_ir.sensor_data_receiving:
+            self.docking_camera.orient_until_seen()
+
         docking_start_time = time.time() 
         while not (self.docking_camera.bumped or self.docking_ir.bumped):
             if goal_handle.is_cancel_requested:
@@ -70,19 +74,6 @@ class DockingMainActionServer(Node):
                 result = DockingRequest.Result()
                 result.result = False
                 return result
-            
-            # # **AprilTag Detection Handling with Debounce**
-            # current_time = self.get_clock().now().nanoseconds / 1e9  # Convert time to seconds
-
-            # if self.docking_camera.is_detect:
-            #     self.current_mode = 'apriltag'
-            #     self.last_detection_time = current_time  # Update last detection time
-            # elif self.last_detection_time and (current_time - self.last_detection_time < self.tag_timeout):
-            #     self.get_logger().info("AprilTag lost briefly, waiting before switching.")
-            # else:
-            #     self.current_mode = 'ir'  # Switch to IR docking
-
-            # self.get_logger().info(f"Current mode: {self.current_mode}")
 
             
             # **Execute the Active Docking Mode**
@@ -90,9 +81,14 @@ class DockingMainActionServer(Node):
                 self.docking_camera.bumped = False
                 self.docking_ir.bumped = False
                 self.docking_camera.get_transformation_from_aptag_to_port()
+                has_transform = self.docking_camera.translation.get("translation_x", None)
+                if has_transform == None:
+                    self.get_logger().warn(f'weblog=Charger and port has no transform.')
+                    break
                 self.failed_count += self.docking_camera.move_towards_tag()
             else:
-                self.failed_count += self.docking_ir.move_to_docking_station()
+                if self.docking_ir.sensor_data_receiving and self.use_IR:
+                    self.failed_count += self.docking_ir.move_to_docking_station()
                  
             if self.failed_count > 10:
                 self.get_logger().info(f'Docking aborted for no sensor data')

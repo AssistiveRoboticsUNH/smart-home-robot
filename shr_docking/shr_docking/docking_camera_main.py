@@ -156,6 +156,92 @@ class Docking(Node):
             self.is_detect = False
             # print('No aptags from callback')
 
+    def move_robot(self, lin_x: float, ang_z: float):
+        t = Twist()
+        t.linear.x  = lin_x
+        t.angular.z = ang_z
+        self.pub.publish(t)
+
+    def orient_until_seen(self, max_time_s: float = 15.0,
+                        confirm_frames: int = 3, sweep_deg: float = 50.0,
+                        sweep_rate_rad: float = 0.30, accel_s: float = 0.20) -> bool:
+        """
+        Short, robust 'orient until seen' sweep.
+        - Rotates ping-pong within ±sweep_deg at sweep_rate_rad (rad/s).
+        - Debounces with `confirm_frames` consecutive positives.
+        Returns True if confirmed, False on timeout/interruption.
+        """
+        t0 = time.monotonic()
+        A = math.radians(max(5.0, min(85.0, sweep_deg)))
+        rate = max(0.05, min(1.0, sweep_rate_rad))
+        half_T = A / rate
+        confirm = 0
+        direction = 1.0  # start CW; alternates each half sweep
+
+        def stop():
+            try: self.move_robot(0.0, 0.0)
+            except Exception: pass
+
+        try:
+            # quick warmup probe (low-cost early exit)
+            for _ in range(confirm_frames):
+                if self.is_detect:
+                    confirm += 1
+                    if confirm >= confirm_frames:
+                        self.get_logger().info("[orient] Can see docking station.")
+                        return True
+                time.sleep(0.03)
+
+            self.get_logger().info("weblog=Cannot see docking station, orienting...")
+            while rclpy.ok() and (time.monotonic() - t0) < max_time_s:
+                # one half-sweep segment
+                seg_end = time.monotonic() + half_T
+                ramp_end = time.monotonic() + accel_s
+                target_wz = direction * rate
+                direction *= -1.0
+
+                while rclpy.ok() and time.monotonic() < seg_end and (time.monotonic() - t0) < max_time_s:
+                    # debounce detection
+                    if self.is_detect:
+                        confirm += 1
+                        if confirm >= confirm_frames:
+                            stop()
+                            self.get_logger().info("weblog=Station confirmed.")
+                            return True
+                    else:
+                        confirm = 0
+
+                    # simple linear ramp for smoother motion
+                    if time.monotonic() < ramp_end:
+                        alpha = (accel_s - (ramp_end - time.monotonic())) / max(1e-6, accel_s)
+                        wz = target_wz * max(0.1, min(1.0, alpha))
+                    else:
+                        wz = target_wz
+
+                    try:
+                        self.move_robot(0.0, wz)
+                    except Exception as e:
+                        self.get_logger().warn(f"[orient] move_robot failed: {e!r}")
+                        stop()
+                        time.sleep(0.05)
+
+                    time.sleep(0.06)  # small tick; lets detection update
+
+                # brief settle at sweep ends
+                stop()
+                time.sleep(0.05)
+
+            self.get_logger().warn("weblog=Timeout: marker not found.")
+            return False
+        except KeyboardInterrupt:
+            self.get_logger().info("[orient] Interrupted.")
+            return False
+        except Exception as e:
+            self.get_logger().error(f"[orient] Error: {e!r}")
+            return False
+        finally:
+            stop()
+
 
     def move_towards_tag(self):
         if (self.bump == None):
@@ -166,7 +252,7 @@ class Docking(Node):
         if (self.is_detect is True and self.bumped is False):
             current_error = float(self.translation.get("translation_y", 0.0))
             transition_x = float(self.translation.get("translation_x", 0.0))
-            error_x = (transition_x+0.031)
+            error_x = (transition_x+0.012)
             modified_error_x = error_x*0.2
             apriltag_logic = (error_x>0.00)
             # doing reverse logic for it. (if apriltag_logic or bump_sensor gives 0, it will be out of the first loop)
@@ -225,6 +311,9 @@ class Docking(Node):
             self.pub.publish(self.vel)
             self.bumped = False
         return 0
+
+    
+
 
 def main(args=None):
     rclpy.init(args=args)
